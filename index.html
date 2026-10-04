@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PA-Marine — Irish HAB &amp; marine heatwave demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="kicker">PA-Marine-Model · colleague demo</div>
+    <h1>Irish harmful-algae &amp; marine-heatwave early warning</h1>
+    <p class="lead">
+      Ocean Hackathon Cork lineage (Challenge 4). Three worked episodes for a 3–5 minute
+      briefing: national context, data-collection bays, Galway deep-dive with a Cork replication path.
+      Built from PA-Marine-Model only.
+    </p>
+    <div class="honesty">
+      Honesty lock: a marine heatwave is not an automatic bloom.
+      June 2023 was a severe Irish-shelf MHW while national Dinophysis / closures stayed below normal.
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0">How we demo (3–5 minutes)</h2>
+      <div class="steps">
+        <div><strong>1.</strong> Open this page — marine only, no other product names.</div>
+        <div><strong>2.</strong> Walk the three episodes: 2018 warm+present · June 2023 severe MHW / quiet biology · 2022 Galway contrast.</div>
+        <div><strong>3.</strong> Pitch A Ireland · B data-collection bays · C Galway → Cork replication.</div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button data-key="2018">2018 Connemara</button>
+      <button data-key="2023" class="active">June 2023 flagship</button>
+      <button data-key="2022">2022 Galway</button>
+    </div>
+    <div id="panel"></div>
+
+    <p class="skill">
+      Current tested skill (4 Oct 2026): forecasting total <em>Dinophysis</em> &ge;100 cells/L one to two weeks ahead,
+      out-of-sample 2022&ndash;26, <strong>PR-AUC 0.290 vs 0.231</strong> for the station-and-season norm.
+      Skill is concentrated in SW Kerry / West Cork. A planning aid only &mdash; not a safety guarantee and not an official Marine Institute product.
+    </p>
+
+    <div class="card">
+      <h2 style="margin-top:0">Pitch one-liners</h2>
+      <p><strong>A Ireland:</strong> spring–summer MHW + Dinophysis / DSP closure risk for national briefing.</p>
+      <p><strong>B Data-collection bays:</strong> same pack retargeted to sampling geography (incl. Connemara / Mace Head / Lehanagh).</p>
+      <p><strong>C Galway → Cork:</strong> local grower view, then replicate the site pack for Cork.</p>
+    </div>
+
+    <footer>
+      PA-Marine-Model colleague demo (static page). Data: Marine Institute HAB monitoring, NOAA OISST, E.U. Copernicus Marine Service Information.
+    </footer>
+  </div>
+  <script src="demo.js"></script>
+</body>
+</html>
