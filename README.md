@@ -1,6 +1,6 @@
 # PA-Marine demo site
 
-Static GitHub Pages site for **PA-Marine-Model**, a research-prototype weekly forecast of *Dinophysis* (DSP shellfish toxin) blooms in Irish waters, by **Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)**. Ocean Hackathon Cork 2026 demo.
+Static GitHub Pages site for **PA-Marine-Model**, a research-prototype weekly forecast of *Dinophysis* (DSP shellfish toxin) blooms in Irish waters, by **Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)**.
 
 - `/` — landing page
 - `/map/` — interactive map demo

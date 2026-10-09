@@ -81,7 +81,7 @@ PAGES.push({id:'overview', group:'Start here', icon:'🌊', title:'Overview',
  <div class="callout"><span class="t">Curious non-specialist</span><p><a href="#/how-it-works">How it works</a> · <a href="#/heatwaves">Heatwaves</a> · <a href="#/glossary">Glossary</a></p></div>
  <div class="callout"><span class="t">Scientist or reviewer</span><p><a href="#/results">Scorecard</a> · <a href="#/test-log">All 122 tests</a> · <a href="#/limitations">Caveats</a></p></div>
 </div>
-<p style="font-size:14px;color:var(--muted)">Research prototype by <strong>Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</strong>, developed for Ocean Hackathon Cork 2026. Not an official Marine Institute product or advice; shellfish safety is decided by official monitoring.</p>
+<p style="font-size:14px;color:var(--muted)">Research prototype by <strong>Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</strong>. Not an official Marine Institute product or advice; shellfish safety is decided by official monitoring.</p>
 `});
 PAGES.push({id:'how-it-works', group:'Start here', icon:'⚙️', title:'How the model works',
  keywords:'lightgbm platt features method pipeline erddap lag sunday target rolling origin',
@@ -481,7 +481,7 @@ PAGES.push({id:'data', group:'Reference', icon:'🗂️', title:'Data sources',
 </ul>
 
 <h2>Data rules for this site</h2>
-<div class="callout warn"><p>Monitoring data from the Marine Institute and REPHY are used for internal research. This public wiki therefore shows <strong>only national, regional and yearly aggregates and method descriptions</strong>. It contains no station- or site-level results, no station names with values, no raw data and no model code. Ocean Hackathon data rules apply: use rights follow each dataset’s licence, event-only data stay event-only, and every feed is attributed.</p></div>
+<div class="callout warn"><p>Monitoring data from the Marine Institute and REPHY are used for internal research. This public wiki therefore shows <strong>only national, regional and yearly aggregates and method descriptions</strong>. It contains no station- or site-level results, no station names with values, no raw data and no model code. Data use rights follow each dataset’s licence, event-only data stay event-only, and every feed is attributed.</p></div>
 <p style="font-size:14px">Attribution: contains Marine Institute data; E.U. Copernicus Marine Service information; NOAA OISST; ECMWF ERA5 (Copernicus Climate Change Service); Met Éireann data (CC BY 4.0); OPW hydrometric data; Ifremer REPHY / REPHYTOX; Marine Biological Association CPR data.</p>
 `});
 PAGES.push({id:'limitations', group:'Reference', icon:'⚠️', title:'Limitations & caveats',
@@ -523,7 +523,7 @@ PAGES.push({id:'limitations', group:'Reference', icon:'⚠️', title:'Limitatio
 </tbody></table></div>
 
 <h2>Use</h2>
-<div class="callout warn"><p>This is a research prototype for Ocean Hackathon Cork 2026. It is <strong>not</strong> an official Marine Institute product, not advice, and not a safety guarantee. Decisions on shellfish harvesting and safety are made by official monitoring and the competent authorities.</p></div>
+<div class="callout warn"><p>This is a research prototype. It is <strong>not</strong> an official Marine Institute product, not advice, and not a safety guarantee. Decisions on shellfish harvesting and safety are made by official monitoring and the competent authorities.</p></div>
 `});
 PAGES.push({id:'roadmap', group:'Reference', icon:'🧭', title:'Roadmap & ideas',
  keywords:'roadmap future ideas 2027 preregistration scoreboard citizen science sensor network backlog',
@@ -600,14 +600,14 @@ PAGES.push({id:'glossary', group:'Reference', icon:'📖', title:'Glossary',
 </tbody></table></div>
 `});
 PAGES.push({id:'about', group:'Reference', icon:'👤', title:'About & credits',
- keywords:'about credits garry lohan atu galway ocean hackathon cork',
+ keywords:'about credits garry lohan atu galway',
  lede:'PA-Marine-Model is a research prototype built by <strong>Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</strong>. Garry is a lecturer at Atlantic Technological University (ATU) Galway.',
  html:`
 <h2>Author</h2>
-<p><strong>Garry Lohan</strong> (ATU Galway) designed and leads PA-Marine-Model, built together with <strong>Felix Sproll</strong> (Marine Institute), a test-everything, report-everything approach to forecasting harmful algal blooms in Irish shellfish waters. The project grew out of the <strong>Ocean Hackathon Cork 2026</strong> challenge on harmful algae and marine heatwaves.</p>
+<p><strong>Garry Lohan</strong> (ATU Galway) designed and leads PA-Marine-Model, built together with <strong>Felix Sproll</strong> (Marine Institute), a test-everything, report-everything approach to forecasting harmful algal blooms in Irish shellfish waters.</p>
 
-<h2>Ocean Hackathon Cork 2026</h2>
-<p>This wiki and the <a href="../map/">interactive map</a> are demonstration material for Ocean Hackathon Cork 2026. They are a research prototype: <strong>not an official Marine Institute product or advice</strong>, and not a safety guarantee.</p>
+<h2>Status</h2>
+<p>This wiki and the <a href="../map/">interactive map</a> are demonstration material. They are a research prototype: <strong>not an official Marine Institute product or advice</strong>, and not a safety guarantee.</p>
 
 <h2>Approach</h2>
 <ul>
