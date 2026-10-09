@@ -39,7 +39,7 @@ window.FR_CI = [
 var PAGES = window.PAGES = [];
 PAGES.push({id:'overview', group:'Start here', icon:'🌊', title:'Overview',
  keywords:'abstract summary plain english introduction what is dsp shellfish',
- lede:'PA-Marine-Model is a weekly, research-prototype forecast of when the toxic plankton <em>Dinophysis</em> is likely to bloom in Irish shellfish waters over the next fortnight. It is built on the Marine Institute’s open monitoring data, and it is tested as harshly as we could manage — including every test that failed.',
+ lede:'PA-Marine-Model is a weekly, research-prototype forecast of when the toxic plankton <em>Dinophysis</em> is likely to bloom in Irish shellfish waters over the next fortnight. It is built on the Marine Institute’s open monitoring data, and it is rigorously tested: pre-registered, benchmarked against standard baselines, with all results reported, including null results.',
  html:`
 <div class="cards">
  <div class="stat"><div class="v">0.312 <small>vs 0.231</small></div><div class="l">Operational forecast skill (PR-AUC), 2022–26, vs the seasonal “normal for this site and week” baseline</div></div>
@@ -55,7 +55,7 @@ PAGES.push({id:'overview', group:'Start here', icon:'🌊', title:'Overview',
 <p>Every <strong>Sunday</strong>, for each MI monitoring station sampled that week, the model estimates the probability that total <em>Dinophysis</em> will reach <strong>≥100 cells/L in either of the next two weeks</strong>. It uses only information that was public by that Sunday: mainly the recent counts at the station itself and at neighbouring stations, plus the time of year and location. The engine is a gradient-boosted tree model (LightGBM) whose probabilities are recalibrated each year. <a href="#/how-it-works">How the model works →</a></p>
 
 <h2>How good is it?</h2>
-<p>Modestly better than an honest baseline, and we can say exactly how much. Using only the counts MI had actually published before each Sunday, the forecast ranks the coming fortnight’s bloom weeks with a <strong>PR-AUC of 0.312, against 0.231</strong> for the “normal for this site and this week of the year” baseline (2022–2026, out of sample). In the South-West it is <strong>0.338 vs 0.203</strong>. Blooms are rare (about 4% of station-weeks in recent years), so a forecast that guessed at random would score about 0.04: both numbers are well above chance, and the real question is how much the model adds <em>beyond</em> the seasonal norm. <a href="#/results">Full scorecard →</a></p>
+<p>Measurably better than a standard baseline, and we can say exactly how much. Using only the counts MI had actually published before each Sunday, the forecast ranks the coming fortnight’s bloom weeks with a <strong>PR-AUC of 0.312, against 0.231</strong> for the “normal for this site and this week of the year” baseline (2022–2026, out of sample). In the South-West it is <strong>0.338 vs 0.203</strong>. Blooms are rare (about 4% of station-weeks in recent years), so a forecast that guessed at random would score about 0.04: both numbers are well above chance, and the real question is how much the model adds <em>beyond</em> the seasonal norm. <a href="#/results">Full scorecard →</a></p>
 <div class="callout warn"><span class="t">What it does not do (yet)</span>
 <p>At the same alarm volume, the forecast <strong>does not catch more shellfish closures</strong> than MI’s own free rule (“≥100 cells/L at the site last week”): 41 vs 46 of 62 South-West closures, or 50 when that rule uses the same published-by-Sunday data. Its practical advantage is far fewer false-alarm runs (41 vs 124–130). It is a <strong>surveillance-triage aid</strong>, not a safety system.</p></div>
 
@@ -85,14 +85,14 @@ PAGES.push({id:'overview', group:'Start here', icon:'🌊', title:'Overview',
 `});
 PAGES.push({id:'how-it-works', group:'Start here', icon:'⚙️', title:'How the model works',
  keywords:'lightgbm platt features method pipeline erddap lag sunday target rolling origin',
- lede:'What the forecast predicts, what it looks at, how it is trained, and how it is kept honest. Method only — no code.',
+ lede:'What the forecast predicts, what it looks at, how it is trained, and how it is evaluated. Method only — no code.',
  html:`
 <div class="flow">
  <div class="step"><b>1 · Data</b><span>MI publishes weekly phytoplankton counts on its open ERDDAP server</span></div>
  <div class="step"><b>2 · Sunday cut-off</b><span>Keep only counts actually published before the issue Sunday</span></div>
  <div class="step"><b>3 · 14 features</b><span>Season, location, the station’s own recent counts, neighbours within 30 km</span></div>
  <div class="step"><b>4 · LightGBM</b><span>Gradient-boosted trees give a risk score</span></div>
- <div class="step"><b>5 · Platt scaling</b><span>Recalibrated on the most recent year to give honest probabilities</span></div>
+ <div class="step"><b>5 · Platt scaling</b><span>Recalibrated on the most recent year to give well-calibrated probabilities</span></div>
  <div class="step"><b>6 · Issue & log</b><span>P(≥100 cells/L in week +1 or +2), locked before outcomes are known</span></div>
 </div>
 
@@ -157,7 +157,7 @@ PAGES.push({id:'results', group:'Findings', icon:'📊', title:'Results & scorec
 <tr class="hl"><td><strong>Operational</strong>, South-West</td><td class="num"><strong>0.338</strong></td><td class="num">0.203 norm</td><td>year-block 90% CI +0.010 to +0.172</td></tr>
 <tr><td>Operational, year-averaged</td><td class="num">0.321</td><td class="num">0.269</td><td>+0.052; CI includes 0</td></tr>
 <tr><td>Conservative frozen v2 (counts ≥7 days old)</td><td class="num">0.290</td><td class="num">0.231 norm</td><td>95% CI 0.235–0.350; region-year 90% gain CI +0.007 to +0.084</td></tr>
-<tr><td>Frozen v2 fed only truly published inputs</td><td class="num">0.291</td><td class="num">—</td><td>Δ +0.001: the 0.290 headline is honest</td></tr>
+<tr><td>Frozen v2 fed only truly published inputs</td><td class="num">0.291</td><td class="num">—</td><td>Δ +0.001: the 0.290 headline is confirmed</td></tr>
 <tr><td>Operational vs frozen v2</td><td class="num">0.312</td><td class="num">0.290</td><td>+0.022; 90% CI −0.010 to +0.038 (probable, not proven)</td></tr>
 <tr><td>Check period 2019–21 (operational)</td><td class="num">0.548</td><td class="num">0.529 norm</td><td>+0.019; CI includes 0</td></tr>
 <tr><td>Check pool 2016–21 (conservative v2)</td><td class="num">0.517</td><td class="num">0.499 norm</td><td>a tie (95% CI −0.015 to +0.057)</td></tr>
@@ -212,7 +212,7 @@ PAGES.push({id:'results', group:'Findings', icon:'📊', title:'Results & scorec
 <tr><td>2026 (to Aug)</td><td class="num">114</td><td class="num">0.492</td><td class="num">0.281</td><td class="num">0.459</td></tr>
 </tbody></table></div>
 <p>The conservative model beats the seasonal norm in 7 of 11 years and “same as last observed” in all 11. About half of the pooled gain comes from ranking <em>across</em> years (telling bad years from quiet ones) rather than week-by-week timing within a season: year-averaged, v2 beats the norm by +0.029 (3 of 5 recent years).</p>
-<figure><img src="assets/img/model_v2_skill.png" alt="Model v2 skill per year, per region, by target, and reliability"><figcaption>Model v2: PR-AUC by year against baselines (shaded = 2022–26 headline pool), by region, which target is most forecastable, and reliability. The “week-0 known” line is the retired optimistic setting; the honest operational figure is 0.312.</figcaption></figure>
+<figure><img src="assets/img/model_v2_skill.png" alt="Model v2 skill per year, per region, by target, and reliability"><figcaption>Model v2: PR-AUC by year against baselines (shaded = 2022–26 headline pool), by region, which target is most forecastable, and reliability. The “week-0 known” line is the retired optimistic setting; the operational figure is 0.312.</figcaption></figure>
 
 <h2>Robustness: does the gain survive?</h2>
 <p>A red team re-ran the headline under many ways of resampling the data. The gain over the norm (+0.060, conservative) stays positive at 90% under every blocking scheme; at 95% the region-year interval just touches zero. In the 2016–21 check pool the gain is small (+0.018) and every interval includes zero.</p>
@@ -220,7 +220,7 @@ PAGES.push({id:'results', group:'Findings', icon:'📊', title:'Results & scorec
 <p><strong>Multiple testing:</strong> across 72 logged comparisons, the v2 gain has a Benjamini–Hochberg q of 0.07 using station-level p-values, but 0.60 using the stricter region-year p-value. Both are reported.</p>
 
 <h2>Shellfish closures: the commercial bar</h2>
-<p>South-West DSP closures, 2019–2026 (62 closure episodes), with alarm thresholds set honestly on earlier years:</p>
+<p>South-West DSP closures, 2019–2026 (62 closure episodes), with alarm thresholds fixed in advance on earlier years:</p>
 <div class="tbl"><table>
 <thead><tr><th>Warning rule</th><th class="num">Closures warned</th><th class="num">False-alarm runs</th></tr></thead>
 <tbody>
@@ -241,7 +241,7 @@ PAGES.push({id:'results', group:'Findings', icon:'📊', title:'Results & scorec
 `});
 PAGES.push({id:'test-log', group:'Findings', icon:'🧪', title:'Full test log', wide:true,
  keywords:'tests experiments null results verdict ablation table filter',
- lede:'Every skill test and experiment in the project, oldest first, <strong>including the many that found nothing</strong>. Null results are the backbone of this project: they are how we know which claims not to make.',
+ lede:'Every skill test and experiment in the project, oldest first, <strong>with all results reported, including null results</strong>. Null results are central to this project: they show which claims the evidence does not support, and they help us know which claims not to make.',
  html:`
 <div class="callout null"><span class="t">Why the nulls matter</span><p>Most ideas for improving a bloom forecast sound plausible: warmer water, heatwaves, winds, river plumes, chlorophyll, currents. We tested them one by one, under pre-registered rules, and most of them did not help. Publishing those nulls is what makes the few positive results believable.</p></div>
 <p><strong>How to read it.</strong> Tests #1–15 use an older, easier “nowcast” set-up (scores ≈0.29–0.295) that is <em>not comparable</em> with the v2 headline. From 4 Oct 2026, tests use the v2 set-up (≥100 cells/L in weeks +1/+2, rolling origin, 2022–26 headline pool at 3.9% prevalence). Δ values are changes in PR-AUC; brackets are confidence intervals. Rows #88–103 (France) ran on a parallel line and are numbered to avoid a clash. The colour categories are a reading aid added for this wiki; the original verdict is shown under each badge.</p>
@@ -295,7 +295,7 @@ PAGES.push({id:'heatwaves', group:'Findings', icon:'🌡️', title:'Marine heat
  <li>None of the buoy or logger temperature, heatwave or chemistry features improved the forecast.</li>
 </ul>
 
-<h2>Honest framing</h2>
+<h2>Framing</h2>
 <blockquote>Heatwaves are getting more frequent around Ireland. So far, we can’t see them reorganising the plankton or causing extra toxic blooms beyond what the season already brings. Season and site, not heatwave status, drive risk, which is why our forecast doesn’t use heatwave features.</blockquote>
 <p style="font-size:13.5px;color:var(--muted)">No detectable effect over 2003–2026 is not proof that heatwaves can never matter; it means any effect is too small to see against season and site in this record. The analyses use licensed monitoring data, so only national and regional aggregates are shown; the chart above is redrawn from the published summary table.</p>
 `});
@@ -364,7 +364,7 @@ PAGES.push({id:'france', group:'Findings', icon:'🌍', title:'France transfer',
  html:`
 <h2>Key findings</h2>
 <ol>
- <li><strong>The Irish method works in France, clearly.</strong> The same recipe beats the French seasonal norm by +0.098 (2005–13: 0.662 vs 0.564) and +0.130 (2014–22: 0.674 vs 0.544). It also passes at ≥500 and ≥1,000 cells/L and for new blooms, and on this larger dataset the tree model beats a ridge model too. The Irish result was not a fluke of one coastline.</li>
+ <li><strong>The Irish method works in France, clearly.</strong> The same recipe beats the French seasonal norm by +0.098 (2005–13: 0.662 vs 0.564) and +0.130 (2014–22: 0.674 vs 0.544). It also passes at ≥500 and ≥1,000 cells/L and for new blooms, and on this larger dataset the tree model beats a ridge model too. The Irish result is not specific to one coastline.</li>
  <li><strong>French data improves a stripped-down Irish model, but not the real one, yet.</strong> A model without map position, pre-trained on French plus Irish data, gains about +0.03 in both Irish test periods (passes). Added to the full v2 recipe it gains +0.024 in 2016–21 but only +0.011 in 2022–26 (CI includes 0): a candidate for 2027, not a change.</li>
  <li><strong>Algae counts only partly help predict toxin.</strong> Last week’s toxin result is hard to beat; counts help in 2017–22 but not in 2012–16, so this fails the both-periods rule. The same holds for ASP and PSP.</li>
  <li><strong>The toxin “fingerprint” and species add nothing.</strong> The OA/DTX/PTX split and which <em>Dinophysis</em> species is present do not improve forecasts.</li>
@@ -484,8 +484,8 @@ PAGES.push({id:'data', group:'Reference', icon:'🗂️', title:'Data sources',
 <div class="callout warn"><p>Monitoring data from the Marine Institute and REPHY are used for internal research. This public wiki therefore shows <strong>only national, regional and yearly aggregates and method descriptions</strong>. It contains no station- or site-level results, no station names with values, no raw data and no model code. Ocean Hackathon data rules apply: use rights follow each dataset’s licence, event-only data stay event-only, and every feed is attributed.</p></div>
 <p style="font-size:14px">Attribution: contains Marine Institute data; E.U. Copernicus Marine Service information; NOAA OISST; ECMWF ERA5 (Copernicus Climate Change Service); Met Éireann data (CC BY 4.0); OPW hydrometric data; Ifremer REPHY / REPHYTOX; Marine Biological Association CPR data.</p>
 `});
-PAGES.push({id:'limitations', group:'Reference', icon:'⚠️', title:'Limitations & honest caveats',
- keywords:'caveats limitations honest weaknesses risks claims retired',
+PAGES.push({id:'limitations', group:'Reference', icon:'⚠️', title:'Limitations & caveats',
+ keywords:'caveats limitations weaknesses risks claims retired',
  lede:'What this forecast cannot do, where the evidence is thin, and which claims we have withdrawn. If you quote the results, please quote these too.',
  html:`
 <h2>Claims we can make</h2>
@@ -541,7 +541,7 @@ PAGES.push({id:'roadmap', group:'Reference', icon:'🧭', title:'Roadmap & ideas
 <thead><tr><th>Idea</th><th>Why</th><th>Status</th></tr></thead>
 <tbody>
 <tr><td>Earlier-in-week sampling, a Tuesday issue or twice-weekly peak-season sampling</td><td>Week-0 counts are the largest information lever; late-week samples are what miss the issue (<a href="#/sampling">Sampling &amp; turnaround</a>)</td><td><span class="badge b-pend">Untested hypothesis</span></td></tr>
-<tr><td>Public weekly scoreboard</td><td>Forecasts locked before outcomes and scored in public, good weeks and bad: honesty you can check</td><td><span class="badge b-chk">Scoping</span></td></tr>
+<tr><td>Public weekly scoreboard</td><td>Forecasts locked before outcomes and scored in public, good weeks and bad: transparent, verifiable performance</td><td><span class="badge b-chk">Scoping</span></td></tr>
 <tr><td>Hidden-bloom lab-priority flag</td><td>Toxin rose but no ≥100 count → count that site first (23% vs 5.1%)</td><td><span class="badge b-pos">Tested</span></td></tr>
 <tr><td>Species-aware harvest-risk product</td><td>Fewer false alarms; mussels and oysters behave differently</td><td><span class="badge b-chk">Candidate</span></td></tr>
 <tr><td>ASP forecast for the scallop fishery</td><td>Strong in Ireland; needs replication</td><td><span class="badge b-chk">Candidate</span></td></tr>
@@ -553,7 +553,7 @@ PAGES.push({id:'roadmap', group:'Reference', icon:'🧭', title:'Roadmap & ideas
 <tr><td>Species × toxin multi-state model</td><td>Closure warnings using toxin dynamics, not just a cell threshold</td><td><span class="badge b-desc">Idea</span></td></tr>
 <tr><td>Scottish and UK transfer or pooling</td><td>More data for the North-West, where the model is weakest</td><td><span class="badge b-desc">Idea</span></td></tr>
 <tr><td>Congener-level DSP data (OA vs DTX2)</td><td>Possible regime marker; not public yet</td><td><span class="badge b-desc">Idea</span></td></tr>
-<tr><td>MI weekly HAB bulletin as a benchmark</td><td>Honest comparison with the expert forecast growers already read</td><td><span class="badge b-desc">Idea</span></td></tr>
+<tr><td>MI weekly HAB bulletin as a benchmark</td><td>A like-for-like comparison with the expert forecast growers already read</td><td><span class="badge b-desc">Idea</span></td></tr>
 <tr><td>Open near-real-time data feed</td><td>Reuse, transparency, schools</td><td><span class="badge b-desc">Idea</span></td></tr>
 <tr><td>Citizen science “what did you find?” app</td><td>Public engagement, biodiversity records, discolouration reports</td><td><span class="badge b-desc">Idea</span></td></tr>
 <tr><td>ATU final-year projects; schools version</td><td>Low-cost pilot builds; education</td><td><span class="badge b-desc">Idea</span></td></tr>
@@ -589,9 +589,9 @@ PAGES.push({id:'glossary', group:'Reference', icon:'📖', title:'Glossary',
 <tr><td><strong>Rolling origin</strong></td><td>Evaluating each year with a model trained only on earlier years, as it would have run at the time.</td></tr>
 <tr><td><strong>Conservative / operational</strong></td><td>Information settings: counts at least 7 days old (conservative) vs counts actually published by the issue Sunday (operational).</td></tr>
 <tr><td><strong>Pre-registration</strong></td><td>Writing down and committing a test’s design and decision rule before seeing any results.</td></tr>
-<tr><td><strong>Block bootstrap</strong></td><td>Resampling whole blocks (stations, years, region-years) to get honest uncertainty when weeks are correlated.</td></tr>
+<tr><td><strong>Block bootstrap</strong></td><td>Resampling whole blocks (stations, years, region-years) to get realistic uncertainty when weeks are correlated.</td></tr>
 <tr><td><strong>Holm / Benjamini–Hochberg</strong></td><td>Corrections for running many tests, controlling the family-wise error rate or the false-discovery rate.</td></tr>
-<tr><td><strong>Null result</strong></td><td>A test that found no reliable effect. Reported, not hidden.</td></tr>
+<tr><td><strong>Null result</strong></td><td>A test that found no reliable effect. All null results are reported.</td></tr>
 <tr><td><strong>Marine heatwave (MHW)</strong></td><td>At least 5 consecutive days above the 90th percentile of the local day-of-year climatology (Hobday definition), with categories I–IV by intensity.</td></tr>
 <tr><td><strong>OSTIA / ODYSSEA / OISST</strong></td><td>Gridded satellite sea-surface temperature products.</td></tr>
 <tr><td><strong>REPHY / REPHYTOX</strong></td><td>France’s phytoplankton and phycotoxin monitoring networks (Ifremer).</td></tr>
@@ -613,7 +613,7 @@ PAGES.push({id:'about', group:'Reference', icon:'👤', title:'About & credits',
 <ul>
  <li><strong>Pre-register, then test.</strong> Decision rules are committed before results are seen.</li>
  <li><strong>Report every test.</strong> All 122 logged tests are in the <a href="#/test-log">test log</a>, and half of them are nulls.</li>
- <li><strong>Beat honest baselines.</strong> Seasonal norms, persistence and simple logistic models, not straw men.</li>
+ <li><strong>Benchmark against standard baselines.</strong> Seasonal norms, persistence and simple logistic models.</li>
  <li><strong>Lock forecasts before outcomes.</strong> Every issued forecast goes into a tamper-evident log.</li>
 </ul>
 
@@ -640,7 +640,7 @@ PAGES.push({id:'about', group:'Reference', icon:'👤', title:'About & credits',
 <tr><td><i lang="ga">Samplaí</i></td><td>Samples (the Sampling &amp; turnaround page)</td></tr>
 <tr><td><i lang="ga">Turas</i></td><td>Tour, journey (the guided tour)</td></tr>
 <tr><td><i lang="ga">Gluais</i> · <i lang="ga">Fúinn</i></td><td>Glossary · About us</td></tr>
-<tr><td><i lang="ga">Macántacht</i></td><td>Honesty (used for the null-results card)</td></tr>
+<tr><td><i lang="ga">Gach toradh</i></td><td>Every result (used for the null-results card)</td></tr>
 <tr><td><i lang="ga">Déanta i nGaillimh</i></td><td>Made in Galway</td></tr>
 </tbody></table></div>
 

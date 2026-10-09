@@ -25,9 +25,9 @@
     <svg class="big-dolphin" role="img" aria-label="Leaping dolphin over a wave"><use href="#dolphin"/></svg>
     <p class="kick"><i lang="ga">Fáilte</i> · Welcome</p>
     <h1>Live <em>Dinophysis</em> Bloom Map · Ireland</h1>
-    <p class="lead">A weekly look at bloom risk for Irish shellfish sites, built on Marine Institute open data and tested as honestly as we could.</p>
+    <p class="lead">A weekly look at bloom risk for Irish shellfish sites, built on Marine Institute open data and rigorously tested against standard baselines.</p>
     <p class="who">Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</p>
-    <p class="hint">Use <kbd>←</kbd> <kbd>→</kbd> or swipe · <kbd>N</kbd> speaker notes · <kbd>F</kbd> full screen</p>
+    <p class="hint">Use <kbd>←</kbd> <kbd>→</kbd> or swipe · <kbd>N</kbd> speaker notes · <kbd>O</kbd> all steps · <kbd>F</kbd> full screen</p>
   </div>
   <aside class="notes"><p><b>Garry:</b> Welcome. Who we are, and that this started as a research prototype at Ocean Hackathon Cork 2026. Everything you’ll see is live on the web.</p><p><b>Felix:</b> The foundation is the Marine Institute’s weekly monitoring programme and its open data. Worth saying up front: this is a research demo, not an official Marine Institute product.</p></aside>
 </section>
@@ -62,7 +62,7 @@
     </ul>
     <p class="more"><a href="../wiki/#/data" target="_blank" rel="noopener">Data sources ↗</a></p>
   </div>
-  <aside class="notes"><p><b>Felix:</b> Suggested: describe the monitoring programme, what a weekly sample is, and that the data are openly published.</p><p><b>Garry:</b> Stress the honesty rule: the forecast only sees what was public at the time.</p></aside>
+  <aside class="notes"><p><b>Felix:</b> Suggested: describe the monitoring programme, what a weekly sample is, and that the data are openly published.</p><p><b>Garry:</b> Stress the information rule: the forecast only sees what was public at the time.</p></aside>
 </section>
 
 <section class="step wide" data-title="The live map">
@@ -98,24 +98,24 @@
       <div><b>~0.04</b><span>what random guessing would score</span></div>
     </div>
     <p class="plain"><b>In plain words:</b> the score (PR-AUC, 0 to 1) measures how well the forecast puts the real bloom weeks at the top of its list. The comparison is “what normally happens at this site in this week of the year”. Blooms are rare (about 4% of site-weeks), so both numbers are far above chance. The point is the gap.</p>
-    <p class="caveat"><b>Honest caveat:</b> for the same number of alarms it does <b>not</b> catch more closures than the Marine Institute’s own simple rule (41 vs 46 of 62 South-West closures), but it raises far fewer false-alarm runs (41 vs 124–130). It is a surveillance aid, not a safety system.</p>
+    <p class="caveat"><b>Caveat:</b> for the same number of alarms it does <b>not</b> catch more closures than the Marine Institute’s own simple rule (41 vs 46 of 62 South-West closures), but it raises far fewer false-alarm runs (41 vs 124–130). It is a surveillance aid, not a safety system.</p>
     <p class="more"><a href="../wiki/#/results" target="_blank" rel="noopener">Full scorecard ↗</a></p>
   </div>
   <aside class="notes"><p><b>Garry:</b> Explain the score once, simply, then move on: “top of the list” and “compared with the normal pattern”. Say the caveat out loud; it builds trust.</p><p><b>Felix:</b> Optional: why fewer false alarms matters for a monitoring programme.</p></aside>
 </section>
 
-<section class="step" data-title="The honest test log">
+<section class="step" data-title="The test log">
   <div class="inner">
-    <p class="kick"><i lang="ga">Tástálacha</i> · The honest test log</p>
-    <h2>122 tests run, 62 honest nulls, all published</h2>
+    <p class="kick"><i lang="ga">Tástálacha</i> · The test log</p>
+    <h2>122 tests run, 62 null results reported</h2>
     <ul class="pts">
-      <li>Every experiment is logged with its verdict, including the ones that found nothing.</li>
+      <li>Every experiment is pre-registered where possible and logged with its verdict; all results are reported, including null results.</li>
       <li><b>Recent counts are the forecast.</b> What was in the water at and near a site in recent weeks carries almost all the skill; a simple logistic model gets within about 0.01.</li>
       <li><b>Environmental extras did not help:</b> sea temperature, heatwaves, wind, chlorophyll, currents and rivers added nothing once recent counts were known.</li>
     </ul>
-    <div class="btns"><a class="b" href="../wiki/#/test-log" target="_blank" rel="noopener">All 122 tests ↗</a><a class="b ghost" href="../wiki/#/test-log?cat=null" target="_blank" rel="noopener">Just the 62 nulls ↗</a></div>
+    <div class="btns"><a class="b" href="../wiki/#/test-log" target="_blank" rel="noopener">All 122 tests ↗</a><a class="b ghost" href="../wiki/#/test-log?cat=null" target="_blank" rel="noopener">The 62 null results ↗</a></div>
   </div>
-  <aside class="notes"><p><b>Garry:</b> The nulls are the backbone: they tell us which claims not to make. Invite people to browse them on their phones.</p><p><b>Felix:</b> Optional: why negative results are useful for monitoring agencies too.</p></aside>
+  <aside class="notes"><p><b>Garry:</b> Reporting null results is standard good practice: they show which claims the evidence does not support. Invite people to browse them on their phones.</p><p><b>Felix:</b> Optional: why negative results are useful for monitoring agencies too.</p></aside>
 </section>
 
 <section class="step" data-title="France">
@@ -128,7 +128,7 @@
       <div><b>~5 <small>weeks</small></b><span>earlier start to the French season (mid-May)</span></div>
     </div>
     <ul class="pts">
-      <li>Retrained on France’s far longer Ifremer REPHY record, the same recipe beats the French seasonal norm. The Irish result was not a fluke of one coastline.</li>
+      <li>Retrained on France’s far longer Ifremer REPHY record, the same recipe beats the French seasonal norm. The Irish result is not specific to one coastline.</li>
       <li>A nugget: when mussels are over the toxin limit, oysters are too <b>15.3%</b> of the time in France vs <b>3%</b> in Ireland.</li>
     </ul>
     <p class="more"><a href="../wiki/#/france" target="_blank" rel="noopener">France page ↗</a></p>
@@ -158,7 +158,7 @@
 <section class="step" data-title="Other species">
   <div class="inner">
     <p class="kick"><i lang="ga">Tocsainí eile</i> · Other toxins &amp; species</p>
-    <h2>One promising lead, and several honest “no”s</h2>
+    <h2>One promising lead, and several clear “no”s</h2>
     <ul class="pts">
       <li><b>Amnesic toxin (ASP) in king scallops:</b> a toxin-history forecast scored 0.748 vs 0.443 for “same as last time” in Ireland. Promising, but it did not replicate in France.</li>
       <li><b>“Hidden bloom” flag:</b> a toxin rise with no preceding high count. Flagged sites had a 23% chance of a ≥100 count within 21 days vs 5.1% otherwise, and it replicates in France.</li>
@@ -207,7 +207,7 @@
     <p class="plain">Candidates being tested, not adopted: French pre-training, a scallop ASP forecast, a harvest-risk product, and sampling-schedule trials.</p>
     <p class="more"><a href="../wiki/#/roadmap" target="_blank" rel="noopener">Roadmap ↗</a> · <a href="../wiki/#/limitations" target="_blank" rel="noopener">Limitations ↗</a></p>
   </div>
-  <aside class="notes"><p><b>Garry:</b> The honest test starts now: forecasts are locked before outcomes are known.</p><p><b>Felix:</b> Optional: what collaboration would make the 2027 season most useful.</p></aside>
+  <aside class="notes"><p><b>Garry:</b> The prospective test starts now: forecasts are locked before outcomes are known.</p><p><b>Felix:</b> Optional: what collaboration would make the 2027 season most useful.</p></aside>
 </section>
 
 <section class="step title" data-title="Thank you">
@@ -227,12 +227,13 @@
 <footer class="ctrl">
   <button id="prev" aria-label="Previous step">←</button>
   <div class="prog"><div id="bar"></div></div>
-  <span id="count" aria-live="polite">1 / 12</span>
+  <button id="count" aria-live="polite" title="All steps (O)">1 / 12</button>
   <button id="notesBtn" aria-pressed="false" title="Speaker notes (N)">Notes</button>
   <button id="fsBtn" title="Full screen (F)" aria-label="Full screen">⤢</button>
   <button id="next" aria-label="Next step">→</button>
 </footer>
-<div id="notesPanel" class="notespanel" hidden><div class="np-in"></div></div>
+<div id="notesPanel" class="notespanel" hidden><div class="np-in"></div><p class="np-t">Elapsed <b id="timer">0:00</b> · <button id="timerReset" type="button">reset</button> · <button id="presWin" type="button">open presenter window</button> <span class="np-tip">(keeps in step with this one, so the projector can show slides only)</span></p></div>
+<div id="overview" class="overview" hidden role="dialog" aria-label="All steps"><div class="ov-in"><p class="ov-h">All steps · press a number or click</p><ol id="ovList"></ol></div></div>
 <div class="disclaimer" role="note">Demo purposes only. Research prototype by Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute). Not an official Marine Institute product.</div>
 <script src="tour.js"></script>
 </body>

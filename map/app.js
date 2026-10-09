@@ -308,7 +308,7 @@ V.honesty = function (el) {
   const ci = (x, k) => `${f3(x.pr_auc[k])} <span class="tiny muted">[${f3(x.pr_auc_ci95[k].lo)}–${f3(x.pr_auc_ci95[k].hi)}]</span>`;
   const dl = x => { const d = x.delta_ci95["V2 - station_week_clim"]; return `${d.lo >= 0 ? "+" : ""}${f3(d.lo)} to +${f3(d.hi)}`; };
   el.innerHTML = `<h1>How good is this?</h1>
-  <p class="muted">Short answer: <b>modestly better than the seasonal norm overall, clearly better only in SW Kerry / West Cork, and not better (or worse) elsewhere.</b> All numbers are honest rolling-origin tests: each year scored by a model that never saw it.</p>
+  <p class="muted">Short answer: <b>modestly better than the seasonal norm overall, clearly better only in SW Kerry / West Cork, and not better (or worse) elsewhere.</b> All numbers come from rolling-origin tests: each year is scored by a model that never saw it.</p>
   <div class="grid g3">
     <div class="card"><div class="lbl">Headline 2022–26 (conservative)</div><div class="kpi">${f3(h.pr_auc.V2)} <small>PR-AUC [${f3(h.pr_auc_ci95.V2.lo)}–${f3(h.pr_auc_ci95.V2.hi)}]</small></div><div class="small">vs seasonal norm ${f3(h.pr_auc.station_week_clim)}; gain CI ${dl(h)}. ${h.n_pos} events in ${h.n.toLocaleString()} station-weeks (${pct1(h.prevalence)}).</div></div>
     <div class="card"><div class="lbl">Week-0 known (operational)</div><div class="kpi">${f3(ho.pr_auc.V2)} <small>PR-AUC [${f3(ho.pr_auc_ci95.V2.lo)}–${f3(ho.pr_auc_ci95.V2.hi)}]</small></div><div class="small">gain over norm ${dl(ho)}. Used only where this week's sample was public by Sunday.</div></div>

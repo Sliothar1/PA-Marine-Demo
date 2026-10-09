@@ -95,3 +95,18 @@ h2.sm{font-size:clamp(24px,2.6vw,34px)}
  .disclaimer{white-space:normal;font-size:10px;padding:2px 8px}
 }
 @media (prefers-reduced-motion:reduce){.step{transition:none}}
+
+#count{background:none;border:0;cursor:pointer;color:var(--soft);font:600 14px var(--sans);min-width:64px}
+#count:hover{color:#fff}
+.np-t{font-size:13px;color:var(--soft);margin:8px 0 0;border-top:1px solid rgba(255,255,255,.12);padding-top:6px}
+.np-t b{color:#fff;font-variant-numeric:tabular-nums}
+.np-t button{background:none;border:1px solid rgba(255,255,255,.3);color:var(--soft);border-radius:6px;font-size:12px;cursor:pointer;padding:0 6px}
+.overview{position:fixed;inset:0;z-index:50;background:rgba(3,16,27,.82);display:flex;align-items:center;justify-content:center;padding:20px}
+.overview[hidden]{display:none}
+.ov-in{background:#0a2d42;border:1px solid rgba(143,224,214,.4);border-radius:18px;padding:18px 26px;width:min(720px,94vw);max-height:84vh;overflow:auto}
+.ov-h{margin:0 0 8px;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--soft)}
+.ov-in ol{margin:0;padding-left:1.6em;columns:2;column-gap:30px;font-size:19px}
+.ov-in li{margin:5px 0;break-inside:avoid}
+.ov-in a{color:var(--ink);text-decoration:none}.ov-in a:hover,.ov-in a.cur{color:var(--glass);text-decoration:underline}
+@media (max-width:600px){.ov-in ol{columns:1}}
+.np-tip{opacity:.7}

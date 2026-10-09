@@ -1,6 +1,7 @@
 /* Guided tour: step-through with arrows / swipe / buttons, #n deep links, N notes, F full screen */
 (function(){
 'use strict';
+var syncing=false;
 var steps=[].slice.call(document.querySelectorAll('.step')), n=steps.length, cur=0;
 var bar=document.getElementById('bar'), count=document.getElementById('count');
 var panel=document.getElementById('notesPanel'), nbtn=document.getElementById('notesBtn');
@@ -24,11 +25,21 @@ function show(i,push){
   bar.style.width=((i+1)/n*100)+'%'; count.textContent=(i+1)+' / '+n;
   document.title=steps[i].getAttribute('data-title')+' · Guided tour · Live Dinophysis Bloom Map';
   if(push!==false){try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
+  if(!syncing){try{localStorage.setItem('pa-tour-step',String(i)+':'+Date.now())}catch(e){}}
   var nt=steps[i].querySelector('.notes'); panel.querySelector('.np-in').innerHTML='<p class="np-h">Speaker notes · step '+(i+1)+' (suggestions)</p>'+(nt?nt.innerHTML:'<p>No notes for this step.</p>');
 }
 function fromHash(){var m=/^#(\d+)$/.exec(location.hash);return m?(+m[1]-1):0}
-function toggleNotes(){var o=panel.hidden;panel.hidden=!o;nbtn.setAttribute('aria-pressed',String(o));try{localStorage.setItem('pa-tour-notes',o?'1':'0')}catch(e){}}
+function toggleNotes(){var o=panel.hidden;panel.hidden=!o;nbtn.setAttribute('aria-pressed',String(o));}
 function fs(){var d=document;if(!d.fullscreenElement){(d.documentElement.requestFullscreen||function(){}).call(d.documentElement)}else{d.exitFullscreen()}}
+var ov=document.getElementById('overview'), ovl=document.getElementById('ovList');
+ovl.innerHTML=steps.map(function(s,k){return '<li><a href="#'+(k+1)+'" data-k="'+k+'">'+s.getAttribute('data-title')+'</a></li>'}).join('');
+ovl.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;e.preventDefault();show(+a.getAttribute('data-k'));toggleOv(false)});
+ov.addEventListener('click',function(e){if(e.target===ov)toggleOv(false)});
+function toggleOv(o){if(o===undefined)o=ov.hidden;ov.hidden=!o;if(o){[].forEach.call(ovl.querySelectorAll('a'),function(a,k){a.classList.toggle('cur',k===cur)});var c=ovl.querySelector('a.cur');if(c)c.focus()}}
+document.getElementById('count').addEventListener('click',function(){toggleOv()});
+var t0=Date.now(),tm=document.getElementById('timer');
+setInterval(function(){var s=Math.floor((Date.now()-t0)/1000);tm.textContent=Math.floor(s/60)+':'+('0'+s%60).slice(-2)},1000);
+document.getElementById('timerReset').addEventListener('click',function(){t0=Date.now();tm.textContent='0:00'});
 document.getElementById('prev').addEventListener('click',function(){show(cur-1)});
 document.getElementById('next').addEventListener('click',function(){show(cur+1)});
 nbtn.addEventListener('click',toggleNotes);
@@ -39,13 +50,14 @@ document.addEventListener('keydown',function(e){
   if(k==='ArrowRight'||k==='PageDown'||(k===' '&&!e.shiftKey)){e.preventDefault();show(cur+1)}
   else if(k==='ArrowLeft'||k==='PageUp'||(k===' '&&e.shiftKey)){e.preventDefault();show(cur-1)}
   else if(k==='Home'){show(0)}else if(k==='End'){show(n-1)}
-  else if(k==='n'||k==='N'){toggleNotes()}else if(k==='f'||k==='F'){fs()}
+  else if(k==='n'||k==='N'){toggleNotes()}else if(k==='o'||k==='O'){toggleOv()}else if(k==='Escape'){toggleOv(false)}else if(!ov.hidden&&/^[0-9]$/.test(k)){var d=+k;show(d===0?9:d-1);toggleOv(false)}else if(k==='f'||k==='F'){fs()}
 });
 var x0=null,y0=null;
 document.addEventListener('touchstart',function(e){if(e.target.closest('.frame'))return;x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
 document.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;if(Math.abs(dx)>50&&Math.abs(dx)>1.5*Math.abs(dy)){show(cur+(dx<0?1:-1))}x0=null},{passive:true});
 window.addEventListener('hashchange',function(){var i=fromHash();if(i!==cur)show(i,false)});
-try{if(localStorage.getItem('pa-tour-notes')==='1'){panel.hidden=false;nbtn.setAttribute('aria-pressed','true')}}catch(e){}
 if(/[?&]notes=1/.test(location.search)){panel.hidden=false;nbtn.setAttribute('aria-pressed','true')}
+window.addEventListener('storage',function(e){if(e.key!=='pa-tour-step'||!e.newValue)return;var i=parseInt(e.newValue,10);if(!isNaN(i)&&i!==cur){syncing=true;show(i);syncing=false}});
+document.getElementById('presWin').addEventListener('click',function(){window.open(location.pathname+'?notes=1#'+(cur+1),'pa-presenter','width=1000,height=700')});
 show(fromHash(),false);
 })();

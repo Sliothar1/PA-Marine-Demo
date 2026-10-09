@@ -769,7 +769,7 @@ window.TESTS = [
 "date": "2026-10-07",
 "test": "Assumed-lag check + frozen v2 fed only published data",
 "result": "3-d 0.328 beats real publication by 0.016 [+0.004, +0.031] (too optimistic); 5-d 0.321 ≈ real (−0.009, CI incl. 0); zero lag 0.324. Frozen v2 with only-published inputs 0.291 (Δ +0.001)",
-"verdict": "0.290 confirmed honest; real ≈ 5-day",
+"verdict": "0.290 confirmed; real ≈ 5-day",
 "cat": "chk",
 "theme": "Operational rescore"
 },
