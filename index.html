@@ -1,58 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PA-Marine — Irish HAB &amp; marine heatwave demo</title>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PA-Marine-Model · Irish Dinophysis bloom forecast · Garry Lohan, ATU Galway</title>
+<meta name="description" content="PA-Marine-Model: a research-prototype weekly forecast of Dinophysis (DSP shellfish toxin) blooms in Irish waters, by Garry Lohan (ATU Galway). Ocean Hackathon Cork 2026 demo.">
+<meta name="author" content="Garry Lohan (ATU Galway)">
+<meta name="theme-color" content="#0a3d62">
+<script>(function(){try{var m=/[?&]theme=(dark|light)/.exec(location.search);var t=m?m[1]:localStorage.getItem('pa-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<link rel="stylesheet" href="styles.css">
 </head>
-<body><p style="background:#b45309;color:#fff;padding:8px;text-align:center;font-weight:600">Ocean Hackathon Cork 2026 demo. <a style="color:#fff" href="map/">Open the interactive forecast map</a></p>
+<body>
+<div class="banner" role="note">Ocean Hackathon Cork 2026 demo. Research prototype by Garry Lohan (ATU Galway). Not an official Marine Institute product or advice.</div>
+<header class="hero">
   <div class="wrap">
-    <div class="kicker">PA-Marine-Model · colleague demo</div>
-    <h1>Irish harmful-algae &amp; marine-heatwave early warning</h1>
-    <p class="lead">
-      Ocean Hackathon Cork lineage (Challenge 4). Three worked episodes for a 3–5 minute
-      briefing: national context, data-collection bays, Galway deep-dive with a Cork replication path.
-      Built from PA-Marine-Model only.
-    </p>
-    <div class="honesty">
-      Honesty lock: a marine heatwave is not an automatic bloom.
-      June 2023 was a severe Irish-shelf MHW while national Dinophysis / closures stayed below normal.
+    <div class="topline"><span class="logo" aria-hidden="true"></span><span class="brand">PA-Marine-Model</span>
+      <button class="iconbtn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark">◐</button></div>
+    <h1>A weekly early-warning forecast for toxic <em>Dinophysis</em> blooms in Irish shellfish waters</h1>
+    <p class="sub">Every Sunday, for each Marine Institute monitoring station sampled that week, PA-Marine-Model estimates the chance that <em>Dinophysis</em> — the plankton behind diarrhetic shellfish poisoning (DSP) — reaches ≥100 cells per litre in the next two weeks. Built on open monitoring data, tested against honest baselines, with every null result published.</p>
+    <p class="by">By <strong>Garry Lohan</strong> · Lecturer, <strong>ATU Galway</strong></p>
+    <div class="ctas">
+      <a class="btn primary" href="map/">Open the interactive map →</a>
+      <a class="btn" href="wiki/">Read the wiki</a>
+      <a class="btn ghost" href="wiki/#/test-log">All 122 tests</a>
     </div>
-
-    <div class="card">
-      <h2 style="margin-top:0">How we demo (3–5 minutes)</h2>
-      <div class="steps">
-        <div><strong>1.</strong> Open this page — marine only, no other product names.</div>
-        <div><strong>2.</strong> Walk the three episodes: 2018 warm+present · June 2023 severe MHW / quiet biology · 2022 Galway contrast.</div>
-        <div><strong>3.</strong> Pitch A Ireland · B data-collection bays · C Galway → Cork replication.</div>
-      </div>
-    </div>
-
-    <div class="tabs">
-      <button data-key="2018">2018 Connemara</button>
-      <button data-key="2023" class="active">June 2023 flagship</button>
-      <button data-key="2022">2022 Galway</button>
-    </div>
-    <div id="panel"></div>
-
-    <p class="skill">
-      Current tested skill (4 Oct 2026): forecasting total <em>Dinophysis</em> &ge;100 cells/L one to two weeks ahead,
-      out-of-sample 2022&ndash;26, <strong>PR-AUC 0.290 vs 0.231</strong> for the station-and-season norm.
-      Skill is concentrated in SW Kerry / West Cork. A planning aid only &mdash; not a safety guarantee and not an official Marine Institute product.
-    </p>
-
-    <div class="card">
-      <h2 style="margin-top:0">Pitch one-liners</h2>
-      <p><strong>A Ireland:</strong> spring–summer MHW + Dinophysis / DSP closure risk for national briefing.</p>
-      <p><strong>B Data-collection bays:</strong> same pack retargeted to sampling geography (incl. Connemara / Mace Head / Lehanagh).</p>
-      <p><strong>C Galway → Cork:</strong> local grower view, then replicate the site pack for Cork.</p>
-    </div>
-
-    <footer>
-      PA-Marine-Model colleague demo (static page). Data: Marine Institute HAB monitoring, NOAA OISST, E.U. Copernicus Marine Service Information.
-    </footer>
   </div>
-  <script src="demo.js"></script>
+  <svg class="waves" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,90 480,0 720,40 C960,80 1200,10 1440,45 L1440,90 L0,90 Z"/></svg>
+</header>
+
+<main class="wrap">
+  <section class="stats" aria-label="Key numbers">
+    <div class="stat"><div class="v">0.312 <small>vs 0.231</small></div><div class="l"><b>Operational skill (PR-AUC), 2022–26.</b> Using only counts the Marine Institute had published by each Sunday, vs the seasonal “normal for this site and week”.</div></div>
+    <div class="stat"><div class="v">0.338 <small>vs 0.203</small></div><div class="l"><b>South-West (Kerry / West Cork).</b> Where most blooms happen and where skill is clearest.</div></div>
+    <div class="stat"><div class="v">3.6 <small>days</small></div><div class="l"><b>Median data lag.</b> From water sample to public count on MI’s open ERDDAP service.</div></div>
+    <div class="stat"><div class="v">122</div><div class="l"><b>Logged tests</b>, roughly half of them null results — published, not hidden.</div></div>
+  </section>
+
+  <section class="cards">
+    <a class="card" href="map/">
+      <span class="ic" aria-hidden="true">🗺</span>
+      <h2>Interactive map</h2>
+      <p>The live demo: the weekly outlook on a map, with season replay, a scoreboard and the bloom-to-toxin view.</p>
+      <span class="go">Open the map →</span>
+    </a>
+    <a class="card" href="wiki/">
+      <span class="ic" aria-hidden="true">📚</span>
+      <h2>Project wiki</h2>
+      <p>Plain-English overview, how the model works, results and scorecard, marine heatwaves, other toxins, France, data sources and caveats.</p>
+      <span class="go">Read the wiki →</span>
+    </a>
+    <a class="card" href="wiki/#/test-log">
+      <span class="ic" aria-hidden="true">🧪</span>
+      <h2>Full test log</h2>
+      <p>Every experiment with its verdict, searchable and filterable. Nulls are clearly marked — they are how we know which claims not to make.</p>
+      <span class="go">Browse the tests →</span>
+    </a>
+  </section>
+
+  <section class="two">
+    <div class="panel">
+      <h2>What we can say</h2>
+      <ul>
+        <li>The Sunday forecast ranks the coming fortnight’s bloom weeks clearly better than the seasonal norm: <strong>PR-AUC 0.31 vs 0.23</strong> nationally (2022–26), and <strong>0.34 vs 0.20</strong> in the South-West.</li>
+        <li>The skill comes from <strong>recent counts</strong> at and near each site. A simple logistic model comes within about 0.01.</li>
+        <li><strong>No environmental input</strong> — sea temperature, heatwaves, wind, chlorophyll, currents, rivers — added fair skill.</li>
+        <li>The same recipe <strong>works in France</strong>, beating the French seasonal norm by 0.10–0.13.</li>
+      </ul>
+    </div>
+    <div class="panel warn">
+      <h2>What we can’t say (yet)</h2>
+      <ul>
+        <li>It does <strong>not catch more shellfish closures</strong> than MI’s own free ≥100 cells/L rule; its edge is far fewer false alarms.</li>
+        <li>About half the gain is telling busy years from quiet ones, not week-by-week timing.</li>
+        <li>Marine heatwaves are getting more frequent (about +29 days per decade), but we found <strong>no detectable effect</strong> on plankton or toxic blooms.</li>
+        <li>Skill so far is from hindcasts. Genuine scoring starts <strong>25 Oct 2026</strong>; 2027 is the confirmatory season.</li>
+      </ul>
+      <p class="more"><a href="wiki/#/limitations">All caveats →</a></p>
+    </div>
+  </section>
+
+  <section class="credit">
+    <div>
+      <h2>About</h2>
+      <p>PA-Marine-Model is a research prototype by <strong>Garry Lohan</strong>, lecturer at <strong>Atlantic Technological University (ATU) Galway</strong>, built for <strong>Ocean Hackathon Cork 2026</strong>. It is <strong>not</strong> an official Marine Institute product or advice; shellfish safety is decided by official monitoring.</p>
+      <p class="small">Contains Marine Institute data (open HAB monitoring via ERDDAP), E.U. Copernicus Marine Service information and other open data; this site shows national, regional and yearly aggregates only. <a href="wiki/#/data">Data sources</a> · <a href="wiki/#/about">Credits</a></p>
+    </div>
+  </section>
+</main>
+<footer class="foot">© 2026 Garry Lohan, ATU Galway · Ocean Hackathon Cork 2026 demo · Not an official Marine Institute product or advice.</footer>
+<script>document.getElementById('themeBtn').addEventListener('click',function(){var d=document.documentElement,t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);try{localStorage.setItem('pa-theme',t)}catch(e){}});</script>
 </body>
 </html>

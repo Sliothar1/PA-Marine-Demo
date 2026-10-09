@@ -1,44 +1,51 @@
-:root {
-  --bg: #0b1220;
-  --card: #121a2b;
-  --muted: #9db0c9;
-  --text: #e8eef7;
-  --line: #243149;
-  --accent: #3ec7c7;
-  --warn: #e0b35a;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0; font-family: "Segoe UI", system-ui, sans-serif;
-  background: linear-gradient(180deg, #07101d, #0b1220 40%);
-  color: var(--text); line-height: 1.45;
-}
-.wrap { max-width: 980px; margin: 0 auto; padding: 28px 18px 64px; }
-.kicker { color: var(--accent); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
-h1 { font-size: 1.85rem; margin: 8px 0 8px; }
-.lead { color: var(--muted); max-width: 62ch; }
-.honesty {
-  margin: 18px 0; padding: 12px 14px; border: 1px solid #5a4a1f;
-  background: #1a160c; color: var(--warn); border-radius: 10px;
-}
-.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 22px 0 14px; }
-.tabs button {
-  background: var(--card); color: var(--text); border: 1px solid var(--line);
-  border-radius: 999px; padding: 8px 14px; cursor: pointer;
-}
-.tabs button.active { border-color: var(--accent); color: var(--accent); }
-.card {
-  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-  padding: 16px 18px; margin-top: 12px;
-}
-.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
-.metric { background: #0d1524; border-radius: 10px; padding: 10px 12px; }
-.metric b { display: block; font-size: 1.05rem; }
-.metric span { color: var(--muted); font-size: .85rem; }
-.skill { margin-top: 18px; font-size: .95rem; color: var(--muted); }
-.skill strong { color: var(--text); }
-.steps { display: grid; gap: 8px; margin-top: 8px; }
-.steps div { padding: 8px 10px; background: #0d1524; border-radius: 8px; }
-footer { margin-top: 28px; color: var(--muted); font-size: .85rem; }
-a { color: var(--accent); }
-.hidden { display: none; }
+:root{--bg:#f4f8fb;--panel:#fff;--ink:#0d2633;--ink2:#3d5866;--muted:#6b8593;--line:#d6e3ea;--accent:#0b7a86;--deep:#0a3d62;--warn:#d97706;--shadow:0 1px 2px rgba(13,38,51,.06),0 6px 22px rgba(13,38,51,.08);
+--sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light}
+[data-theme="dark"]{--bg:#06141c;--panel:#0d2431;--ink:#e4f1f6;--ink2:#b4cbd6;--muted:#87a3b1;--line:#1d3a49;--accent:#4fd1c5;--deep:#04202f;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.3);color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+.banner{background:#b45309;color:#fff;font:600 13.5px/1.4 var(--sans);text-align:center;padding:7px 14px}
+.hero{position:relative;color:#eaf7fa;background:radial-gradient(1200px 500px at 80% -10%,#1aa3a8 0%,transparent 60%),linear-gradient(160deg,#0a3d62 0%,#0b5f73 55%,#0b7a86 100%);padding:28px 0 110px}
+[data-theme="dark"] .hero{background:radial-gradient(1200px 500px at 80% -10%,#0f6d73 0%,transparent 60%),linear-gradient(160deg,#03182a 0%,#06324a 60%,#085a66 100%)}
+.topline{display:flex;align-items:center;gap:10px;margin-bottom:46px}
+.logo{width:34px;height:34px;border-radius:10px;background:radial-gradient(circle at 30% 30%,#9ff0e6,#20a4a8 55%,#0a3d62);box-shadow:inset 0 -6px 10px rgba(0,0,0,.2)}
+.brand{font:700 17px var(--sans);letter-spacing:.3px}
+.iconbtn{margin-left:auto;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;border-radius:10px;height:36px;width:40px;cursor:pointer;font-size:16px}
+.hero h1{font:700 clamp(30px,4.6vw,52px)/1.1 var(--serif);margin:0 0 18px;max-width:900px;letter-spacing:-.4px}
+.hero .sub{font-size:clamp(16px,1.6vw,19px);max-width:780px;color:#cfe9ef;margin:0 0 14px}
+.hero .by{color:#fff;margin:0 0 26px;font-size:16px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:12px 20px;border-radius:12px;text-decoration:none;font-weight:650;border:1px solid rgba(255,255,255,.45);color:#fff;background:rgba(255,255,255,.08)}
+.btn:hover{background:rgba(255,255,255,.18)}
+.btn.primary{background:#fff;color:#0a3d62;border-color:#fff}
+.btn.primary:hover{background:#e6f6f8}
+.btn.ghost{border-color:transparent;text-decoration:underline;text-underline-offset:3px}
+.waves{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:90px}
+.waves path{fill:var(--bg)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-70px;position:relative}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.stat .v{font:700 30px/1.1 var(--serif);color:var(--deep)}
+[data-theme="dark"] .stat .v{color:var(--accent)}
+.stat .v small{font:600 15px var(--sans);color:var(--muted)}
+.stat .l{font-size:14px;color:var(--ink2);margin-top:8px;line-height:1.45}
+.stat .l b{color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:34px 0}
+.card{display:block;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);transition:transform .15s ease,border-color .15s ease}
+.card:hover{transform:translateY(-3px);border-color:var(--accent)}
+.card .ic{font-size:28px}
+.card h2{font:700 22px var(--serif);margin:8px 0 6px}
+.card p{color:var(--ink2);margin:0 0 14px;font-size:15px}
+.card .go{color:var(--accent);font-weight:650}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:34px}
+.panel{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:16px;padding:20px 24px;box-shadow:var(--shadow)}
+.panel.warn{border-left-color:var(--warn)}
+.panel h2{font:700 21px var(--serif);margin:0 0 8px}
+.panel li{margin:7px 0;color:var(--ink2)}.panel li strong{color:var(--ink)}
+.panel .more{margin:8px 0 0}
+.credit{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px 26px;margin-bottom:40px;box-shadow:var(--shadow)}
+.credit h2{font:700 21px var(--serif);margin:0 0 6px}
+.credit .small{font-size:14px;color:var(--muted)}
+.foot{border-top:1px solid var(--line);padding:22px;text-align:center;color:var(--muted);font-size:13px}
+@media (max-width:900px){.stats{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+@media (max-width:520px){.stats{grid-template-columns:1fr}.topline{margin-bottom:28px}.banner{font-size:12px}}
