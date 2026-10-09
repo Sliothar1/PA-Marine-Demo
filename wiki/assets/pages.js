@@ -81,7 +81,7 @@ PAGES.push({id:'overview', group:'Start here', icon:'🌊', title:'Overview',
  <div class="callout"><span class="t">Curious non-specialist</span><p><a href="#/how-it-works">How it works</a> · <a href="#/heatwaves">Heatwaves</a> · <a href="#/glossary">Glossary</a></p></div>
  <div class="callout"><span class="t">Scientist or reviewer</span><p><a href="#/results">Scorecard</a> · <a href="#/test-log">All 122 tests</a> · <a href="#/limitations">Caveats</a></p></div>
 </div>
-<p style="font-size:14px;color:var(--muted)">Research prototype by <strong>Garry Lohan</strong> (lecturer, ATU Galway) and <strong>Felix Sproll</strong> (Marine Institute), developed for Ocean Hackathon Cork 2026. Not an official Marine Institute product or advice; shellfish safety is decided by official monitoring.</p>
+<p style="font-size:14px;color:var(--muted)">Research prototype by <strong>Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</strong>, developed for Ocean Hackathon Cork 2026. Not an official Marine Institute product or advice; shellfish safety is decided by official monitoring.</p>
 `});
 PAGES.push({id:'how-it-works', group:'Start here', icon:'⚙️', title:'How the model works',
  keywords:'lightgbm platt features method pipeline erddap lag sunday target rolling origin',
@@ -358,7 +358,7 @@ PAGES.push({id:'toxins', group:'Findings', icon:'🦪', title:'Other toxins & sp
 </ul>
 <div class="callout warn"><p><strong>Bottom line:</strong> don’t build a <em>Karenia</em> forecast on this recipe. Last week’s count is the better guide.</p></div>
 `});
-PAGES.push({id:'france', group:'Findings', icon:'🇫🇷', title:'France transfer',
+PAGES.push({id:'france', group:'Findings', icon:'🌍', title:'France transfer',
  keywords:'rephy rephytox ifremer france replication transfer pooling',
  lede:'France has kept a far longer and denser record than Ireland: algae counts at 551 coastal sites and shellfish toxin tests at 520 sites, 1987–2022 (Ifremer REPHY / REPHYTOX). We used it to ask whether the Irish method works elsewhere, whether French data can improve the Irish forecast, and what biology the Irish record cannot show.',
  html:`
@@ -557,7 +557,7 @@ PAGES.push({id:'glossary', group:'Reference', icon:'📖', title:'Glossary',
 `});
 PAGES.push({id:'about', group:'Reference', icon:'👤', title:'About & credits',
  keywords:'about credits garry lohan atu galway ocean hackathon cork',
- lede:'PA-Marine-Model is a research prototype built by <strong>Garry Lohan</strong>, lecturer at <strong>Atlantic Technological University (ATU) Galway</strong>, and <strong>Felix Sproll</strong> of the <strong>Marine Institute</strong>.',
+ lede:'PA-Marine-Model is a research prototype built by <strong>Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</strong>. Garry is a lecturer at Atlantic Technological University (ATU) Galway.',
  html:`
 <h2>Author</h2>
 <p><strong>Garry Lohan</strong> (ATU Galway) designed and leads PA-Marine-Model, built together with <strong>Felix Sproll</strong> (Marine Institute), a test-everything, report-everything approach to forecasting harmful algal blooms in Irish shellfish waters. The project grew out of the <strong>Ocean Hackathon Cork 2026</strong> challenge on harmful algae and marine heatwaves.</p>
@@ -575,6 +575,27 @@ PAGES.push({id:'about', group:'Reference', icon:'👤', title:'About & credits',
 
 <h2>Acknowledgements</h2>
 <p>The forecast is built on the Marine Institute’s national phytoplankton and biotoxin monitoring programme and its open ERDDAP data service. Thanks also to the data providers listed on the <a href="#/data">Data sources</a> page, including the E.U. Copernicus Marine Service, NOAA, ECMWF, Met Éireann, OPW, Ifremer (REPHY / REPHYTOX) and the Marine Biological Association. Reviewers and red-teamers challenged every headline; the claims on this site are narrower because of them.</p>
+
+<h2>The Irish labels</h2>
+<p>Small Irish-language (Gaeilge) labels appear alongside the English on this site, as a light, friendly touch from a Galway-built project. The English always carries the full meaning; the Irish is just a companion.</p>
+<div class="tbl"><table>
+<thead><tr><th>Irish</th><th>English</th></tr></thead>
+<tbody>
+<tr><td><i lang="ga">Fáilte</i></td><td>Welcome</td></tr>
+<tr><td><i lang="ga">Ag faire ar an bhfarraige</i></td><td>Watching the sea</td></tr>
+<tr><td><i lang="ga">Taiscéal an vicí</i></td><td>Explore the wiki</td></tr>
+<tr><td><i lang="ga">An léarscáil bheo</i></td><td>The live map</td></tr>
+<tr><td><i lang="ga">Vicí</i> · <i lang="ga">Baile</i></td><td>Wiki · Home</td></tr>
+<tr><td><i lang="ga">Tosaigh anseo</i> · <i lang="ga">Fionnachtana</i> · <i lang="ga">Tagairt</i></td><td>Start here · Findings · Reference</td></tr>
+<tr><td><i lang="ga">Forléargas</i> · <i lang="ga">Conas a oibríonn sé</i></td><td>Overview · How it works</td></tr>
+<tr><td><i lang="ga">Torthaí</i> · <i lang="ga">Tástálacha</i></td><td>Results · Tests</td></tr>
+<tr><td><i lang="ga">Tonnta teasa mara</i></td><td>Marine heatwaves</td></tr>
+<tr><td><i lang="ga">Tocsainí eile</i> · <i lang="ga">An Fhrainc</i></td><td>Other toxins · France</td></tr>
+<tr><td><i lang="ga">Foinsí sonraí</i> · <i lang="ga">Teorainneacha</i></td><td>Data sources · Limitations</td></tr>
+<tr><td><i lang="ga">Gluais</i> · <i lang="ga">Fúinn</i></td><td>Glossary · About us</td></tr>
+<tr><td><i lang="ga">Macántacht</i></td><td>Honesty (used for the null-results card)</td></tr>
+<tr><td><i lang="ga">Déanta i nGaillimh</i></td><td>Made in Galway</td></tr>
+</tbody></table></div>
 
 <h2>About this site</h2>
 <p>A static site (HTML, CSS and JavaScript, no build step) with light and dark modes, search across every page and test, and a mobile layout. It shows aggregates and method descriptions only: no station-level data, raw data or model code is published here. Last updated 9 Oct 2026.</p>

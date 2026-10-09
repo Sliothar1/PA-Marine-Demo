@@ -15,6 +15,9 @@ var CAT = {
   pend:{label:'Pending / not run / milestone', short:'Pending', color:'var(--pend)'}
 };
 var CAT_ORDER=['pos','null','chk','desc','pend'];
+/* light Irish-language labels (shown alongside the English) */
+var GA={overview:'Forléargas','how-it-works':'Conas a oibríonn sé',results:'Torthaí','test-log':'Tástálacha',heatwaves:'Tonnta teasa mara',toxins:'Tocsainí eile',france:'An Fhrainc',data:'Foinsí sonraí',limitations:'Teorainneacha',glossary:'Gluais',about:'Fúinn'};
+var GA_GROUP={'Start here':'Tosaigh anseo','Findings':'Fionnachtana','Reference':'Tagairt'};
 
 /* ---------- height of sticky header ---------- */
 function setHH(){document.documentElement.style.setProperty('--hh',$('#stickyhead').offsetHeight+'px')}
@@ -32,13 +35,13 @@ function buildSide(){
   PAGES.forEach(function(p){ if(!by[p.group]){by[p.group]=[];groups.push(p.group)} by[p.group].push(p) });
   var h='';
   groups.forEach(function(g){
-    h+='<h4>'+esc(g)+'</h4>';
+    h+='<h4>'+esc(g)+(GA_GROUP[g]?' <i lang="ga">· '+GA_GROUP[g]+'</i>':'')+'</h4>';
     by[g].forEach(function(p){
-      h+='<a href="#/'+p.id+'" data-id="'+p.id+'"><span aria-hidden="true">'+(p.icon||'•')+'</span>'+esc(p.title)+(p.id==='test-log'?'<span class="n">'+TESTS.length+'</span>':'')+'</a>';
+      h+='<a href="#/'+p.id+'" data-id="'+p.id+'"><span aria-hidden="true">'+(p.icon||'•')+'</span>'+'<span class="lbl">'+esc(p.title)+(GA[p.id]?'<i lang="ga">'+GA[p.id]+'</i>':'')+'</span>'+(p.id==='test-log'?'<span class="n">'+TESTS.length+'</span>':'')+'</a>';
     });
   });
-  h+='<div class="ext"><h4>Elsewhere on this site</h4><a href="../"><span>⌂</span>Landing page</a><a href="../map/"><span>🗺</span>Interactive map</a></div>';
-  h+='<div class="credit-card"><b>Garry Lohan</b><br>Lecturer, ATU Galway<br><b>Felix Sproll</b><br>Marine Institute<br>Research prototype for Ocean Hackathon Cork 2026. Not Marine Institute advice.</div>';
+  h+='<div class="ext"><h4>Elsewhere on this site</h4><a href="../"><span>⌂</span><span class="lbl">Home page<i lang="ga">Baile</i></span></a><a href="../map/"><span>🗺</span><span class="lbl">Live map<i lang="ga">An léarscáil bheo</i></span></a></div>';
+  h+='<div class="credit-card"><b>Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</b><br>Research prototype for Ocean Hackathon Cork 2026. Not Marine Institute advice.<br><i lang="ga">Déanta i nGaillimh</i> · Made in Galway</div>';
   $('#side').innerHTML=h;
 }
 function openNav(o){document.body.classList.toggle('navopen',o)}
@@ -59,7 +62,7 @@ function render(){
   if(idx<0){r.id='overview';idx=0}
   var p=PAGES[idx];
   document.title=p.title+' · PA-Marine-Model wiki';
-  var html='<div class="crumb">'+esc(p.group)+'</div><h1>'+esc(p.title)+'</h1>'+(p.lede?'<p class="lede">'+p.lede+'</p>':'')+p.html;
+  var html='<div class="crumb">'+esc(p.group)+'</div>'+(GA[p.id]?'<div class="ga-kicker" lang="ga">'+GA[p.id]+'</div>':'')+'<h1>'+esc(p.title)+'</h1>'+(p.lede?'<p class="lede">'+p.lede+'</p>':'')+p.html;
   var prev=PAGES[idx-1], next=PAGES[idx+1];
   html+='<nav class="pager">'+(prev?'<a href="#/'+prev.id+'"><small>← Previous</small>'+esc(prev.title)+'</a>':'<span></span>')+(next?'<a class="nx" href="#/'+next.id+'"><small>Next →</small>'+esc(next.title)+'</a>':'<span></span>')+'</nav>';
   var view=$('#view'); view.innerHTML=html; view.classList.toggle('wide',!!p.wide); $('.layout').classList.toggle('notoc',!!p.wide);

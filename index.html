@@ -2,57 +2,98 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PA-Marine-Model · Irish Dinophysis bloom forecast · Garry Lohan, ATU Galway</title>
-<meta name="description" content="PA-Marine-Model: a research-prototype weekly forecast of Dinophysis (DSP shellfish toxin) blooms in Irish waters, by Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute). Ocean Hackathon Cork 2026 demo.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Live Dinophysis Bloom Map · Ireland · PA-Marine-Model · Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</title>
+<meta name="description" content="Live Dinophysis Bloom Map for Ireland: weekly bloom risk for Irish shellfish sites, built on Marine Institute open data. A research prototype by Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute). Ocean Hackathon Cork 2026 demo.">
 <meta name="author" content="Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)">
-<meta name="theme-color" content="#0a3d62">
+<meta name="theme-color" content="#061f33">
 <script>(function(){try{var m=/[?&]theme=(dark|light)/.exec(location.search);var t=m?m[1]:localStorage.getItem('pa-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <header class="hero">
   <div class="wrap">
-    <div class="topline"><span class="logo" aria-hidden="true"></span><span class="brand">PA-Marine-Model</span>
-      <button class="iconbtn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark">◐</button></div>
-    <h1>A weekly early-warning forecast for toxic <em>Dinophysis</em> blooms in Irish shellfish waters</h1>
-    <p class="sub">Every Sunday, for each Marine Institute monitoring station sampled that week, PA-Marine-Model estimates the chance that <em>Dinophysis</em> — the plankton behind diarrhetic shellfish poisoning (DSP) — reaches ≥100 cells per litre in the next two weeks. Built on open monitoring data, tested against honest baselines, with every null result published.</p>
-    <p class="by">By <strong>Garry Lohan</strong> · Lecturer, <strong>ATU Galway</strong></p>
-    <div class="ctas">
-      <a class="btn primary" href="map/">Open the interactive map →</a>
-      <a class="btn" href="wiki/">Read the wiki</a>
-      <a class="btn ghost" href="wiki/#/test-log">All 122 tests</a>
+    <nav class="topline" aria-label="Site">
+      <a class="brandlink" href="./"><svg class="mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 41 C16 24 36 13 49 25 L55 29 C47 28 41 27 35 29 C28 31 22 36 18 42 L13 41"/><path d="M26.5 22.4 L30 15 L33.5 20.8"/><path d="M30 31.2 L27 36"/><path d="M15.5 41.5 C12.5 40 10 40 7.5 41.5 M15.5 41.5 C14.5 44 13.5 46 13.5 48.5"/><circle cx="47.5" cy="25.3" r=".8" fill="currentColor"/><path d="M4 53 C9 49 13 49 18 53 S27 57 32 53 S41 49 46 53 S55 57 60 53"/></svg><span class="brand">PA-Marine-Model</span></a>
+      <a class="toplink" href="wiki/">Wiki</a>
+      <a class="toplink" href="map/">Map</a>
+      <button class="iconbtn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark">◐</button>
+    </nav>
+    <div class="headline">
+      <svg class="emblem" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Leaping dolphin over a wave"><path d="M13 41 C16 24 36 13 49 25 L55 29 C47 28 41 27 35 29 C28 31 22 36 18 42 L13 41"/><path d="M26.5 22.4 L30 15 L33.5 20.8"/><path d="M30 31.2 L27 36"/><path d="M15.5 41.5 C12.5 40 10 40 7.5 41.5 M15.5 41.5 C14.5 44 13.5 46 13.5 48.5"/><circle cx="47.5" cy="25.3" r=".7" fill="currentColor"/><path d="M4 53 C9 49 13 49 18 53 S27 57 32 53 S41 49 46 53 S55 57 60 53"/><path d="M12 59 C16 56.5 20 56.5 24 59 M38 59 C42 56.5 46 56.5 50 59" opacity=".55"/></svg>
+      <div>
+        <p class="eyebrow"><i lang="ga">Fáilte</i> · Welcome</p>
+        <h1>Live <em>Dinophysis</em> Bloom Map · Ireland</h1>
+        <p class="sub">Weekly bloom risk for Irish shellfish sites, built on Marine Institute open data.</p>
+      </div>
     </div>
   </div>
-  <svg class="waves" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,90 480,0 720,40 C960,80 1200,10 1440,45 L1440,90 L0,90 Z"/></svg>
 </header>
 
+<section class="mapzone" aria-label="Live map">
+  <div class="wrap">
+    <div class="mapbar"><span><i lang="ga">An léarscáil bheo</i> · The live map <small>Plankton counts, not toxin results · not official advice</small></span><a href="map/" class="fs">Full screen ↗</a></div>
+    <div class="mapframe"><iframe id="liveMap" src="map/" title="Live Dinophysis bloom map of Ireland (interactive)" loading="eager"></iframe></div>
+    <a class="btn primary wide" href="wiki/"><span class="bt">Explore the wiki <span class="arr" aria-hidden="true">→</span></span><span class="ga" lang="ga">Taiscéal an vicí</span></a>
+    <p class="by">By Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute) · <i lang="ga">Ag faire ar an bhfarraige</i> (Watching the sea)</p>
+  </div>
+</section>
+
 <main class="wrap">
-  <section class="stats" aria-label="Key numbers">
-    <div class="stat"><div class="v">0.312 <small>vs 0.231</small></div><div class="l"><b>Operational skill (PR-AUC), 2022–26.</b> Using only counts the Marine Institute had published by each Sunday, vs the seasonal “normal for this site and week”.</div></div>
-    <div class="stat"><div class="v">0.338 <small>vs 0.203</small></div><div class="l"><b>South-West (Kerry / West Cork).</b> Where most blooms happen and where skill is clearest.</div></div>
-    <div class="stat"><div class="v">3.6 <small>days</small></div><div class="l"><b>Median data lag.</b> From water sample to public count on MI’s open ERDDAP service.</div></div>
-    <div class="stat"><div class="v">122</div><div class="l"><b>Logged tests</b>, roughly half of them null results — published, not hidden.</div></div>
+  <section class="read" aria-labelledby="readH">
+    <h2 class="sect" id="readH"><span class="ga" lang="ga">Conas í a léamh</span>How to read the map</h2>
+    <p class="lead">Each dot is a Marine Institute shellfish monitoring site. Its colour shows the chance that <em>Dinophysis</em>, a plankton that can make shellfish unsafe to eat, reaches 100 cells per litre at that site over the next two weeks. A new outlook is issued every week.</p>
+    <ul class="bands">
+      <li><i style="background:#7fbf8e"></i><b>Low</b><span>under 5%</span></li>
+      <li><i style="background:#f2c94c"></i><b>Watch</b><span>5–15%</span></li>
+      <li><i style="background:#f2994a"></i><b>Elevated</b><span>15–30%</span></li>
+      <li><i style="background:#d64545"></i><b>High</b><span>30% or more</span></li>
+      <li><i class="prov" style="background:#f2c94c"></i><b>Paler dot</b><span>provisional: no sample yet this week</span></li>
+    </ul>
+    <div class="views">
+      <a href="map/#/outlook"><b>Outlook</b><span>This week’s picture, site by site.</span></a>
+      <a href="map/#/bays"><b>Bays</b><span>A short weekly note for each bay.</span></a>
+      <a href="map/#/replay"><b>Season replay</b><span>Watch a past season unfold week by week.</span></a>
+      <a href="map/#/leadtime"><b>Bloom → toxin</b><span>How blooms run ahead of toxins in shellfish.</span></a>
+    </div>
   </section>
 
-  <section class="cards">
-    <a class="card" href="map/">
-      <span class="ic" aria-hidden="true">🗺</span>
-      <h2>Interactive map</h2>
-      <p>The live demo: the weekly outlook on a map, with season replay, a scoreboard and the bloom-to-toxin view.</p>
-      <span class="go">Open the map →</span>
+  <h2 class="sect"><span class="ga" lang="ga">Torthaí</span>What we found</h2>
+  <section class="cards" aria-label="Highlights">
+    <a class="card c-tests" href="wiki/#/test-log">
+      <span class="ga" lang="ga">Tástálacha</span>
+      <div class="big">122</div>
+      <h3>tests run</h3>
+      <p>Every experiment, with its verdict, searchable and filterable in the wiki.</p>
+      <span class="go">Browse the test log →</span>
     </a>
-    <a class="card" href="wiki/">
-      <span class="ic" aria-hidden="true">📚</span>
-      <h2>Project wiki</h2>
-      <p>Plain-English overview, how the model works, results and scorecard, marine heatwaves, other toxins, France, data sources and caveats.</p>
-      <span class="go">Read the wiki →</span>
+    <a class="card c-null" href="wiki/#/test-log?cat=null">
+      <span class="ga" lang="ga">Macántacht</span>
+      <div class="big">62</div>
+      <h3>honest nulls</h3>
+      <p>Ideas that didn’t help, published rather than hidden. They tell us which claims not to make.</p>
+      <span class="go">See the nulls →</span>
     </a>
-    <a class="card" href="wiki/#/test-log">
-      <span class="ic" aria-hidden="true">🧪</span>
-      <h2>Full test log</h2>
-      <p>Every experiment with its verdict, searchable and filterable. Nulls are clearly marked — they are how we know which claims not to make.</p>
-      <span class="go">Browse the tests →</span>
+    <a class="card c-fr" href="wiki/#/france">
+      <span class="ga" lang="ga">An Fhrainc</span>
+      <div class="big">551</div>
+      <h3>French sites: the method travels</h3>
+      <p>The same approach also works on France’s much longer record (1987–2022).</p>
+      <span class="go">Read the France page →</span>
+    </a>
+    <a class="card c-mhw" href="wiki/#/heatwaves">
+      <span class="ga" lang="ga">Tonnta teasa mara</span>
+      <div class="big">+29<small> days a decade</small></div>
+      <h3>Marine heatwaves</h3>
+      <p>Heatwaves around Ireland are becoming more frequent, but we found no detectable effect on plankton or toxic blooms.</p>
+      <span class="go">See the verdict →</span>
+    </a>
+    <a class="card c-tox" href="wiki/#/toxins">
+      <span class="ga" lang="ga">Tocsainí eile</span>
+      <div class="big">ASP · PSP · AZP</div>
+      <h3>Other toxins &amp; species</h3>
+      <p>The scallop toxin (ASP) looks promising; paralytic (PSP) and azaspiracid (AZP) toxins showed no gain.</p>
+      <span class="go">Explore other toxins →</span>
     </a>
   </section>
 
@@ -60,34 +101,53 @@
     <div class="panel">
       <h2>What we can say</h2>
       <ul>
-        <li>The Sunday forecast ranks the coming fortnight’s bloom weeks clearly better than the seasonal norm: <strong>PR-AUC 0.31 vs 0.23</strong> nationally (2022–26), and <strong>0.34 vs 0.20</strong> in the South-West.</li>
-        <li>The skill comes from <strong>recent counts</strong> at and near each site. A simple logistic model comes within about 0.01.</li>
-        <li><strong>No environmental input</strong> — sea temperature, heatwaves, wind, chlorophyll, currents, rivers — added fair skill.</li>
-        <li>The same recipe <strong>works in France</strong>, beating the French seasonal norm by 0.10–0.13.</li>
+        <li>The weekly outlook ranks the coming fortnight’s bloom weeks better than simply going by the usual pattern for each site and time of year.</li>
+        <li>The signal comes from <strong>recent plankton counts</strong> at and near each site.</li>
+        <li>Sea temperature, heatwaves, wind, chlorophyll, currents and rivers did not add to it.</li>
       </ul>
+      <p class="more"><a href="wiki/#/results">Results in the wiki →</a></p>
     </div>
     <div class="panel warn">
       <h2>What we can’t say (yet)</h2>
       <ul>
-        <li>It does <strong>not catch more shellfish closures</strong> than MI’s own free ≥100 cells/L rule; its edge is far fewer false alarms.</li>
-        <li>About half the gain is telling busy years from quiet ones, not week-by-week timing.</li>
-        <li>Marine heatwaves are getting more frequent (about +29 days per decade), but we found <strong>no detectable effect</strong> on plankton or toxic blooms.</li>
-        <li>Skill so far is from hindcasts. Genuine scoring starts <strong>25 Oct 2026</strong>; 2027 is the confirmatory season.</li>
+        <li>It does <strong>not catch more shellfish closures</strong> than the Marine Institute’s own rule; its edge is fewer false alarms.</li>
+        <li>So far it has been tested on past seasons. Live scoring starts <strong>25 Oct 2026</strong>, with 2027 as the confirmatory season.</li>
       </ul>
       <p class="more"><a href="wiki/#/limitations">All caveats →</a></p>
     </div>
   </section>
 
   <section class="credit">
-    <div>
-      <h2>About</h2>
-      <p>PA-Marine-Model is a research prototype by <strong>Garry Lohan</strong>, lecturer at <strong>Atlantic Technological University (ATU) Galway</strong>, built for <strong>Ocean Hackathon Cork 2026</strong>. It is <strong>not</strong> an official Marine Institute product or advice; shellfish safety is decided by official monitoring.</p>
-      <p class="small">Contains Marine Institute data (open HAB monitoring via ERDDAP), E.U. Copernicus Marine Service information and other open data; this site shows national, regional and yearly aggregates only. <a href="wiki/#/data">Data sources</a> · <a href="wiki/#/about">Credits</a></p>
-    </div>
+    <h2><span class="ga" lang="ga">Fúinn</span>About</h2>
+    <p>PA-Marine-Model is a research prototype by <strong>Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</strong>, built for <strong>Ocean Hackathon Cork 2026</strong>. It is <strong>not</strong> an official Marine Institute product or advice; shellfish safety is decided by official monitoring.</p>
+    <p class="small">Contains Marine Institute data (open HAB monitoring via ERDDAP), E.U. Copernicus Marine Service information and other open data; this site shows national, regional and yearly aggregates only. <a href="wiki/#/data">Data sources</a> · <a href="wiki/#/about">Credits</a></p>
   </section>
 </main>
-<footer class="foot">© 2026 Garry Lohan, ATU Galway · Ocean Hackathon Cork 2026 demo · Not an official Marine Institute product or advice.</footer>
+<footer class="foot"><i lang="ga">Déanta i nGaillimh</i> · Made in Galway<br>© 2026 Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute) · Ocean Hackathon Cork 2026 demo · Not an official Marine Institute product or advice.</footer>
 <div class="disclaimer" role="note">Demo purposes only. Ocean Hackathon Cork 2026 research prototype by Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute). Not an official Marine Institute product.</div>
-<script>document.getElementById('themeBtn').addEventListener('click',function(){var d=document.documentElement,t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);try{localStorage.setItem('pa-theme',t)}catch(e){}});</script>
+<script>
+document.getElementById('themeBtn').addEventListener('click',function(){var d=document.documentElement,t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);try{localStorage.setItem('pa-theme',t)}catch(e){}});
+/* embed mode for the live map: hide the map page's own chrome & demo strip (this page already shows them) and give the map the full frame */
+(function(){
+ var f=document.getElementById('liveMap');
+ var css='body>div[style*="position:fixed"][style*="bottom:0"]{display:none!important}'+
+  'html.embed-o header.top,html.embed-o .banner,html.embed-o #foot,html.embed-o #view>.flex,html.embed-o #view>.grid,html.embed-o .mapwrap>div:nth-child(2){display:none!important}'+
+  'html.embed-o body{padding:0!important;margin:0!important;overflow:hidden}html.embed-o #view{padding:0!important;margin:0!important;max-width:none!important}'+
+  'html.embed-o .mapwrap{display:block!important;margin:0!important}html.embed-o #map{height:calc(100vh - 34px)!important;border:0!important;border-radius:0!important}'+
+  'html.embed-o .leaflet-control-attribution{font-size:10px!important}html.embed-o .legend{padding:6px 10px!important;margin:0!important;font-size:12px!important;white-space:nowrap;overflow-x:auto}';
+ function isO(w){var h=w.location.hash.replace(/^#\/?/,'');return h===''||h==='outlook'}
+ function inject(){try{
+  var w=f.contentWindow,d=f.contentDocument;
+  if(!d||!/\/map\//.test(d.URL)||!d.head)return 0;
+  if(d.getElementById('embedcss'))return 2;
+  var s=d.createElement('style');s.id='embedcss';s.textContent=css;d.head.appendChild(s);
+  d.documentElement.classList.toggle('embed-o',isO(w));
+  w.addEventListener('hashchange',function(){var o=isO(w);if(o!==d.documentElement.classList.contains('embed-o')){d.documentElement.classList.toggle('embed-o',o);w.dispatchEvent(new w.HashChangeEvent('hashchange'))}});
+  return 1;
+ }catch(e){return 2}}
+ var t=setInterval(function(){if(inject())clearInterval(t)},10);
+ f.addEventListener('load',function(){clearInterval(t);if(inject()===1){try{f.contentWindow.dispatchEvent(new f.contentWindow.HashChangeEvent('hashchange'))}catch(e){}}});
+})();
+</script>
 </body>
 </html>
