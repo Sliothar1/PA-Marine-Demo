@@ -64,7 +64,7 @@ PAGES.push({id:'overview', group:'Start here', icon:'🌊', title:'Overview',
  <li><strong>Recent counts are the forecast.</strong> What was in the water at and near a site in recent weeks carries almost all the skill. A simple, transparent logistic model gets within about 0.01 of the tree model.</li>
  <li><strong>Environmental extras did not help.</strong> Sea-surface temperature from several satellite products, marine-heatwave state and intensity, ERA5 winds, river flow, solar radiation, chlorophyll, ocean currents and back-trajectories, plankton-recorder data, buoy chemistry and climate indices were all tested; none added skill once recent counts were known. <a href="#/test-log?cat=null">See the nulls →</a></li>
  <li><strong>Marine heatwaves are becoming more frequent</strong> around Ireland (about <strong>+29 heatwave days per decade</strong> per station, 2005–25; suggestive), but across a 15-test battery we found <strong>no detectable effect</strong> on the plankton community or on toxic blooms beyond what season and site already explain. <a href="#/heatwaves">Marine heatwaves →</a></li>
- <li><strong>Faster data is the cheapest win.</strong> The biggest lever we found is how quickly MI counts become public (median 3.6 days after sampling).</li>
+ <li><strong>When you sample matters more than how fast the lab is.</strong> Counts become public a median 3.6 days after sampling. Knowing the current week’s counts is the biggest information lever, but even zero lab delay would lift skill only from 0.312 to 0.324: the missing information is mainly in samples taken late in the week. <a href="#/sampling">Sampling &amp; turnaround →</a></li>
  <li><strong>The method travels.</strong> The same recipe, retrained on France’s much larger REPHY record, beats the French seasonal norm by 0.10–0.13 PR-AUC in two separate periods. <a href="#/france">France transfer →</a></li>
  <li><strong>Other toxins:</strong> an amnesic (ASP) toxin forecast for king scallops looks promising in Ireland (0.748 vs 0.443 for persistence) but did not replicate in France. <a href="#/toxins">Other toxins & species →</a></li>
 </ul>
@@ -402,6 +402,50 @@ PAGES.push({id:'france', group:'Findings', icon:'🌍', title:'France transfer',
 </tbody></table></div>
 <figure><img src="assets/img/france_phenology.png" alt="French and Irish Dinophysis season onset by year, French presence rate, OA-group positivity"><figcaption>National yearly aggregates: median <em>Dinophysis</em> season onset (France vs Ireland), the French presence rate, and French OA-group positivity (two lab methods that must not be joined). No clear long-term trend.</figcaption></figure>
 `});
+PAGES.push({id:'sampling', group:'Findings', icon:'⏱️', title:'Sampling & turnaround',
+ keywords:'sampling turnaround lag publication lab courier week-0 monday thursday tuesday issue day triage queue microscopy flow cytometry qpcr twice-weekly sentinel',
+ lede:'How quickly counts reach the forecast matters less than <em>when in the week</em> the water is sampled. Most of the information the forecast misses comes from samples taken late in the week, not from slow lab work.',
+ html:`
+<div class="cards">
+ <div class="stat"><div class="v">3.6 <small>days</small></div><div class="l">Median time from sampling to public count, since 2019 (90th percentile 6.6–9.6 days) · test #66</div></div>
+ <div class="stat"><div class="v">78%</div><div class="l">Of the week’s samples are public before the Sunday forecast · #66</div></div>
+ <div class="stat"><div class="v">0.324 <small>vs 0.312</small></div><div class="l">Skill with zero lab and posting delay vs real publication: cutting the lag adds little · #86</div></div>
+ <div class="stat"><div class="v">+0.063</div><div class="l">Gain from knowing the current week’s counts: the biggest information lever we found · #43</div></div>
+</div>
+
+<h2>When the sample is taken is what counts</h2>
+<p>The forecast is issued on Sunday and uses only counts that were public by then. Measured against MI’s real publication timestamps (test #66), the day of the week a sample is taken largely decides whether it makes it in:</p>
+<div class="daybars" role="img" aria-label="Share of samples published before the Sunday issue: Monday 90%, Tuesday 75%, Wednesday 40%, Thursday 2%">
+ <div><span>Mon</span><b style="width:90%"></b><i>90%</i></div>
+ <div><span>Tue</span><b style="width:75%"></b><i>75%</i></div>
+ <div><span>Wed</span><b style="width:40%"></b><i>40%</i></div>
+ <div><span>Thu</span><b style="width:2%"></b><i>2%</i></div>
+</div>
+<p>A Monday sample is almost always in time; a Thursday sample almost never is. The typical lag (a median of 3.6 days) is short, but a short lag still pushes a late-week sample past Sunday.</p>
+
+<h2>Faster lab work buys surprisingly little</h2>
+<p>Test #86 re-ran the frozen forecast as if every count were public the moment the water was sampled. Skill rose only from <strong>0.312 to 0.324</strong> (PR-AUC, 2022–26). Real publication behaves roughly like a five-day lag. So shaving a day off transport or posting, on its own, would not change much.</p>
+
+<h2>But this week’s counts are the most valuable information</h2>
+<p>Test #43 asked how much the forecast gains when the current week’s (“week-0”) counts are known: <strong>+0.063</strong> nationally [95% CI +0.038 to +0.083] and +0.084 in the South-West. That was the largest information lever in the whole project. It was measured in a setting that also included samples taken on the issue Sunday itself (see test #45), so read it as an upper bound. The two results fit together: the missing information sits mainly in <strong>samples taken late in the week</strong>, which a faster lab alone cannot bring forward to Sunday.</p>
+
+<h2>Lab triage helps only when the queue backs up</h2>
+<p>Test #81 simulated a lab working through a Monday–Friday queue (sample dates only). With capacity equal to the median weekly load, processing samples in forecast-risk order found new bloom episodes about <strong>3 days earlier</strong> than first-come-first-served order (2.97 days, 95% CI 2.08–3.77). Ordering by the plain seasonal norm did almost as well (2.87 days), so any sensible seasonal ranking works. With spare capacity (150% of the usual load) the benefit shrank to a quarter of a day.</p>
+
+<h2>Practical ideas</h2>
+<p>Only the last row has been tested, and only in simulation. The others are <strong>untested hypotheses</strong> that follow from the timing results above; each would need a proper trial with the Marine Institute before anyone relied on it.</p>
+<div class="tbl"><table>
+<thead><tr><th>Idea</th><th>Why it might help</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><strong>Sample earlier in the week</strong> (Monday–Tuesday) at key sites</td><td>Monday samples are in time for Sunday 90% of the time, Thursday samples 2%</td><td><span class="badge b-pend">Untested hypothesis</span></td></tr>
+<tr><td><strong>Issue the forecast on Tuesday</strong> instead of Sunday</td><td>Would let late-week samples catch up before the issue, at the cost of a shorter lead time</td><td><span class="badge b-pend">Untested hypothesis</span></td></tr>
+<tr><td><strong>Sample more often</strong> in peak season: twice weekly at South-West sentinel sites</td><td>More fresh counts per week, rather than shaving transit time off the same counts</td><td><span class="badge b-pend">Untested hypothesis</span></td></tr>
+<tr><td><strong>Courier or direct pick-up</strong></td><td>Helps mainly the late-week samples that currently miss the issue</td><td><span class="badge b-pend">Untested hypothesis</span></td></tr>
+<tr><td><strong>On-site screening</strong>: grower microscopy, imaging flow cytometry or qPCR as a fast pre-screen</td><td>Could flag a rising bloom days before the official count, which would still be needed for decisions</td><td><span class="badge b-pend">Untested hypothesis</span></td></tr>
+<tr><td><strong>Risk-ordered lab triage</strong> in backlog weeks</td><td>Finds new episodes about 3 days earlier when the lab is at capacity; little gain otherwise</td><td><span class="badge b-chk">Simulated (#81)</span></td></tr>
+</tbody></table></div>
+<p style="font-size:13.5px;color:var(--muted)">Publication timestamps are genuine from mid-May 2018 onwards. The triage simulation assumes a Monday–Friday lab queue and uses sample dates only. Tests #43, #66, #81 and #86 are in the <a href="#/test-log">full test log</a> (type the number, e.g. <code>#86</code>, in its filter box).</p>
+`});
 PAGES.push({id:'data', group:'Reference', icon:'🗂️', title:'Data sources',
  keywords:'erddap marine institute copernicus ostia odyssea oisst era5 met eireann opw cpr rephy licence data rules',
  lede:'Every dataset used or tested, what it was used for, and the rules on how results derived from it may be shared.',
@@ -496,7 +540,7 @@ PAGES.push({id:'roadmap', group:'Reference', icon:'🧭', title:'Roadmap & ideas
 <div class="tbl"><table>
 <thead><tr><th>Idea</th><th>Why</th><th>Status</th></tr></thead>
 <tbody>
-<tr><td>Faster counts: week-0 data available by Sunday</td><td>The largest lever found in hindcast tests</td><td><span class="badge b-pos">Tested</span></td></tr>
+<tr><td>Earlier-in-week sampling, a Tuesday issue or twice-weekly peak-season sampling</td><td>Week-0 counts are the largest information lever; late-week samples are what miss the issue (<a href="#/sampling">Sampling &amp; turnaround</a>)</td><td><span class="badge b-pend">Untested hypothesis</span></td></tr>
 <tr><td>Public weekly scoreboard</td><td>Forecasts locked before outcomes and scored in public, good weeks and bad: honesty you can check</td><td><span class="badge b-chk">Scoping</span></td></tr>
 <tr><td>Hidden-bloom lab-priority flag</td><td>Toxin rose but no ≥100 count → count that site first (23% vs 5.1%)</td><td><span class="badge b-pos">Tested</span></td></tr>
 <tr><td>Species-aware harvest-risk product</td><td>Fewer false alarms; mussels and oysters behave differently</td><td><span class="badge b-chk">Candidate</span></td></tr>
@@ -592,6 +636,9 @@ PAGES.push({id:'about', group:'Reference', icon:'👤', title:'About & credits',
 <tr><td><i lang="ga">Tonnta teasa mara</i></td><td>Marine heatwaves</td></tr>
 <tr><td><i lang="ga">Tocsainí eile</i> · <i lang="ga">An Fhrainc</i></td><td>Other toxins · France</td></tr>
 <tr><td><i lang="ga">Foinsí sonraí</i> · <i lang="ga">Teorainneacha</i></td><td>Data sources · Limitations</td></tr>
+<tr><td><i lang="ga">An raibh a fhios agat?</i></td><td>Did you know?</td></tr>
+<tr><td><i lang="ga">Samplaí</i></td><td>Samples (the Sampling &amp; turnaround page)</td></tr>
+<tr><td><i lang="ga">Turas</i></td><td>Tour, journey (the guided tour)</td></tr>
 <tr><td><i lang="ga">Gluais</i> · <i lang="ga">Fúinn</i></td><td>Glossary · About us</td></tr>
 <tr><td><i lang="ga">Macántacht</i></td><td>Honesty (used for the null-results card)</td></tr>
 <tr><td><i lang="ga">Déanta i nGaillimh</i></td><td>Made in Galway</td></tr>

@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guided tour · Turas · Live Dinophysis Bloom Map · Ireland</title>
+<meta name="description" content="A step-through guided tour of PA-Marine-Model, the live Dinophysis bloom map for Irish shellfish sites, by Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute).">
+<meta name="author" content="Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)">
+<meta name="theme-color" content="#061f33">
+<link rel="stylesheet" href="tour.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="dolphin" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M13 41 C16 24 36 13 49 25 L55 29 C47 28 41 27 35 29 C28 31 22 36 18 42 L13 41"/><path d="M26.5 22.4 L30 15 L33.5 20.8"/><path d="M30 31.2 L27 36"/><path d="M15.5 41.5 C12.5 40 10 40 7.5 41.5 M15.5 41.5 C14.5 44 13.5 46 13.5 48.5"/><circle cx="47.5" cy="25.3" r=".7" fill="currentColor"/><path d="M4 53 C9 49 13 49 18 53 S27 57 32 53 S41 49 46 53 S55 57 60 53"/><path d="M12 59 C16 56.5 20 56.5 24 59 M38 59 C42 56.5 46 56.5 50 59" opacity=".55"/></g></symbol></svg>
+
+<header class="tbar">
+  <a class="home" href="../"><svg class="mk"><use href="#dolphin"/></svg><span>PA-Marine-Model</span></a>
+  <span class="ttl">Guided tour · <i lang="ga">Turas</i></span>
+  <nav class="tlinks"><a href="../map/">Map</a><a href="../wiki/">Wiki</a></nav>
+</header>
+
+<main id="deck" aria-live="polite">
+
+<section class="step title" data-title="Welcome">
+  <div class="inner center">
+    <svg class="big-dolphin" role="img" aria-label="Leaping dolphin over a wave"><use href="#dolphin"/></svg>
+    <p class="kick"><i lang="ga">Fáilte</i> · Welcome</p>
+    <h1>Live <em>Dinophysis</em> Bloom Map · Ireland</h1>
+    <p class="lead">A weekly look at bloom risk for Irish shellfish sites, built on Marine Institute open data and tested as honestly as we could.</p>
+    <p class="who">Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</p>
+    <p class="hint">Use <kbd>←</kbd> <kbd>→</kbd> or swipe · <kbd>N</kbd> speaker notes · <kbd>F</kbd> full screen</p>
+  </div>
+  <aside class="notes"><p><b>Garry:</b> Welcome. Who we are, and that this started as a research prototype at Ocean Hackathon Cork 2026. Everything you’ll see is live on the web.</p><p><b>Felix:</b> The foundation is the Marine Institute’s weekly monitoring programme and its open data. Worth saying up front: this is a research demo, not an official Marine Institute product.</p></aside>
+</section>
+
+<section class="step" data-title="The problem">
+  <div class="inner">
+    <p class="kick"><i lang="ga">An fhadhb</i> · The problem</p>
+    <h2>Toxic plankton can close shellfish farms at short notice</h2>
+    <ul class="pts">
+      <li><em>Dinophysis</em> is a microscopic alga. Mussels and other shellfish filter it from the water and build up its toxins, which cause <b>diarrhetic shellfish poisoning (DSP)</b>.</li>
+      <li>To protect consumers, harvesting areas are <b>closed</b> when toxins exceed the legal limit. For growers, closures are costly and often come with little warning.</li>
+      <li>A count of <b>100 cells per litre</b> is the level the Marine Institute treats as a trigger.</li>
+    </ul>
+    <p class="q">Can we say, a week or two ahead, where that level is likely to be reached?</p>
+    <p class="more"><a href="../wiki/#/overview" target="_blank" rel="noopener">Overview in the wiki ↗</a></p>
+  </div>
+  <aside class="notes"><p><b>Garry:</b> Frame the question: not “is there toxin now?” but “where should we be watching over the next fortnight?”.</p><p><b>Felix:</b> Optional: a sentence on how weekly sampling and closures work in practice, and what short notice means for a grower.</p></aside>
+</section>
+
+<section class="step" data-title="The data">
+  <div class="inner">
+    <p class="kick"><i lang="ga">Na sonraí</i> · The data</p>
+    <h2>Built on open, weekly Marine Institute counts</h2>
+    <div class="nums">
+      <div><b>~200</b><span>coastal monitoring stations</span></div>
+      <div><b>2003–26</b><span>weekly cell counts by species</span></div>
+      <div><b>3.6 <small>days</small></b><span>median from water sample to public count</span></div>
+    </div>
+    <ul class="pts">
+      <li>Every count comes from the Marine Institute’s open data service (ERDDAP), with a publication timestamp on every sample.</li>
+      <li>Each Sunday’s forecast uses <b>only counts that were already public</b> by that Sunday. No peeking at the future.</li>
+    </ul>
+    <p class="more"><a href="../wiki/#/data" target="_blank" rel="noopener">Data sources ↗</a></p>
+  </div>
+  <aside class="notes"><p><b>Felix:</b> Suggested: describe the monitoring programme, what a weekly sample is, and that the data are openly published.</p><p><b>Garry:</b> Stress the honesty rule: the forecast only sees what was public at the time.</p></aside>
+</section>
+
+<section class="step wide" data-title="The live map">
+  <div class="inner split">
+    <div class="mapcol">
+      <div class="framebar"><span><i lang="ga">An léarscáil bheo</i> · The live map</span><a href="../map/" target="_blank" rel="noopener">Full screen ↗</a></div>
+      <div class="frame"><iframe data-src="../map/" title="Live Dinophysis bloom map (interactive)"></iframe></div>
+    </div>
+    <div class="side">
+      <p class="kick">How to read it</p>
+      <h2 class="sm">One dot per monitoring site</h2>
+      <p>The colour is the chance that <em>Dinophysis</em> reaches 100 cells/L there in the <b>next two weeks</b>. Bigger dots mean a higher chance.</p>
+      <ul class="legend">
+        <li><i style="background:#7fbf8e"></i>Low <span>under 5%</span></li>
+        <li><i style="background:#f2c94c"></i>Watch <span>5–15%</span></li>
+        <li><i style="background:#f2994a"></i>Elevated <span>15–30%</span></li>
+        <li><i style="background:#d64545"></i>High <span>30% or more</span></li>
+        <li><i class="prov" style="background:#f2c94c"></i>Paler, dashed <span>no sample yet this week</span></li>
+      </ul>
+      <p class="small">Click a site for its history. Try <a href="../map/#/bays" target="_blank" rel="noopener">Bays</a> for weekly notes and <a href="../map/#/replay" target="_blank" rel="noopener">Season replay</a> to watch a past season unfold.</p>
+    </div>
+  </div>
+  <aside class="notes"><p><b>Garry:</b> Zoom into the South-West and click a red or orange site. Point out that paler, dashed dots are provisional because there is no sample yet this week.</p><p><b>Felix:</b> Optional: say how this complements, and doesn’t replace, the official HAB bulletin and closures.</p></aside>
+</section>
+
+<section class="step" data-title="How good is it?">
+  <div class="inner">
+    <p class="kick"><i lang="ga">Torthaí</i> · How good is it?</p>
+    <h2>Modestly better than the usual pattern, and we can say how much</h2>
+    <div class="nums">
+      <div><b>0.312 <small>vs 0.231</small></b><span>nationally, 2022–26</span></div>
+      <div><b>0.338 <small>vs 0.203</small></b><span>South-West (Kerry / West Cork)</span></div>
+      <div><b>~0.04</b><span>what random guessing would score</span></div>
+    </div>
+    <p class="plain"><b>In plain words:</b> the score (PR-AUC, 0 to 1) measures how well the forecast puts the real bloom weeks at the top of its list. The comparison is “what normally happens at this site in this week of the year”. Blooms are rare (about 4% of site-weeks), so both numbers are far above chance. The point is the gap.</p>
+    <p class="caveat"><b>Honest caveat:</b> for the same number of alarms it does <b>not</b> catch more closures than the Marine Institute’s own simple rule (41 vs 46 of 62 South-West closures), but it raises far fewer false-alarm runs (41 vs 124–130). It is a surveillance aid, not a safety system.</p>
+    <p class="more"><a href="../wiki/#/results" target="_blank" rel="noopener">Full scorecard ↗</a></p>
+  </div>
+  <aside class="notes"><p><b>Garry:</b> Explain the score once, simply, then move on: “top of the list” and “compared with the normal pattern”. Say the caveat out loud; it builds trust.</p><p><b>Felix:</b> Optional: why fewer false alarms matters for a monitoring programme.</p></aside>
+</section>
+
+<section class="step" data-title="The honest test log">
+  <div class="inner">
+    <p class="kick"><i lang="ga">Tástálacha</i> · The honest test log</p>
+    <h2>122 tests run, 62 honest nulls, all published</h2>
+    <ul class="pts">
+      <li>Every experiment is logged with its verdict, including the ones that found nothing.</li>
+      <li><b>Recent counts are the forecast.</b> What was in the water at and near a site in recent weeks carries almost all the skill; a simple logistic model gets within about 0.01.</li>
+      <li><b>Environmental extras did not help:</b> sea temperature, heatwaves, wind, chlorophyll, currents and rivers added nothing once recent counts were known.</li>
+    </ul>
+    <div class="btns"><a class="b" href="../wiki/#/test-log" target="_blank" rel="noopener">All 122 tests ↗</a><a class="b ghost" href="../wiki/#/test-log?cat=null" target="_blank" rel="noopener">Just the 62 nulls ↗</a></div>
+  </div>
+  <aside class="notes"><p><b>Garry:</b> The nulls are the backbone: they tell us which claims not to make. Invite people to browse them on their phones.</p><p><b>Felix:</b> Optional: why negative results are useful for monitoring agencies too.</p></aside>
+</section>
+
+<section class="step" data-title="France">
+  <div class="inner">
+    <p class="kick"><i lang="ga">An Fhrainc</i> · France transfer</p>
+    <h2>The method travels</h2>
+    <div class="nums">
+      <div><b>551</b><span>French coastal sites, 1987–2022</span></div>
+      <div><b>+0.10 <small>and</small> +0.13</b><span>gain over the French seasonal norm, in two separate periods</span></div>
+      <div><b>~5 <small>weeks</small></b><span>earlier start to the French season (mid-May)</span></div>
+    </div>
+    <ul class="pts">
+      <li>Retrained on France’s far longer Ifremer REPHY record, the same recipe beats the French seasonal norm. The Irish result was not a fluke of one coastline.</li>
+      <li>A nugget: when mussels are over the toxin limit, oysters are too <b>15.3%</b> of the time in France vs <b>3%</b> in Ireland.</li>
+    </ul>
+    <p class="more"><a href="../wiki/#/france" target="_blank" rel="noopener">France page ↗</a></p>
+  </div>
+  <aside class="notes"><p><b>Garry:</b> Replication is the strongest evidence we have that this isn’t over-fitted to Ireland.</p><p><b>Felix:</b> Optional: the value of cross-border data sharing (European angle).</p></aside>
+</section>
+
+<section class="step" data-title="Marine heatwaves">
+  <div class="inner">
+    <p class="kick"><i lang="ga">Tonnta teasa mara</i> · Marine heatwaves</p>
+    <h2>More heatwaves, but no detectable effect on blooms</h2>
+    <div class="nums">
+      <div><b>+29 <small>days / decade</small></b><span>heatwave days per station, 2005–25 (suggestive)</span></div>
+      <div><b>15</b><span>ecology tests: no detectable effect</span></div>
+      <div><b>1.39 → 1.00</b><span>the “40% more blooms” claim, once compared fairly</span></div>
+    </div>
+    <ul class="pts">
+      <li>Heatwaves happen in summer, and so do blooms. Compare the same site in the same month, and the apparent “+40%” disappears.</li>
+      <li>June 2023 brought a severe shelf heatwave, yet national <em>Dinophysis</em> counts and closures were <b>below</b> normal. A heatwave is not a bloom.</li>
+      <li>Inside sheltered shellfish bays, temperature loggers record a median <b>82% more</b> heatwave days than satellites see.</li>
+    </ul>
+    <p class="more"><a href="../wiki/#/heatwaves" target="_blank" rel="noopener">Heatwaves page ↗</a></p>
+  </div>
+  <aside class="notes"><p><b>Garry:</b> This is the result people don’t expect. Be clear it means “too small to see in this record”, not “heatwaves can never matter”.</p><p><b>Felix:</b> Optional: the bay-logger vs satellite point and why in-situ sensors matter.</p></aside>
+</section>
+
+<section class="step" data-title="Other species">
+  <div class="inner">
+    <p class="kick"><i lang="ga">Tocsainí eile</i> · Other toxins &amp; species</p>
+    <h2>One promising lead, and several honest “no”s</h2>
+    <ul class="pts">
+      <li><b>Amnesic toxin (ASP) in king scallops:</b> a toxin-history forecast scored 0.748 vs 0.443 for “same as last time” in Ireland. Promising, but it did not replicate in France.</li>
+      <li><b>“Hidden bloom” flag:</b> a toxin rise with no preceding high count. Flagged sites had a 23% chance of a ≥100 count within 21 days vs 5.1% otherwise, and it replicates in France.</li>
+      <li><b>Paralytic (PSP), azaspiracid (AZP) toxins and <em>Karenia mikimotoi</em>:</b> no gain over simple baselines.</li>
+    </ul>
+    <p class="more"><a href="../wiki/#/toxins" target="_blank" rel="noopener">Other toxins page ↗</a></p>
+  </div>
+  <aside class="notes"><p><b>Garry:</b> ASP is a scallop-fishery product idea, and it’s labelled promising, not established.</p><p><b>Felix:</b> Optional: which of these would matter most operationally.</p></aside>
+</section>
+
+<section class="step" data-title="Sampling & turnaround">
+  <div class="inner">
+    <p class="kick"><i lang="ga">Samplaí</i> · Sampling &amp; turnaround</p>
+    <h2>When you sample matters more than how fast the lab is</h2>
+    <div class="cols">
+      <div>
+        <p class="small">Share of samples public before the Sunday forecast</p>
+        <div class="daybars" role="img" aria-label="Monday 90%, Tuesday 75%, Wednesday 40%, Thursday 2%">
+          <div><span>Mon</span><b style="width:90%"></b><i>90%</i></div>
+          <div><span>Tue</span><b style="width:75%"></b><i>75%</i></div>
+          <div><span>Wed</span><b style="width:40%"></b><i>40%</i></div>
+          <div><span>Thu</span><b style="width:2%"></b><i>2%</i></div>
+        </div>
+      </div>
+      <ul class="pts">
+        <li>Even with <b>zero</b> lab delay, skill would rise only from 0.312 to 0.324.</li>
+        <li>Knowing this week’s counts is the biggest lever we found (up to +0.063). The missing information sits in <b>late-week samples</b>.</li>
+        <li><b>Ideas (untested hypotheses):</b> sample earlier in the week, issue on Tuesday, sample twice weekly at South-West sentinel sites in peak season, and add fast on-site screening.</li>
+      </ul>
+    </div>
+    <p class="more"><a href="../wiki/#/sampling" target="_blank" rel="noopener">Sampling &amp; turnaround page ↗</a></p>
+  </div>
+  <aside class="notes"><p><b>Garry:</b> The counter-intuitive insight: don’t just ask the lab to go faster; ask when the boats go out.</p><p><b>Felix:</b> Suggested: practical constraints on sampling days and couriers, and whether a Tuesday issue would suit users. These are hypotheses for discussion, not recommendations.</p></aside>
+</section>
+
+<section class="step" data-title="What's next">
+  <div class="inner">
+    <p class="kick">What’s next</p>
+    <h2>From hindcasts to a genuine, locked-in test</h2>
+    <ul class="timeline">
+      <li><b>4 Oct 2026</b><span>First locked-in-advance weekly forecast issued</span></li>
+      <li><b>7 Oct 2026</b><span>Model v2 frozen after a red-team review found no leakage bug</span></li>
+      <li><b>25 Oct 2026</b><span>First genuine scoring of a live forecast</span></li>
+      <li><b>2027</b><span>Confirmatory season, pre-registered against a simple comparator</span></li>
+    </ul>
+    <p class="plain">Candidates being tested, not adopted: French pre-training, a scallop ASP forecast, a harvest-risk product, and sampling-schedule trials.</p>
+    <p class="more"><a href="../wiki/#/roadmap" target="_blank" rel="noopener">Roadmap ↗</a> · <a href="../wiki/#/limitations" target="_blank" rel="noopener">Limitations ↗</a></p>
+  </div>
+  <aside class="notes"><p><b>Garry:</b> The honest test starts now: forecasts are locked before outcomes are known.</p><p><b>Felix:</b> Optional: what collaboration would make the 2027 season most useful.</p></aside>
+</section>
+
+<section class="step title" data-title="Thank you">
+  <div class="inner center">
+    <svg class="big-dolphin" aria-hidden="true"><use href="#dolphin"/></svg>
+    <h1><i lang="ga">Go raibh maith agaibh</i> · Thank you</h1>
+    <p class="who">Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</p>
+    <p class="url">sliothar1.github.io/PA-Marine-Demo</p>
+    <div class="btns center"><a class="b" href="../map/">Open the live map</a><a class="b ghost" href="../wiki/">Explore the wiki</a></div>
+    <p class="small dim">Built on the Marine Institute’s national phytoplankton and biotoxin monitoring and its open ERDDAP service, with E.U. Copernicus Marine Service information and Ifremer REPHY data. Research prototype; not an official Marine Institute product or advice. <i lang="ga">Déanta i nGaillimh</i> · Made in Galway.</p>
+  </div>
+  <aside class="notes"><p><b>Garry &amp; Felix:</b> Thank the Marine Institute monitoring teams and the hackathon organisers. Invite questions and point people to the site on their phones.</p></aside>
+</section>
+
+</main>
+
+<footer class="ctrl">
+  <button id="prev" aria-label="Previous step">←</button>
+  <div class="prog"><div id="bar"></div></div>
+  <span id="count" aria-live="polite">1 / 12</span>
+  <button id="notesBtn" aria-pressed="false" title="Speaker notes (N)">Notes</button>
+  <button id="fsBtn" title="Full screen (F)" aria-label="Full screen">⤢</button>
+  <button id="next" aria-label="Next step">→</button>
+</footer>
+<div id="notesPanel" class="notespanel" hidden><div class="np-in"></div></div>
+<div class="disclaimer" role="note">Demo purposes only. Research prototype by Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute). Not an official Marine Institute product.</div>
+<script src="tour.js"></script>
+</body>
+</html>

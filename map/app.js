@@ -35,7 +35,24 @@ function baseMap(el, opts = {}) {
   const m = L.map(el, {zoomSnap: .25, scrollWheelZoom: !!opts.scroll, attributionControl: true, preferCanvas: false});
   m.fitBounds([[51.35, -10.6], [55.4, -5.4]]);
   const fc = {type: "FeatureCollection", features: PA.land.map(r => ({type: "Feature", geometry: {type: "Polygon", coordinates: [r.concat([r[0]])]}}))};
-  L.geoJSON(fc, {style: {color: "#a9a18c", weight: .8, fillColor: "#ece8dc", fillOpacity: 1}, interactive: false}).addTo(m);
+  /* land fill without outline; the coastline is drawn separately so the straight edges where the
+     land layer was clipped (east of 4.6°W, north of 55.9°N) are not stroked, and Britain fades out
+     towards its clipped edge instead of ending in a hard vertical line */
+  const clipEdge = (a, b) => (a[0] >= -4.601 && b[0] >= -4.601) || (a[1] >= 55.899 && b[1] >= 55.899) || (a[1] <= 50.901 && b[1] <= 50.901);
+  const clipped = r => r.some((a, j) => { const b = r[(j + 1) % r.length]; return a[0] >= -4.601 && b[0] >= -4.601; });
+  const lg = L.geoJSON(fc, {style: f => ({stroke: false, fillColor: "#ece8dc", fillOpacity: 1, className: clipped(f.geometry.coordinates[0]) ? "land-clip" : ""}), interactive: false}).addTo(m);
+  const lines = [];
+  PA.land.forEach(r => { let cur = []; for (let j = 0; j < r.length; j++) { const a = r[j], b = r[(j + 1) % r.length]; if (clipEdge(a, b)) { if (cur.length > 1) lines.push(cur); cur = []; } else { if (!cur.length) cur.push([a[1], a[0]]); cur.push([b[1], b[0]]); } } if (cur.length > 1) lines.push(cur); });
+  L.polyline(lines, {color: "#a9a18c", weight: .8, interactive: false, className: "coast"}).addTo(m);
+  try {
+    const svg = m.getPanes().overlayPane.querySelector("svg");
+    if (svg && !svg.querySelector("#landfade")) {
+      const ns = "http://www.w3.org/2000/svg", defs = document.createElementNS(ns, "defs");
+      defs.innerHTML = '<linearGradient id="landfade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ece8dc" stop-opacity="1"/><stop offset=".55" stop-color="#ece8dc" stop-opacity="1"/><stop offset="1" stop-color="#ece8dc" stop-opacity="0"/></linearGradient>';
+      svg.insertBefore(defs, svg.firstChild);
+    }
+    lg.eachLayer(l => { if (l.options.className === "land-clip" && l._path) l._path.setAttribute("fill", "url(#landfade)"); });
+  } catch (e) {}
   m.attributionControl.setPrefix(false).addAttribution("Coast: Natural Earth · Counts: Marine Institute (CC-BY 4.0)");
   maps.push(m);
   return m;

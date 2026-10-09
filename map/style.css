@@ -71,3 +71,6 @@ ul.tight{margin:6px 0;padding-left:20px}ul.tight li{margin:3px 0}
 @media (max-width:720px){nav{display:none;position:absolute;top:58px;left:0;right:0;background:#0d3b54;flex-direction:column;padding:8px}
 body.navopen nav{display:flex}.navtoggle{display:block}.baylist{columns:1}h1{font-size:20px}th{top:0}
 .hide-sm{display:none}}
+
+/* mobile polish: compact outlook summary so the map appears sooner */
+@media (max-width:600px){.g4{gap:8px}.card{padding:10px 12px}.kpi{font-size:21px}.kpi small{font-size:12px}.lbl{font-size:11px}}

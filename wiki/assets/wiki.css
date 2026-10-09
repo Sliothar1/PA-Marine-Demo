@@ -203,3 +203,8 @@ nav.side a .lbl i{font-size:11.5px;color:var(--muted);font-weight:400}
 @media (max-width:520px){.brand>span:last-child{display:block}.brand .logo{display:none}.brand b i{display:none}.brand b{font-size:15px}}
 .brand svg.logo.dolphin{background:linear-gradient(175deg,#061f33,#0a3a52);color:#8fe0d6;padding:3px;box-shadow:none}
 .homelink{background:linear-gradient(175deg,#061f33,#0a3a52);color:#eef6f8;border-color:#0a3a52}.homelink:hover{color:#fff;border-color:#8fe0d6}
+.daybars{margin:14px 0 18px;max-width:560px}
+.daybars div{display:grid;grid-template-columns:44px 1fr 46px;align-items:center;gap:10px;margin:6px 0}
+.daybars span{font-weight:650;color:var(--ink2)}
+.daybars b{display:block;height:16px;border-radius:8px;background:linear-gradient(90deg,var(--accent2),var(--accent));min-width:4px}
+.daybars i{font-style:normal;font-weight:650;color:var(--ink)}

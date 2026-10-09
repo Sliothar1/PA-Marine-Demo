@@ -16,7 +16,7 @@ var CAT = {
 };
 var CAT_ORDER=['pos','null','chk','desc','pend'];
 /* light Irish-language labels (shown alongside the English) */
-var GA={overview:'Forléargas','how-it-works':'Conas a oibríonn sé',results:'Torthaí','test-log':'Tástálacha',heatwaves:'Tonnta teasa mara',toxins:'Tocsainí eile',france:'An Fhrainc',data:'Foinsí sonraí',limitations:'Teorainneacha',glossary:'Gluais',about:'Fúinn'};
+var GA={overview:'Forléargas','how-it-works':'Conas a oibríonn sé',results:'Torthaí','test-log':'Tástálacha',heatwaves:'Tonnta teasa mara',toxins:'Tocsainí eile',france:'An Fhrainc',sampling:'Samplaí',data:'Foinsí sonraí',limitations:'Teorainneacha',glossary:'Gluais',about:'Fúinn'};
 var GA_GROUP={'Start here':'Tosaigh anseo','Findings':'Fionnachtana','Reference':'Tagairt'};
 
 /* ---------- height of sticky header ---------- */
@@ -40,7 +40,7 @@ function buildSide(){
       h+='<a href="#/'+p.id+'" data-id="'+p.id+'"><span aria-hidden="true">'+(p.icon||'•')+'</span>'+'<span class="lbl">'+esc(p.title)+(GA[p.id]?'<i lang="ga">'+GA[p.id]+'</i>':'')+'</span>'+(p.id==='test-log'?'<span class="n">'+TESTS.length+'</span>':'')+'</a>';
     });
   });
-  h+='<div class="ext"><h4>Elsewhere on this site</h4><a href="../"><span>⌂</span><span class="lbl">Home page<i lang="ga">Baile</i></span></a><a href="../map/"><span>🗺</span><span class="lbl">Live map<i lang="ga">An léarscáil bheo</i></span></a></div>';
+  h+='<div class="ext"><h4>Elsewhere on this site</h4><a href="../"><span>⌂</span><span class="lbl">Home page<i lang="ga">Baile</i></span></a><a href="../map/"><span>🗺</span><span class="lbl">Live map<i lang="ga">An léarscáil bheo</i></span></a><a href="../tour/"><span>🎞️</span><span class="lbl">Guided tour<i lang="ga">Turas</i></span></a></div>';
   h+='<div class="credit-card"><b>Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</b><br>Research prototype for Ocean Hackathon Cork 2026. Not Marine Institute advice.<br><i lang="ga">Déanta i nGaillimh</i> · Made in Galway</div>';
   $('#side').innerHTML=h;
 }
