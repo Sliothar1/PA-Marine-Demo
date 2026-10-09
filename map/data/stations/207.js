@@ -1,0 +1,1 @@
+PA_load({"id":207,"name":"Sruwaddacon","area":"Broadhaven North","slug":"broadhaven-north","region":"mayo","lat":54.27333,"lon":-9.80278,"first_year":2026,"n_weeks_total":1,"hist":{"ws":["2026-08-10"],"c":[0.0],"ac":[0.0],"pc":[0.0517],"po":[0.0146],"pn":[0.1614],"y":[null],"ya":[null],"ap":[0.0139]},"norm":[],"recent":[{"t":"2026-08-11","sum":0.0,"taxa":{}}],"current":null});

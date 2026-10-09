@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cork Hackathon demo: PA-Marine-Model · Dinophysis outlook</title>
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body><div style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#b45309;color:#fff;font:600 14px sans-serif;padding:6px;text-align:center">Ocean Hackathon Cork 2026 demo only. Research prototype by Garry Lohan (ATU Galway), not an official Marine Institute product or advice.</div>
+<header class="top">
+  <div class="wrap topbar">
+    <a class="brand" href="#/outlook"><span class="logo" aria-hidden="true"></span><span><b>PA-Marine-Model</b><small>Dinophysis outlook for Irish shellfish waters</small></span></a>
+    <button class="navtoggle" aria-label="Menu" onclick="document.body.classList.toggle('navopen')">☰</button>
+    <nav id="nav">
+      <a href="#/outlook" data-r="outlook">Outlook</a>
+      <a href="#/bays" data-r="bays">Bays</a>
+      <a href="#/replay" data-r="replay">Season replay</a>
+      <a href="#/scoreboard" data-r="scoreboard">Scoreboard</a>
+      <a href="#/leadtime" data-r="leadtime">Bloom → toxin</a>
+      <a href="#/honesty" data-r="honesty">How good is this?</a>
+    </nav>
+  </div>
+</header>
+<div class="banner"><div class="wrap" id="banner"></div></div>
+<main class="wrap" id="view"><p class="muted">Loading…</p></main>
+<footer class="wrap foot" id="foot"></footer>
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="data/meta.js"></script>
+<script src="data/outlook.js"></script>
+<script src="data/bays.js"></script>
+<script src="data/land.js"></script>
+<script src="data/scoreboard.js"></script>
+<script src="data/leadtime.js"></script>
+<script src="data/honesty.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
