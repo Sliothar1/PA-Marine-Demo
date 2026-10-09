@@ -38,7 +38,7 @@ function buildSide(){
     });
   });
   h+='<div class="ext"><h4>Elsewhere on this site</h4><a href="../"><span>⌂</span>Landing page</a><a href="../map/"><span>🗺</span>Interactive map</a></div>';
-  h+='<div class="credit-card"><b>Garry Lohan</b><br>Lecturer, ATU Galway<br>Research prototype for Ocean Hackathon Cork 2026. Not Marine Institute advice.</div>';
+  h+='<div class="credit-card"><b>Garry Lohan</b><br>Lecturer, ATU Galway<br><b>Felix Sproll</b><br>Marine Institute<br>Research prototype for Ocean Hackathon Cork 2026. Not Marine Institute advice.</div>';
   $('#side').innerHTML=h;
 }
 function openNav(o){document.body.classList.toggle('navopen',o)}

@@ -81,7 +81,7 @@ PAGES.push({id:'overview', group:'Start here', icon:'🌊', title:'Overview',
  <div class="callout"><span class="t">Curious non-specialist</span><p><a href="#/how-it-works">How it works</a> · <a href="#/heatwaves">Heatwaves</a> · <a href="#/glossary">Glossary</a></p></div>
  <div class="callout"><span class="t">Scientist or reviewer</span><p><a href="#/results">Scorecard</a> · <a href="#/test-log">All 122 tests</a> · <a href="#/limitations">Caveats</a></p></div>
 </div>
-<p style="font-size:14px;color:var(--muted)">Research prototype by <strong>Garry Lohan</strong>, lecturer at <strong>ATU Galway</strong>, developed for Ocean Hackathon Cork 2026. Not an official Marine Institute product or advice; shellfish safety is decided by official monitoring.</p>
+<p style="font-size:14px;color:var(--muted)">Research prototype by <strong>Garry Lohan</strong> (lecturer, ATU Galway) and <strong>Felix Sproll</strong> (Marine Institute), developed for Ocean Hackathon Cork 2026. Not an official Marine Institute product or advice; shellfish safety is decided by official monitoring.</p>
 `});
 PAGES.push({id:'how-it-works', group:'Start here', icon:'⚙️', title:'How the model works',
  keywords:'lightgbm platt features method pipeline erddap lag sunday target rolling origin',
@@ -557,10 +557,10 @@ PAGES.push({id:'glossary', group:'Reference', icon:'📖', title:'Glossary',
 `});
 PAGES.push({id:'about', group:'Reference', icon:'👤', title:'About & credits',
  keywords:'about credits garry lohan atu galway ocean hackathon cork',
- lede:'PA-Marine-Model is a research prototype by <strong>Garry Lohan</strong>, lecturer at <strong>Atlantic Technological University (ATU) Galway</strong>.',
+ lede:'PA-Marine-Model is a research prototype built by <strong>Garry Lohan</strong>, lecturer at <strong>Atlantic Technological University (ATU) Galway</strong>, and <strong>Felix Sproll</strong> of the <strong>Marine Institute</strong>.',
  html:`
 <h2>Author</h2>
-<p><strong>Garry Lohan</strong> (ATU Galway) designed and leads PA-Marine-Model, a test-everything, report-everything approach to forecasting harmful algal blooms in Irish shellfish waters. The project grew out of the <strong>Ocean Hackathon Cork 2026</strong> challenge on harmful algae and marine heatwaves.</p>
+<p><strong>Garry Lohan</strong> (ATU Galway) designed and leads PA-Marine-Model, built together with <strong>Felix Sproll</strong> (Marine Institute), a test-everything, report-everything approach to forecasting harmful algal blooms in Irish shellfish waters. The project grew out of the <strong>Ocean Hackathon Cork 2026</strong> challenge on harmful algae and marine heatwaves.</p>
 
 <h2>Ocean Hackathon Cork 2026</h2>
 <p>This wiki and the <a href="../map/">interactive map</a> are demonstration material for Ocean Hackathon Cork 2026. They are a research prototype: <strong>not an official Marine Institute product or advice</strong>, and not a safety guarantee.</p>
