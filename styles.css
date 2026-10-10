@@ -239,7 +239,7 @@ html.js .reveal.settled{opacity:1;transform:none;transition:none}
 html.js .cards.reveal.settled .card{opacity:1}
 html.js .cards.reveal.settled .card:not(:hover){transform:none}
 
-/* ---- Features · Gnéithe menu (matches PA Réalt, marine palette) ---- */
+/* ---- Features · Gnéithe menu (marine palette) ---- */
 .feat{position:relative}
 .featbtn{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(180deg,rgba(15,124,128,.45),rgba(6,31,51,.55));border:1px solid rgba(143,224,214,.45);border-radius:999px;color:#eef6f8;cursor:pointer;font:inherit;font-weight:600;font-size:15px;padding:6px 13px;margin-right:4px;touch-action:manipulation}
 .featbtn .fb-ga{font-family:var(--serif);color:var(--glass);font-size:.92em;font-weight:400}
@@ -274,15 +274,7 @@ html.js .cards.reveal.settled .card:not(:hover){transform:none}
  .brand{font-size:14.5px}
 }
 
-/* ---- PA family strip + credit (as on PA Réalt) ---- */
-.pa-family{display:flex;align-items:center;justify-content:center;gap:10px 14px;flex-wrap:wrap;margin:4px auto 0;font:13px var(--sans);color:var(--muted)}
-.pa-family .pa-mark{width:30px;height:30px;color:var(--accent)}
-.pa-family a{display:inline-flex;align-items:center;gap:6px;color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 12px 4px 8px;min-height:32px;transition:border-color .2s}
-.pa-family a:hover{border-color:var(--accent)}
-.pa-family a[aria-current]{border-color:var(--accent);color:var(--accent)}
-.pa-family a svg{width:18px;height:18px;color:var(--accent)}
-.pa-family .pa-hub{border-style:dashed}
-.foot .pa-family i{font-size:13.5px}
+/* ---- Credit ---- */
 .pa-credit{text-align:center;font:12px/1.5 var(--sans);color:var(--muted);margin:10px 0 14px;opacity:.9}
 .pa-credit a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:2px}
 .pa-credit a:hover{color:var(--accent)}
