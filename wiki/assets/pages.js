@@ -81,7 +81,7 @@ PAGES.push({id:'overview', group:'Start here', icon:'🌊', title:'Overview',
  <div class="callout"><span class="t">Curious non-specialist</span><p><a href="#/how-it-works">How it works</a> · <a href="#/heatwaves">Heatwaves</a> · <a href="#/glossary">Glossary</a></p></div>
  <div class="callout"><span class="t">Scientist or reviewer</span><p><a href="#/results">Scorecard</a> · <a href="#/test-log">All 125 tests</a> · <a href="#/limitations">Caveats</a></p></div>
 </div>
-<p style="font-size:14px;color:var(--muted)">Research prototype by <strong>Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</strong>. Not an official product or official advice; shellfish safety is decided by official monitoring.</p>
+<p style="font-size:14px;color:var(--muted)">Research prototype by <strong>Garry Lohan and Felix Sproll</strong>. Not an official product or official advice; shellfish safety is decided by official monitoring.</p>
 `});
 PAGES.push({id:'how-it-works', group:'Start here', icon:'⚙️', title:'How the model works',
  keywords:'lightgbm platt features method pipeline erddap lag sunday target rolling origin',
@@ -621,11 +621,11 @@ PAGES.push({id:'glossary', group:'Reference', icon:'📖', title:'Glossary',
 </tbody></table></div>
 `});
 PAGES.push({id:'about', group:'Reference', icon:'👤', title:'About & credits',
- keywords:'about credits garry lohan atu galway',
- lede:'PA-Marine-Model is a research prototype built by <strong>Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</strong>. Garry is a lecturer at Atlantic Technological University (ATU) Galway.',
+ keywords:'about credits garry lohan felix sproll',
+ lede:'PA-Marine-Model is a research prototype built by <strong>Garry Lohan and Felix Sproll</strong>.',
  html:`
 <h2>Author</h2>
-<p><strong>Garry Lohan</strong> (ATU Galway) designed and leads PA-Marine-Model, built together with <strong>Felix Sproll</strong> (Marine Institute), a test-everything, report-everything approach to forecasting harmful algal blooms in Irish shellfish waters.</p>
+<p><strong>Garry Lohan</strong> designed and leads PA-Marine-Model, built together with <strong>Felix Sproll</strong>, a test-everything, report-everything approach to forecasting harmful algal blooms in Irish shellfish waters.</p>
 
 <h2>Status</h2>
 <p>This wiki and the <a href="../map/">interactive map</a> are demonstration material. They are a research prototype: <strong>not an official product or official advice</strong>, and not a safety guarantee.</p>

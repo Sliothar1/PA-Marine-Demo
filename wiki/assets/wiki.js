@@ -41,7 +41,7 @@ function buildSide(){
     });
   });
   h+='<div class="ext"><h4>Elsewhere on this site</h4><a href="../"><span>⌂</span><span class="lbl">Home page<i lang="ga">Baile</i></span></a><a href="../map/"><span>🗺</span><span class="lbl">Live map<i lang="ga">An léarscáil bheo</i></span></a><a href="../tour/"><span>🎞️</span><span class="lbl">Guided tour<i lang="ga">Turas</i></span></a></div>';
-  h+='<div class="credit-card"><b>Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</b><br>Research prototype. Not Marine Institute advice.<br><i lang="ga">Déanta i nGaillimh</i> · Made in Galway</div>';
+  h+='<div class="credit-card"><b>Garry Lohan and Felix Sproll</b><br>Research prototype. Not Marine Institute advice.<br><i lang="ga">Déanta i nGaillimh</i> · Made in Galway</div>';
   $('#side').innerHTML=h;
 }
 function openNav(o){document.body.classList.toggle('navopen',o)}
