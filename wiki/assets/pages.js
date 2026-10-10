@@ -230,7 +230,7 @@ PAGES.push({id:'results', group:'Findings', icon:'📊', title:'Results & scorec
 <tr><td>Operational model, rolling threshold</td><td class="num">41 / 62</td><td class="num"><strong>41</strong></td></tr>
 </tbody></table></div>
 <p>An earlier claim that v2 “warned 61 of 62 closures” was withdrawn: random warnings issued at the same alarm volume per area and month catch 58.8 of 62 on average. The model’s real advantage is far fewer false-alarm runs, much of it from staying almost silent in quiet years (0–2 alarms in 2021 and 2023–25, when the trigger-level rule raised 13–48).</p>
-<figure><img src="assets/img/closure_null.png" alt="Closure null distribution: random warnings with the same alarm budget"><figcaption>The closure null: how many of the 62 South-West DSP closures random warning sets catch with the same alarm budget as v2 (blue) or the trigger-level rule (orange; labelled “MI rule” in the figure). Dashed lines = actual.</figcaption></figure>
+<figure><img src="assets/img/closure_null.png" alt="Closure null distribution: random warnings with the same alarm budget"><figcaption>The closure null: how many of the 62 South-West DSP closures random warning sets catch with the same alarm budget as v2 (blue) or the trigger-level rule (orange). Dashed lines = actual.</figcaption></figure>
 
 <h2>Genuine prospective record</h2>
 <ul>
