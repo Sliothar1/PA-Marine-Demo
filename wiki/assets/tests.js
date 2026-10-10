@@ -128,7 +128,7 @@ window.TESTS = [
 {
 "n": 15,
 "date": "2026-09-08",
-"test": "Cork weekend lock (decision)",
+"test": "Feature-set lock (decision)",
 "result": "STRONG_OISST kept as the spine; Chl/ODYSSEA/OSI predictive work parked",
 "verdict": "history-only",
 "cat": "desc",
@@ -1096,5 +1096,32 @@ window.TESTS = [
 "verdict": "no lift",
 "cat": "null",
 "theme": "Karenia"
+},
+{
+"n": 123,
+"date": "2026-10-09",
+"test": "**Mesodinium rubrum presence (weeks t−1/t−2, published-by-Sunday) added to operational v2 (#84 PUB recipe), PR-AUC 2022–26**",
+"result": "MP **0.314 vs PUB 0.312** (Δ +0.001, region-year 90% [−0.003, +0.006], 95% [−0.004, +0.007]); norm 0.231. 2016–26: 0.481 vs 0.484 (Δ −0.004, 95% [−0.010, +0.002]). PUB refit reproduces #84 exactly",
+"verdict": "no lift",
+"cat": "null",
+"theme": "Mesodinium"
+},
+{
+"n": 124,
+"date": "2026-10-09",
+"test": "*Mesodinium* presence + abundance (log10 t−1/t−2) added to operational v2 (secondary)",
+"result": "2022–26: 0.318 vs PUB 0.312 (Δ +0.0055, 90% [+0.0006, +0.009], **95% [−0.0003, +0.010]**); 2016–26 0.487 vs 0.484 (Δ +0.003, 95% [−0.002, +0.009]); Brier 0.03105 vs 0.03127",
+"verdict": "no lift (fails 95% rule; exploratory)",
+"cat": "null",
+"theme": "Mesodinium"
+},
+{
+"n": 125,
+"date": "2026-10-09",
+"test": "Do *Mesodinium* rises lead *Dinophysis* blooms? (descriptive, 2016–26)",
+"result": "Non-blooming station-weeks (28,503; 1,181 events): event rate 4.7% with Meso at t−1/t−2 vs 4.1% without; MH OR (station × month) **1.16, 95% region-year [0.87, 1.57]**. Regional anomaly lead-lag −6…+6 wk: all r between −0.05 and 0.00",
+"verdict": "no association",
+"cat": "null",
+"theme": "Mesodinium"
 }
 ];

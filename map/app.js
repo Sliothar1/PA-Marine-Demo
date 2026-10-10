@@ -53,8 +53,8 @@ function baseMap(el, opts = {}) {
     }
     lg.eachLayer(l => { if (l.options.className === "land-clip" && l._path) l._path.setAttribute("fill", "url(#landfade)"); });
   } catch (e) {}
-  m.attributionControl.setPrefix(false).addAttribution("Coast: Natural Earth · Counts: Marine Institute (CC-BY 4.0)");
-  maps.push(m);
+  m.attributionControl.setPrefix(false).addAttribution("Coast: Natural Earth · Counts: <a href=\"https://erddap3.marine.ie/erddap/tabledap/habs_phyto.html\" target=\"_blank\" rel=\"noopener\">Marine Institute</a> (CC BY 4.0)");
+  maps.push(m); if (el.id === "map") window.PA_MAP = m; /* used by the landing page embed */
   return m;
 }
 function marker(m, lat, lon, p, o = {}) {
@@ -69,7 +69,7 @@ function marker(m, lat, lon, p, o = {}) {
 function legend(extra = "") {
   return `<div class="legend">${["Low", "Watch", "Elevated", "High"].map((b, i) => `<span><i class="dot" style="background:${BANDC[b]}"></i>${b} ${["<5%", "5–15%", "15–30%", "≥30%"][i]}</span>`).join("")}
   <span><i class="dot" style="background:#fff;border:2px dashed #555"></i>provisional (no sample this week)</span>
-  <span><i class="dot" style="background:#fff;border:3px solid var(--acuta)"></i>D. acuta flag</span>${extra}</div>`;
+  <span><i class="dot" style="background:#fff;border:3px solid var(--acuta)"></i><i>D. acuta</i> flag</span>${extra}</div>`;
 }
 
 /* ---------------- tiny SVG charts ---------------- */
@@ -95,7 +95,7 @@ function riskChart(st, year) {
   s += `<line x1="${pad}" x2="${W - 8}" y1="${Yc(100)}" y2="${Yc(100)}" stroke="#c0392b" stroke-dasharray="4,3"/><text x="${W - 10}" y="${Yc(100) - 3}" font-size="10" fill="#c0392b" text-anchor="end">100 cells/L</text>`;
   idx.forEach(([d, i]) => { const c = H.c[i]; if (c == null) return; const yy = Yc(c); s += `<rect x="${X(d) - 2.5}" y="${yy}" width="5" height="${h1 + gap + h2 - yy}" fill="${c >= 100 ? "#c0392b" : "#8fb8cf"}"><title>${d}: ${cells(c)} cells/L total Dinophysis${H.ac[i] ? " (D. acuta " + cells(H.ac[i]) + ")" : ""}</title></rect>`; });
   [10, 100, 1000, 10000].forEach(v => { if (lc(v) <= cm) s += `<text x="${pad - 4}" y="${Yc(v) + 4}" font-size="10" text-anchor="end" fill="#667">${v >= 1000 ? v / 1000 + "k" : v}</text>`; });
-  s += `<text x="${pad}" y="${h1 + gap - 4}" font-size="10.5" fill="#445">Weekly max total Dinophysis (cells/L, log scale)</text></svg>`;
+  s += `<text x="${pad}" y="${h1 + gap - 4}" font-size="10.5" fill="#445">Weekly max total <tspan font-style="italic">Dinophysis</tspan> (cells/L, log scale)</text></svg>`;
   return s + `<div class="legend"><span><svg width="26" height="8"><line x1="0" x2="26" y1="4" y2="4" stroke="#0f5f8a" stroke-width="2.2"/></svg>model, week-0 known</span><span><svg width="26" height="8"><line x1="0" x2="26" y1="4" y2="4" stroke="#0f5f8a" stroke-dasharray="2,2"/></svg>model, conservative</span><span><svg width="26" height="8"><line x1="0" x2="26" y1="4" y2="4" stroke="#7a8794" stroke-width="1.6" stroke-dasharray="5,4"/></svg>seasonal norm</span><span><i class="dot" style="background:#c0392b;border:0;width:8px;height:8px"></i>event followed (≥100 in wk +1/+2)</span></div>`;
 }
 function normChart(st, year) {
@@ -141,11 +141,11 @@ V.outlook = function (el) {
   const sw = M.region_skill.southwest_kerry_westcork;
   el.innerHTML = `
   <div class="flex"><div><h1>Sunday outlook · ${fmtDate(M.issue_date)}</h1>
-  <div class="muted small">Chance that <b>total Dinophysis</b> (all species summed) reaches <b>≥100 cells/L</b> at each MI monitoring station in the next two weeks (ISO weeks ${isoWeek(addDays(M.issue_date, 1))}–${isoWeek(addDays(M.issue_date, 8))}). MI counts up to ${fmtDate(M.fetch.latest_sample || M.data_last_sample)} · fetched ${esc(M.fetch.fetched_at ? M.fetch.fetched_at.slice(0, 16).replace("T", " ") : "–")}${M.fetch.source_note ? " · " + esc(M.fetch.source_note) : ""}.</div></div></div>
+  <div class="muted small">Chance that <b>total <i>Dinophysis</i></b> (all species summed) reaches <b>≥100 cells/L</b> at each MI monitoring station in the next two weeks (ISO weeks ${isoWeek(addDays(M.issue_date, 1))}–${isoWeek(addDays(M.issue_date, 8))}). MI counts up to ${fmtDate(M.fetch.latest_sample || M.data_last_sample)} · fetched ${esc(M.fetch.fetched_at ? M.fetch.fetched_at.slice(0, 16).replace("T", " ") : "–")}${M.fetch.source_note ? " · " + esc(M.fetch.source_note) : ""}.</div></div></div>
   <div class="grid g4" style="margin-top:12px">
     <div class="card"><div class="lbl">Stations with an outlook</div><div class="kpi">${rows.length} <small>${M.n_week0} sampled this week · ${rows.length - M.n_week0} provisional</small></div></div>
     <div class="card"><div class="lbl">High / Elevated</div><div class="kpi">${nb("High")} / ${nb("Elevated")} <small>Watch ${nb("Watch")} · Low ${nb("Low")}</small></div></div>
-    <div class="card"><div class="lbl">D. acuta flags</div><div class="kpi">${rows.filter(r => r.acuta_flag).length} <small>flag = ≥10% chance of D. acuta ≥100 cells/L</small></div></div>
+    <div class="card"><div class="lbl"><i>D. acuta</i> flags</div><div class="kpi">${rows.filter(r => r.acuta_flag).length} <small>flag = ≥10% chance of <i>D. acuta</i> ≥100 cells/L</small></div></div>
     <div class="card"><div class="lbl">Where the model has skill</div><div class="kpi" style="font-size:17px">SW Kerry / West Cork only</div><div class="small muted">PR-AUC ${f2(sw.model)} vs norm ${f2(sw.norm)} (2022–26). Elsewhere: flat or worse; see badges.</div></div>
   </div>
   <div class="mapwrap" style="margin-top:14px">
@@ -159,7 +159,7 @@ V.outlook = function (el) {
   <h2>All stations</h2>
   <div class="controls"><label class="small">Region <select id="reg"><option value="">All regions</option>${M.region_order.map(r => `<option value="${r}">${esc(M.regions[r])}</option>`).join("")}</select></label>
   <label class="small"><input type="checkbox" id="nonlow"> hide Low</label><span class="small muted right">Chance = model probability; norm = station × week-of-year climatology (the baseline to beat).</span></div>
-  <div class="tablewrap"><table id="tbl"><thead><tr><th>Station</th><th class="hide-sm">Bay / area</th><th>Latest total Dinophysis</th><th>Basis</th><th class="num">Chance</th><th></th><th>Band</th><th class="num hide-sm">Norm</th><th class="hide-sm">D. acuta</th><th class="hide-sm">Model skill (region)</th></tr></thead><tbody></tbody></table></div>`;
+  <div class="tablewrap"><table id="tbl"><thead><tr><th>Station</th><th class="hide-sm">Bay / area</th><th>Latest total <i>Dinophysis</i></th><th>Basis</th><th class="num">Chance</th><th></th><th>Band</th><th class="num hide-sm">Norm</th><th class="hide-sm"><i>D. acuta</i></th><th class="hide-sm">Model skill (region)</th></tr></thead><tbody></tbody></table></div>`;
   const m = baseMap($("#map"));
   rows.slice().sort((a, b) => a.p - b.p).forEach(r => {
     marker(m, r.latitude, r.longitude, r.p, {dash: r.basis !== "week-0 known", ring: r.acuta_flag ? "#7b4fd6" : null, href: "#/bay/" + r.slug,
@@ -198,7 +198,7 @@ V.bay = function (el, sl) {
   <div class="grid g2">
     <div class="card"><div class="lbl">Model skill in ${esc(b.region_label)}</div>${skillCard(b.region)}</div>
     <div class="card"><div class="lbl">Bloom → toxin history (association, not forecast)</div>${lt && lt.n ? `<div class="kpi">${lt.median.toFixed(0)} weeks <small>median, n = ${lt.n} seasons (IQR ${lt.q25.toFixed(0)}–${lt.q75.toFixed(0)}, range ${lt.min}…${lt.max})</small></div>
-      <div class="small">From first total Dinophysis ≥100 cells/L of the season to the first DSP result above the regulatory limit. Toxin came first in ${pct(lt.share_toxin_first)} of seasons. Seasons with a bloom: ${b.lead.seasons_bloom} of ${b.lead.seasons}; DSP onset followed in ${pct(b.lead.p_toxin_given_bloom)} of bloom seasons vs ${pct(b.lead.p_toxin_given_no_bloom)} without. <a href="#/leadtime">Method →</a></div>` : `<div class="small muted">Not enough paired phytoplankton + DSP seasons here.</div>`}</div>
+      <div class="small">From first total <i>Dinophysis</i> ≥100 cells/L of the season to the first DSP result above the regulatory limit. Toxin came first in ${pct(lt.share_toxin_first)} of seasons. Seasons with a bloom: ${b.lead.seasons_bloom} of ${b.lead.seasons}; DSP onset followed in ${pct(b.lead.p_toxin_given_bloom)} of bloom seasons vs ${pct(b.lead.p_toxin_given_no_bloom)} without. <a href="#/leadtime">Method →</a></div>` : `<div class="small muted">Not enough paired phytoplankton + DSP seasons here.</div>`}</div>
   </div>
   <div class="controls"><label class="small">Season <select id="yr">${Array.from({length: 11}, (_, i) => 2026 - i).map(y => `<option ${y === year ? "selected" : ""}>${y}</option>`).join("")}</select></label></div>
   <div id="sts"><p class="muted">Loading station histories…</p></div>`;
@@ -207,11 +207,11 @@ V.bay = function (el, sl) {
     Promise.all(ids.map(loadStation)).then(sts => {
       $("#sts").innerHTML = sts.filter(Boolean).map(st => {
         const cur = OUT.find(r => r.location_id === st.id);
-        return `<div class="card stcard"><div class="flex"><h2 style="margin:0">${esc(st.name)}</h2>${cur ? chip(cur.band) + " " + basisTag(cur.basis) + ` <b>${pct(cur.p)}</b> <span class="small muted">norm ${pct(cur.p_norm)}</span>` + (cur.acuta_flag ? ` <span class="acuta">D. acuta flag</span>` : "") : `<span class="small muted">no outlook this week</span>`}<span class="right tiny muted">MI station ${st.id} · ${st.lat.toFixed(3)}, ${st.lon.toFixed(3)} · ${st.n_weeks_total || "?"} sampled weeks since ${st.first_year || "?"}</span></div>
+        return `<div class="card stcard"><div class="flex"><h2 style="margin:0">${esc(st.name)}</h2>${cur ? chip(cur.band) + " " + basisTag(cur.basis) + ` <b>${pct(cur.p)}</b> <span class="small muted">norm ${pct(cur.p_norm)}</span>` + (cur.acuta_flag ? ` <span class="acuta"><i>D. acuta</i> flag</span>` : "") : `<span class="small muted">no outlook this week</span>`}<span class="right tiny muted">MI station ${st.id} · ${st.lat.toFixed(3)}, ${st.lon.toFixed(3)} · ${st.n_weeks_total || "?"} sampled weeks since ${st.first_year || "?"}</span></div>
         ${cur ? `<p class="small">${esc(cur.note)}</p>` : ""}
         <h3>Risk history ${y}</h3>${riskChart(st, y)}
         <div class="grid g2"><div><h3>Seasonal norm vs ${y}</h3>${normChart(st, y)}</div>
-        <div><h3>Recent MI samples</h3><table><thead><tr><th>Date</th><th class="num">Total Dinophysis</th><th>Species (cells/L)</th></tr></thead><tbody>${st.recent.slice(0, 8).map(s => `<tr><td>${s.t}</td><td class="num">${cells(s.sum)}</td><td class="tiny">${Object.entries(s.taxa).map(([k, v]) => esc(k.replace("Dinophysis", "D.")) + " " + cells(v)).join(", ") || "none detected"}</td></tr>`).join("")}</tbody></table></div></div></div>`;
+        <div><h3>Recent MI samples</h3><table><thead><tr><th>Date</th><th class="num">Total <i>Dinophysis</i></th><th>Species (cells/L)</th></tr></thead><tbody>${st.recent.slice(0, 8).map(s => `<tr><td>${s.t}</td><td class="num">${cells(s.sum)}</td><td class="tiny">${Object.entries(s.taxa).map(([k, v]) => esc(k.replace("Dinophysis", "D.")).replace(/^(.*?)( spp?\.)?$/, (m, a, b) => `<i>${a}</i>${b || ""}`) + " " + cells(v)).join(", ") || "none detected"}</td></tr>`).join("")}</tbody></table></div></div></div>`;
       }).join("");
     });
   };
@@ -221,7 +221,7 @@ function skillCard(region) {
   const s = M.region_skill[region], o = M.region_skill_oper[region];
   if (!s) return `<p class="small muted">No test results for this region.</p>`;
   return `<div class="kpi">${f2(s.model)} <small>model PR-AUC vs ${f2(s.norm)} seasonal norm</small></div>
-  <div class="small">2022–26 rolling-origin test, ${s.n_pos} events in ${s.n.toLocaleString()} station-weeks. Gain over norm, 95% CI: ${f3(s.gain_lo)} to ${f3(s.gain_hi)} (conservative). ${o ? `Week-0 known: ${f2(o.model)} (CI ${f3(o.gain_lo)} to ${f3(o.gain_hi)}).` : ""}<br><b>${esc(M.skill_text[s.verdict] || s.verdict)}</b>.</div>`;
+  <div class="small">2022–26 rolling-origin test, ${s.n_pos} events in ${s.n.toLocaleString()} station-weeks. Gain over norm, 95% CI: ${f3(s.gain_lo)} to ${f3(s.gain_hi)} (conservative). ${o ? `Week-0 known (upper bound): ${f2(o.model)} (CI ${f3(o.gain_lo)} to ${f3(o.gain_hi)}).` : ""}<br><b>${esc(M.skill_text[s.verdict] || s.verdict)}</b>.</div>`;
 }
 
 V.replay = function (el) {
@@ -254,7 +254,7 @@ V.scoreboard = function (el) {
   const bandRows = st => ["Low", "Watch", "Elevated", "High"].map(b => { const x = st.bands[b]; return `<tr><td>${chip(b)}</td><td class="num">${x.n}</td><td class="num">${x.events}</td><td class="num">${x.n ? pct1(x.events / x.n) : "–"}</td></tr>`; }).join("");
   const bi = P.by_issue;
   el.innerHTML = `<h1>Forecast scoreboard</h1>
-  <p class="muted small">Event = total Dinophysis ≥100 cells/L in ISO week +1 or +2 after the issue Sunday. A forecast is scored ${S.rules.scoring_delay_days} days after issue (two forecast weeks plus one week for MI to publish counts) if at least one of the two weeks was sampled. Hit = event at Watch or above · miss = event at Low · false alarm = no event at Elevated/High.</p>
+  <p class="muted small">Event = total <i>Dinophysis</i> ≥100 cells/L in ISO week +1 or +2 after the issue Sunday. A forecast is scored ${S.rules.scoring_delay_days} days after issue (two forecast weeks plus one week for MI to publish counts) if at least one of the two weeks was sampled. Hit = event at Watch or above · miss = event at Low · false alarm = no event at Elevated/High.</p>
   <div class="genuine"><span class="tag">GENUINE · LOGGED BEFORE THE OUTCOME</span>
   <h2 style="margin-top:8px">Track record of issued forecasts (from 4 Oct 2026)</h2>
   <p class="small">Each Sunday issue is saved as a CSV, its SHA256 appended to <code>SHA256SUMS</code> and to a hash-chained <code>LEDGER.jsonl</code>; files are never overwritten and a file whose hash does not match is never scored. Ledger chain: <b>${G.ledger_chain_ok ? "intact" : "BROKEN"}</b> (${G.ledger_entries} entr${G.ledger_entries === 1 ? "y" : "ies"}).</p>
@@ -272,7 +272,7 @@ V.scoreboard = function (el) {
   </div>
   <div class="grid g2" style="margin-top:12px"><div><h3>Running PR-AUC (cumulative over issue weeks)</h3>${lineChart([{name: "model (conservative)", c: "#0f5f8a", v: bi.map(x => x.cum_pr_auc)}, {name: "seasonal norm", c: "#7a8794", dash: "5,4", v: bi.map(x => x.cum_pr_auc_norm)}], {lo: 0, hi: 1, labels: bi.map(x => shortDate(x.issue_date))})}</div>
   <div><h3>Reliability by band</h3><table><thead><tr><th>Band</th><th class="num">Forecasts</th><th class="num">Events</th><th class="num">Observed rate</th></tr></thead><tbody>${bandRows(s)}</tbody></table>
-  <p class="small">Post-freeze only (issues after ${fmtDate(P.post_freeze_from)}): ${pf.n} forecasts, ${pf.events} events, PR-AUC ${f3(pf.pr_auc)} vs norm ${f3(pf.pr_auc_norm)} — far too few events to conclude anything. D. acuta flag (hindcast): ${P.acuta_flag.flags} flags, ${P.acuta_flag.flag_hits} of ${P.acuta_flag.acuta_events} D. acuta events caught.</p></div></div>
+  <p class="small">Post-freeze only (issues after ${fmtDate(P.post_freeze_from)}): ${pf.n} forecasts, ${pf.events} events, PR-AUC ${f3(pf.pr_auc)} vs norm ${f3(pf.pr_auc_norm)} — far too few events to conclude anything. <i>D. acuta</i> flag (hindcast): ${P.acuta_flag.flags} flags, ${P.acuta_flag.flag_hits} of ${P.acuta_flag.acuta_events} <i>D. acuta</i> events caught.</p></div></div>
   <h3>Week by week</h3><div class="tablewrap" style="max-height:420px"><table><thead><tr><th>Issue Sunday</th><th class="num">Scored</th><th class="num">Events</th><th class="num">Mean fcst</th><th class="num">Brier</th><th class="num">Brier norm</th><th class="num">Hits</th><th class="num">Misses</th><th class="num">FA</th><th class="hide-sm">Events (model chance)</th></tr></thead><tbody>${bi.slice().reverse().map(x => `<tr><td>${fmtDate(x.issue_date)}</td><td class="num">${x.n}</td><td class="num">${x.events}</td><td class="num">${pct1(x.mean_forecast)}</td><td class="num">${f3(x.brier)}</td><td class="num">${f3(x.brier_norm)}</td><td class="num">${x.hits_watch_or_above}</td><td class="num">${x.misses_low}</td><td class="num">${x.false_alarms_elevated_or_above}</td><td class="tiny hide-sm">${x.events_list.map(e => esc(e.station) + " " + pct(e.p)).join(", ")}</td></tr>`).join("")}</tbody></table></div>
   <h3>By region (hindcast)</h3><table><thead><tr><th>Region</th><th class="num">n</th><th class="num">Events</th><th class="num">PR-AUC</th><th class="num">Norm</th><th class="num">Brier</th><th class="num">Brier norm</th></tr></thead><tbody>${M.region_order.filter(r => P.by_region[r]).map(r => { const x = P.by_region[r]; return `<tr><td>${esc(M.regions[r])}</td><td class="num">${x.n}</td><td class="num">${x.events}</td><td class="num">${f3(x.pr_auc)}</td><td class="num">${f3(x.pr_auc_norm)}</td><td class="num">${f3(x.brier)}</td><td class="num">${f3(x.brier_norm)}</td></tr>`; }).join("")}</tbody></table>
   </div>`;
@@ -286,7 +286,7 @@ V.leadtime = function (el) {
     DSP onset in ${pct(x.p_toxin_given_bloom)} of ${x.seasons_bloom} bloom seasons vs ${pct(x.p_toxin_given_no_bloom)} of ${x.seasons - x.seasons_bloom} without.<br>
     To DSP closure (2019+): ${x.lead_closure.n ? `median ${x.lead_closure.median.toFixed(0)} weeks, n = ${x.lead_closure.n}` : "n = 0"}</div></div>`;
   el.innerHTML = `<h1>Bloom → toxin lead time</h1>
-  <p class="muted small">How many weeks after Dinophysis first reaches ≥100 cells/L in a season does DSP toxin in shellfish go above the regulatory limit, per production area? <b>This is a historical association, not a forecast</b>, and toxin results, not counts, decide closures.</p>
+  <p class="muted small">How many weeks after <i>Dinophysis</i> first reaches ≥100 cells/L in a season does DSP toxin in shellfish go above the regulatory limit, per production area? <b>This is a historical association, not a forecast</b>, and toxin results, not counts, decide closures.</p>
   <div class="grid g3">${sw ? blk("SW Kerry / West Cork", sw) : ""}${blk("All regions", A)}
   <div class="card"><div class="lbl">Data</div><div class="small">DSP results: ${esc(T.biotoxin_source)} (last sample ${fmtDate(T.biotoxin_last_sample)}). Closures: ${esc(T.status_source)} (to ${fmtDate(T.status_last_week)}). Counts: MI phytoplankton (ERDDAP <code>habs_phyto</code>). Season = ISO weeks ${T.season_iso_weeks[0]}–${T.season_iso_weeks[1]}; area-seasons need ≥8 phytoplankton weeks and ≥8 DSP results.</div></div></div>
   <div class="grid g2"><div class="card"><h3 style="margin-top:0">SW Kerry / West Cork: weeks from first ≥100 cells/L to DSP above limit</h3>${sw ? hist(sw.lead_toxin.values, -8, 20) : ""}</div>
@@ -294,11 +294,11 @@ V.leadtime = function (el) {
   <h2>Per bay / production area (n ≥ 3 paired seasons)</h2>
   <div class="tablewrap"><table><thead><tr><th>Area</th><th class="hide-sm">Region</th><th class="num">Seasons</th><th class="num">Bloom seasons</th><th class="num">n paired</th><th class="num">Median</th><th class="num">IQR</th><th class="num">Range</th><th class="num">Toxin first</th><th class="num hide-sm">P(toxin | bloom)</th><th class="num hide-sm">P(toxin | no bloom)</th><th class="num hide-sm">Closure n / median</th></tr></thead><tbody>${areas.map(([a, v]) => { const l = v.lead_toxin, c = v.lead_closure; return `<tr><td><a href="#/bay/${T.area_slugs[a]}">${esc(a)}</a></td><td class="hide-sm small">${esc(v.region)}</td><td class="num">${v.seasons}</td><td class="num">${v.seasons_bloom}</td><td class="num"><b>${l.n}</b></td><td class="num"><b>${l.median.toFixed(0)}</b></td><td class="num">${l.q25.toFixed(0)}–${l.q75.toFixed(0)}</td><td class="num">${l.min} to ${l.max}</td><td class="num">${pct(l.share_toxin_first)}</td><td class="num hide-sm">${pct(v.p_toxin_given_bloom)}</td><td class="num hide-sm">${pct(v.p_toxin_given_no_bloom)}</td><td class="num hide-sm">${c.n ? c.n + " / " + c.median.toFixed(0) : "0"}</td></tr>`; }).join("")}</tbody></table></div>
   <h2>Method and caveats</h2><ul class="tight small">
-  <li><b>Bloom onset</b>: first ISO week in the season when any MI phytoplankton station in the production area had total Dinophysis (sum of all Dinophysis taxa in a sample) ≥100 cells/L.</li>
+  <li><b>Bloom onset</b>: first ISO week in the season when any MI phytoplankton station in the production area had total <i>Dinophysis</i> (sum of all <i>Dinophysis</i> taxa in a sample) ≥100 cells/L.</li>
   <li><b>Toxin onset</b>: first MI DSP (okadaic-acid group) result at or above 0.16 µg OA eq/g (or a 'positive' bioassay before LC-MS) whose previous DSP result in that area was below the limit, so toxicity carried over from winter is not counted as a new onset.</li>
   <li><b>Closure</b>: first week with production-area status 'Closed' and reason 'Toxicity – DSP'; reasons are only recorded from 2019, so n is small.</li>
   <li><b>Association, not a forecast.</b> Many bloom seasons never reach the toxin limit; 100 cells/L is a low bar that is crossed in most SW seasons, sometimes months before toxin appears, which is why the distribution has a long tail. Some areas share water and phytoplankton stations, so seasons are not independent and the n's overstate the evidence.</li>
-  <li>Toxin first (negative leads) happens: sampling gaps, other DSP producers (e.g. D. acuta offshore), or toxin uptake before the station count crosses 100.</li>
+  <li>Toxin first (negative leads) happens: sampling gaps, other DSP producers (e.g. <i>D. acuta</i> offshore), or toxin uptake before the station count crosses 100.</li>
   <li>Monitoring frequencies changed over 2002–2026 (bioassay era until ~2011, LC-MS after), and recent seasons (2022–2026) had very few DSP exceedances, so most pairs come from 2005–2021.</li>
   <li>Open data only: Marine Institute ERDDAP <code>habs_biotoxin</code> and <code>habs_status</code>, no accounts needed. This run: biotoxin ${esc(M.fetch.habs_biotoxin_source || T.biotoxin_source)}; status ${esc(M.fetch.habs_status_source || T.status_source)}. DSP results on disk run to ${fmtDate(T.biotoxin_last_sample)}, so the 2026 season is incomplete.</li></ul>`;
 };
@@ -311,7 +311,7 @@ V.honesty = function (el) {
   <p class="muted">Short answer: <b>modestly better than the seasonal norm overall, clearly better only in SW Kerry / West Cork, and not better (or worse) elsewhere.</b> All numbers come from rolling-origin tests: each year is scored by a model that never saw it.</p>
   <div class="grid g3">
     <div class="card"><div class="lbl">Headline 2022–26 (conservative)</div><div class="kpi">${f3(h.pr_auc.V2)} <small>PR-AUC [${f3(h.pr_auc_ci95.V2.lo)}–${f3(h.pr_auc_ci95.V2.hi)}]</small></div><div class="small">vs seasonal norm ${f3(h.pr_auc.station_week_clim)}; gain CI ${dl(h)}. ${h.n_pos} events in ${h.n.toLocaleString()} station-weeks (${pct1(h.prevalence)}).</div></div>
-    <div class="card"><div class="lbl">Week-0 known (operational)</div><div class="kpi">${f3(ho.pr_auc.V2)} <small>PR-AUC [${f3(ho.pr_auc_ci95.V2.lo)}–${f3(ho.pr_auc_ci95.V2.hi)}]</small></div><div class="small">gain over norm ${dl(ho)}. Used only where this week's sample was public by Sunday.</div></div>
+    <div class="card"><div class="lbl">Week-0 known (upper bound)</div><div class="kpi">${f3(ho.pr_auc.V2)} <small>PR-AUC [${f3(ho.pr_auc_ci95.V2.lo)}–${f3(ho.pr_auc_ci95.V2.hi)}]</small></div><div class="small">gain over norm ${dl(ho)}. Optimistic: counts sampled up to the issue Sunday are treated as known (test #45). With MI’s real publication dates the operational score is 0.312 vs norm 0.231 (test #84, <a href="../wiki/#/results" target="_top">wiki</a>).</div></div>
     <div class="card"><div class="lbl">Calibration</div><div class="kpi">${f3(h.brier.V2)} <small>Brier vs ${f3(h.brier.station_week_clim)} norm</small></div><div class="small">BSS vs norm ${f2(h.bss_vs_station_week_clim)} · mean forecast ${pct1(h.mean_pred)} vs ${pct1(h.prevalence)} observed · slope ${f2(h.calibration_slope)}</div></div>
   </div>
   <h2>Baselines (2022–26, conservative)</h2>
@@ -323,14 +323,14 @@ V.honesty = function (el) {
   <p class="small">Earlier pool 2016–21: conservative ${f3(fr.pr_auc.V2)} vs norm ${f3(fr.pr_auc.station_week_clim)} (gain ${dl(fr)}: a tie); week-0 known ${f3(fo.pr_auc.V2)} (gain ${dl(fo)}). PR-AUC rewards ranking the riskiest station-weeks first; random ranking scores the event rate (~4%).</p>
   <h2>By region (2022–26)</h2>
   <table><thead><tr><th>Region</th><th class="num">Events</th><th class="num">Model</th><th class="num">Norm</th><th class="num">Gain 95% CI</th><th>Verdict</th></tr></thead><tbody>${M.region_order.map(r => { const s = M.region_skill[r]; return s ? `<tr><td>${esc(M.regions[r])}</td><td class="num">${s.n_pos}</td><td class="num">${f3(s.model)}</td><td class="num">${f3(s.norm)}</td><td class="num">${s.gain_lo == null ? "–" : f3(s.gain_lo) + " to " + f3(s.gain_hi)}</td><td>${badge(s.verdict)}</td></tr>` : ""; }).join("")}</tbody></table>
-  <h2>D. acuta flag</h2><p class="small">PR-AUC ${f3(a.pr_auc.V2)} [${f3(a.pr_auc_ci95.V2.lo)}–${f3(a.pr_auc_ci95.V2.hi)}] vs seasonal norm ${f3(a.pr_auc.station_week_clim)} (gain ${dl(a)}), the most forecastable species relative to its own climatology, but only ${a.n_pos} events in 2022–26. The flag fires at ≥10% chance (fixed on 2016–25 hindcasts: ~6% of station-weeks flagged, 24% precision, 62% of D. acuta events caught).</p>
+  <h2><i>D. acuta</i> flag</h2><p class="small">PR-AUC ${f3(a.pr_auc.V2)} [${f3(a.pr_auc_ci95.V2.lo)}–${f3(a.pr_auc_ci95.V2.hi)}] vs seasonal norm ${f3(a.pr_auc.station_week_clim)} (gain ${dl(a)}), the most forecastable species relative to its own climatology, but only ${a.n_pos} events in 2022–26. The flag fires at ≥10% chance (fixed on 2016–25 hindcasts: ~6% of station-weeks flagged, 24% precision, 62% of <i>D. acuta</i> events caught).</p>
   <h2>What doesn't work (tested, not adopted)</h2><ul class="tight small">
   <li>Sea-surface temperature (repaired SST: −0.002; SST + marine-heatwave features: −0.018, and −0.036 at bloom onset, so harmful).</li>
   <li>Wind / upwelling-downwelling features: harmful (−0.024). Alongshore 'upstream' station counts: helped 2016–21 only, not adopted.</li>
-  <li>Satellite chlorophyll, ODYSSEA/OSTIA SST products, climate indices, IBI back-trajectories, Mesodinium: no gain.</li>
-  <li>Other taxa with the same recipe: Pseudo-nitzschia (gain CI −0.004 to +0.039), Alexandrium (−0.041 to +0.003): no demonstrated skill; Azadinium proxy worse than its norm. D. acuminata alone ties its norm; ≥500 cells/L is weak unless week-0 is known.</li></ul>
+  <li>Satellite chlorophyll, ODYSSEA/OSTIA SST products, climate indices, IBI back-trajectories, <i>Mesodinium</i>: no gain.</li>
+  <li>Other taxa with the same recipe: <i>Pseudo-nitzschia</i> (gain CI −0.004 to +0.039), <i>Alexandrium</i> (−0.041 to +0.003): no demonstrated skill; <i>Azadinium</i> proxy worse than its norm. <i>D. acuminata</i> alone ties its norm; ≥500 cells/L is weak unless week-0 is known.</li></ul>
   <h2>Limits</h2><ul class="tight small">
-  <li><b>Counts, not toxins.</b> ≥100 cells/L of total Dinophysis is the count threshold used throughout this project. It is not a closure and does not mean shellfish are toxic; DSP toxin results decide that (see Bloom → toxin).</li>
+  <li><b>Counts, not toxins.</b> ≥100 cells/L of total <i>Dinophysis</i> is the count threshold used throughout this project. It is not a closure and does not mean shellfish are toxic; DSP toxin results decide that (see Bloom → toxin).</li>
   <li>Skill is mostly <b>persistence plus season</b>: the model is good at saying an ongoing bloom will continue and weak at predicting onset from a clean station.</li>
   <li>2026 so far (hindcast, conservative): PR-AUC ${f3(PA.scoreboard.pseudo_prospective.scored.pr_auc)} vs norm ${f3(PA.scoreboard.pseudo_prospective.scored.pr_auc_norm)}, i.e. no better than the norm this season unless this week's sample is known (${f3(PA.scoreboard.pseudo_prospective.scored_if_week0_known.pr_auc)}). Mean forecast ${pct1(PA.scoreboard.pseudo_prospective.scored.mean_forecast)} vs ${pct1(PA.scoreboard.pseudo_prospective.scored.obs_rate)} observed.</li>
   <li>Week-0 counts are public for only some stations by Sunday (${M.n_week0} of ${M.n_stations} this week); the rest are provisional (conservative model).</li>
@@ -349,7 +349,7 @@ function route() {
   window.scrollTo(0, 0);
 }
 $("#banner").innerHTML = `<b>Not official.</b> ${esc(M.banner.replace(/^Not an official forecast or warning\.\s*/, ""))} <span class="muted">· <a href="https://www.marine.ie" rel="noopener">Marine Institute</a> · <a href="https://www.sfpa.ie" rel="noopener">SFPA</a></span>`;
-$("#foot").innerHTML = `PA-Marine-Model · ${esc(M.model_version)} · issue ${esc(M.issue_date)} · built ${esc(M.built_at)}${M.log_entry ? ` · logged SHA256 <span class="mono">${esc(M.log_entry.sha256.slice(0, 16))}…</span>` : ""}<br>Data: Marine Institute HABs phytoplankton, biotoxin and production-area status datasets (ERDDAP, CC-BY 4.0). Coastline: Natural Earth. Map: Leaflet. Experimental research tool, not affiliated with MI or SFPA.`;
+$("#foot").innerHTML = `PA-Marine-Model · ${esc(M.model_version)} · issue ${esc(M.issue_date)} · built ${esc(M.built_at)}${M.log_entry ? ` · logged SHA256 <span class="mono">${esc(M.log_entry.sha256.slice(0, 16))}…</span>` : ""}<br>Data: Marine Institute HABs phytoplankton, biotoxin and production-area status datasets (<a href="https://erddap3.marine.ie/erddap/" target="_blank" rel="noopener">MI ERDDAP</a>; licences and terms on the <a href="../wiki/#/data" target="_top">Data sources</a> page). Coastline: Natural Earth. Map: Leaflet. Experimental research tool. Not an official product or official advice.`;
 window.addEventListener("hashchange", route);
 route();
 })();

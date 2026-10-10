@@ -208,3 +208,5 @@ nav.side a .lbl i{font-size:11.5px;color:var(--muted);font-weight:400}
 .daybars span{font-weight:650;color:var(--ink2)}
 .daybars b{display:block;height:16px;border-radius:8px;background:linear-gradient(90deg,var(--accent2),var(--accent));min-width:4px}
 .daybars i{font-style:normal;font-weight:650;color:var(--ink)}
+.foot .pa-credit{display:inline-block;margin-top:6px;font-size:12px;opacity:.9}
+.foot .pa-credit a{color:inherit;text-decoration:underline;text-underline-offset:2px}

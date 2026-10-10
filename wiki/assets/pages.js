@@ -44,12 +44,12 @@ PAGES.push({id:'overview', group:'Start here', icon:'🌊', title:'Overview',
 <div class="cards">
  <div class="stat"><div class="v">0.312 <small>vs 0.231</small></div><div class="l">Operational forecast skill (PR-AUC), 2022–26, vs the seasonal “normal for this site and week” baseline</div></div>
  <div class="stat"><div class="v">0.338 <small>vs 0.203</small></div><div class="l">Same comparison in the South-West (Kerry / West Cork), where most blooms occur</div></div>
- <div class="stat"><div class="v">122</div><div class="l">Logged tests and experiments, nulls included — see the <a href="#/test-log">full test log</a></div></div>
+ <div class="stat"><div class="v">125</div><div class="l">Logged tests and experiments, nulls included — see the <a href="#/test-log">full test log</a></div></div>
  <div class="stat"><div class="v">0</div><div class="l">Environmental inputs (sea temperature, heatwaves, wind, chlorophyll, currents…) that added fair skill</div></div>
 </div>
 
 <h2>The problem in one paragraph</h2>
-<p><em>Dinophysis</em> is a microscopic alga that lives in the plankton along the Irish coast. Mussels and other shellfish filter it from the water and accumulate its toxins, which cause <strong>diarrhetic shellfish poisoning (DSP)</strong>. To protect consumers, the Marine Institute (MI) samples coastal water and shellfish every week, and harvesting areas are closed when toxins exceed the legal limit. Closures are costly for growers and often come at short notice. A count of <strong>100 cells per litre</strong> of <em>Dinophysis</em> is the level MI treats as a trigger. So a natural question is: <em>can we say, a week or two ahead, where that level is likely to be reached?</em></p>
+<p><em>Dinophysis</em> is a microscopic dinoflagellate that lives in the plankton along the Irish coast. Mussels and other shellfish filter it from the water and accumulate its toxins, which cause <strong>diarrhetic shellfish poisoning (DSP)</strong>. To protect consumers, the national monitoring programme, with analysis by the Marine Institute (MI), tests coastal water and shellfish every week, and harvesting areas are closed when toxins in shellfish flesh exceed the regulatory limit. Closures are costly for growers and often come at short notice. A count of <strong>100 cells/L</strong> is the <em>Dinophysis</em> trigger level used in the national monitoring programme (a trigger level flags a possible risk; it is not a closure). So a natural question is: <em>can we say, a week or two ahead, where that level is likely to be reached?</em></p>
 
 <h2>What the forecast does</h2>
 <p>Every <strong>Sunday</strong>, for each MI monitoring station sampled that week, the model estimates the probability that total <em>Dinophysis</em> will reach <strong>≥100 cells/L in either of the next two weeks</strong>. It uses only information that was public by that Sunday: mainly the recent counts at the station itself and at neighbouring stations, plus the time of year and location. The engine is a gradient-boosted tree model (LightGBM) whose probabilities are recalibrated each year. <a href="#/how-it-works">How the model works →</a></p>
@@ -57,14 +57,14 @@ PAGES.push({id:'overview', group:'Start here', icon:'🌊', title:'Overview',
 <h2>How good is it?</h2>
 <p>Measurably better than a standard baseline, and we can say exactly how much. Using only the counts MI had actually published before each Sunday, the forecast ranks the coming fortnight’s bloom weeks with a <strong>PR-AUC of 0.312, against 0.231</strong> for the “normal for this site and this week of the year” baseline (2022–2026, out of sample). In the South-West it is <strong>0.338 vs 0.203</strong>. Blooms are rare (about 4% of station-weeks in recent years), so a forecast that guessed at random would score about 0.04: both numbers are well above chance, and the real question is how much the model adds <em>beyond</em> the seasonal norm. <a href="#/results">Full scorecard →</a></p>
 <div class="callout warn"><span class="t">What it does not do (yet)</span>
-<p>At the same alarm volume, the forecast <strong>does not catch more shellfish closures</strong> than MI’s own free rule (“≥100 cells/L at the site last week”): 41 vs 46 of 62 South-West closures, or 50 when that rule uses the same published-by-Sunday data. Its practical advantage is far fewer false-alarm runs (41 vs 124–130). It is a <strong>surveillance-triage aid</strong>, not a safety system.</p></div>
+<p>At the same alarm volume, the forecast <strong>does not catch more shellfish closures</strong> than a simple trigger-level rule (“≥100 cells/L at the site last week”): 41 vs 46 of 62 South-West closures, or 50 when that rule uses the same published-by-Sunday data. Its practical advantage is far fewer false-alarm runs (41 vs 124–130). It is a <strong>surveillance-triage aid</strong>, not a safety system.</p></div>
 
 <h2>What we learned along the way</h2>
 <ul>
  <li><strong>Recent counts are the forecast.</strong> What was in the water at and near a site in recent weeks carries almost all the skill. A simple, transparent logistic model gets within about 0.01 of the tree model.</li>
  <li><strong>Environmental extras did not help.</strong> Sea-surface temperature from several satellite products, marine-heatwave state and intensity, ERA5 winds, river flow, solar radiation, chlorophyll, ocean currents and back-trajectories, plankton-recorder data, buoy chemistry and climate indices were all tested; none added skill once recent counts were known. <a href="#/test-log?cat=null">See the nulls →</a></li>
  <li><strong>Marine heatwaves are becoming more frequent</strong> around Ireland (about <strong>+29 heatwave days per decade</strong> per station, 2005–25; suggestive), but across a 15-test battery we found <strong>no detectable effect</strong> on the plankton community or on toxic blooms beyond what season and site already explain. <a href="#/heatwaves">Marine heatwaves →</a></li>
- <li><strong>When you sample matters more than how fast the lab is.</strong> Counts become public a median 3.6 days after sampling. Knowing the current week’s counts is the biggest information lever, but even zero lab delay would lift skill only from 0.312 to 0.324: the missing information is mainly in samples taken late in the week. <a href="#/sampling">Sampling &amp; turnaround →</a></li>
+ <li><strong>The day of sampling matters more than turnaround time.</strong> Counts become public a median 3.6 days after sampling. Knowing the current week’s counts is the biggest information lever, but even zero lab delay would lift skill only from 0.312 to 0.324: the missing information is mainly in samples taken late in the week. <a href="#/sampling">Sampling &amp; turnaround →</a></li>
  <li><strong>The method travels.</strong> The same recipe, retrained on France’s much larger REPHY record, beats the French seasonal norm by 0.10–0.13 PR-AUC in two separate periods. <a href="#/france">France transfer →</a></li>
  <li><strong>Other toxins:</strong> an amnesic (ASP) toxin forecast for king scallops looks promising in Ireland (0.748 vs 0.443 for persistence) but did not replicate in France. <a href="#/toxins">Other toxins & species →</a></li>
 </ul>
@@ -79,9 +79,9 @@ PAGES.push({id:'overview', group:'Start here', icon:'🌊', title:'Overview',
 <h2>Where to go next</h2>
 <div class="two">
  <div class="callout"><span class="t">Curious non-specialist</span><p><a href="#/how-it-works">How it works</a> · <a href="#/heatwaves">Heatwaves</a> · <a href="#/glossary">Glossary</a></p></div>
- <div class="callout"><span class="t">Scientist or reviewer</span><p><a href="#/results">Scorecard</a> · <a href="#/test-log">All 122 tests</a> · <a href="#/limitations">Caveats</a></p></div>
+ <div class="callout"><span class="t">Scientist or reviewer</span><p><a href="#/results">Scorecard</a> · <a href="#/test-log">All 125 tests</a> · <a href="#/limitations">Caveats</a></p></div>
 </div>
-<p style="font-size:14px;color:var(--muted)">Research prototype by <strong>Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</strong>. Not an official Marine Institute product or advice; shellfish safety is decided by official monitoring.</p>
+<p style="font-size:14px;color:var(--muted)">Research prototype by <strong>Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</strong>. Not an official product or official advice; shellfish safety is decided by official monitoring.</p>
 `});
 PAGES.push({id:'how-it-works', group:'Start here', icon:'⚙️', title:'How the model works',
  keywords:'lightgbm platt features method pipeline erddap lag sunday target rolling origin',
@@ -163,14 +163,14 @@ PAGES.push({id:'results', group:'Findings', icon:'📊', title:'Results & scorec
 <tr><td>Check pool 2016–21 (conservative v2)</td><td class="num">0.517</td><td class="num">0.499 norm</td><td>a tie (95% CI −0.015 to +0.057)</td></tr>
 <tr><td>Brier score (conservative)</td><td class="num">0.0318</td><td class="num">0.0355</td><td>Brier skill +0.11</td></tr>
 </tbody></table></div>
-<blockquote>“Using only the counts MI had actually published by each Sunday, our outlook ranks the coming fortnight’s Dinophysis ≥100 cells/L weeks clearly better than the seasonal norm: PR-AUC 0.31 vs 0.23 nationally for 2022–26, and 0.34 vs 0.20 in the South-West. It does not yet catch more shellfish closures than MI’s own ≥100 cells/L rule.”</blockquote>
+<blockquote>“Using only the counts MI had actually published by each Sunday, our outlook ranks the coming fortnight’s <em>Dinophysis</em> ≥100 cells/L weeks clearly better than the seasonal norm: PR-AUC 0.31 vs 0.23 nationally for 2022–26, and 0.34 vs 0.20 in the South-West. It does not yet catch more shellfish closures than a simple ≥100 cells/L trigger-level rule.”</blockquote>
 
 <h2>The baseline gauntlet</h2>
 <p>A forecast is only as impressive as the baselines it beats. All on the 2022–26 pool, conservative setting:</p>
 <div class="tbl"><table>
 <thead><tr><th>Forecast</th><th class="num">PR-AUC</th><th>Comment</th></tr></thead>
 <tbody>
-<tr><td>MI-style threshold rules</td><td class="num">0.08–0.12</td><td>Ranked MI rule 0.182</td></tr>
+<tr><td>Simple threshold rules</td><td class="num">0.08–0.12</td><td>Ranked trigger-level rule 0.182</td></tr>
 <tr><td>Week-of-year climatology</td><td class="num">0.124</td><td>Same probability for every station in a given week</td></tr>
 <tr><td>“Same as last observed”</td><td class="num">0.144</td><td>Persistence of the last count</td></tr>
 <tr><td>Station × week seasonal norm</td><td class="num">0.231</td><td>The main comparator</td></tr>
@@ -224,13 +224,13 @@ PAGES.push({id:'results', group:'Findings', icon:'📊', title:'Results & scorec
 <div class="tbl"><table>
 <thead><tr><th>Warning rule</th><th class="num">Closures warned</th><th class="num">False-alarm runs</th></tr></thead>
 <tbody>
-<tr><td>MI rule: ≥100 cells/L at the site last week</td><td class="num">46 / 62</td><td class="num">130</td></tr>
-<tr><td>MI rule on published-by-Sunday counts</td><td class="num"><strong>50 / 62</strong></td><td class="num">124</td></tr>
+<tr><td>Trigger-level rule: ≥100 cells/L at the site last week</td><td class="num">46 / 62</td><td class="num">130</td></tr>
+<tr><td>Trigger-level rule on published-by-Sunday counts</td><td class="num"><strong>50 / 62</strong></td><td class="num">124</td></tr>
 <tr><td>Frozen v2, rolling threshold</td><td class="num">42 / 62</td><td class="num">47</td></tr>
 <tr><td>Operational model, rolling threshold</td><td class="num">41 / 62</td><td class="num"><strong>41</strong></td></tr>
 </tbody></table></div>
-<p>An earlier claim that v2 “warned 61 of 62 closures” was withdrawn: random warnings issued at the same alarm volume per area and month catch 58.8 of 62 on average. The model’s real advantage is far fewer false-alarm runs, much of it from staying almost silent in quiet years (0–2 alarms in 2021 and 2023–25, when the MI rule raised 13–48).</p>
-<figure><img src="assets/img/closure_null.png" alt="Closure null distribution: random warnings with the same alarm budget"><figcaption>The closure null: how many of the 62 South-West DSP closures random warning sets catch with the same alarm budget as v2 (blue) or the MI rule (orange). Dashed lines = actual.</figcaption></figure>
+<p>An earlier claim that v2 “warned 61 of 62 closures” was withdrawn: random warnings issued at the same alarm volume per area and month catch 58.8 of 62 on average. The model’s real advantage is far fewer false-alarm runs, much of it from staying almost silent in quiet years (0–2 alarms in 2021 and 2023–25, when the trigger-level rule raised 13–48).</p>
+<figure><img src="assets/img/closure_null.png" alt="Closure null distribution: random warnings with the same alarm budget"><figcaption>The closure null: how many of the 62 South-West DSP closures random warning sets catch with the same alarm budget as v2 (blue) or the trigger-level rule (orange; labelled “MI rule” in the figure). Dashed lines = actual.</figcaption></figure>
 
 <h2>Genuine prospective record</h2>
 <ul>
@@ -300,8 +300,8 @@ PAGES.push({id:'heatwaves', group:'Findings', icon:'🌡️', title:'Marine heat
 <p style="font-size:13.5px;color:var(--muted)">No detectable effect over 2003–2026 is not proof that heatwaves can never matter; it means any effect is too small to see against season and site in this record. The analyses use licensed monitoring data, so only national and regional aggregates are shown; the chart above is redrawn from the published summary table.</p>
 `});
 PAGES.push({id:'toxins', group:'Findings', icon:'🦪', title:'Other toxins & species',
- keywords:'asp psp azp scallop pseudo-nitzschia alexandrium azadinium karenia mikimotoi acuta acuminata toxin harvest risk hidden bloom oyster mussel',
- lede:'Beyond the <em>Dinophysis</em> cell forecast: forecasting shellfish toxins directly, the amnesic, paralytic and azaspiracid toxins, the two main <em>Dinophysis</em> species, and the fish-killing alga <em>Karenia mikimotoi</em>.',
+ keywords:'asp psp azp scallop pseudo-nitzschia alexandrium azadinium karenia mikimotoi acuta acuminata mesodinium rubrum ciliate prey toxin harvest risk hidden bloom oyster mussel',
+ lede:'Beyond the <em>Dinophysis</em> cell forecast: forecasting shellfish toxins directly, the amnesic, paralytic and azaspiracid toxins, the two main <em>Dinophysis</em> species, the fish-killing alga <em>Karenia mikimotoi</em>, and <em>Mesodinium rubrum</em>, the ciliate <em>Dinophysis</em> feeds on.',
  html:`
 <h2>At a glance</h2>
 <div class="tbl"><table>
@@ -315,6 +315,7 @@ PAGES.push({id:'toxins', group:'Findings', icon:'🦪', title:'Other toxins & sp
 <tr><td><strong>PSP</strong> and <strong>AZP</strong></td><td>25 and 44 positives in 2016–26; persistence as good or better</td><td><span class="badge b-null">No lift</span></td></tr>
 <tr><td>Other taxa with the v2 recipe</td><td><em>Pseudo-nitzschia</em> 0.104 vs 0.089; <em>Alexandrium</em> 0.249 vs 0.267; <em>Azadinium</em> proxy 0.046 vs 0.079</td><td><span class="badge b-null">No lift</span></td></tr>
 <tr><td><em>Karenia mikimotoi</em> ≥10,000 cells/L</td><td>0.048 vs norm 0.022 vs persistence 0.110</td><td><span class="badge b-null">No lift</span></td></tr>
+<tr><td><em>Mesodinium rubrum</em> counts added to the <em>Dinophysis</em> forecast</td><td>0.318 vs 0.312 (2022–26): a small gain that does not pass the pre-registered 95% rule</td><td><span class="badge b-null">No lift</span></td></tr>
 </tbody></table></div>
 
 <h2>ASP: a scallop forecast worth building (in Ireland)</h2>
@@ -330,7 +331,7 @@ PAGES.push({id:'toxins', group:'Findings', icon:'🦪', title:'Other toxins & sp
 <ul>
  <li><strong>Toxin features do not help the cell forecast</strong> (−0.004 in 2022–26; tests #27 and #63).</li>
  <li><strong>Toxin as the target:</strong> in 2016–21 a toxin + counts model scores 0.650 vs 0.516 for persistence and 0.229 for the norm (≥ limit). In 2022–26 only 33 site-weeks went over the limit nationally, so limit-level skill cannot be assessed; at ≥50% of the limit the model beats persistence (0.255 vs 0.197, CI +0.011 to +0.131).</li>
- <li><strong>Harvest-risk (toxic-state) product:</strong> PR-AUC 0.50 vs 0.29 for counts alone (2019–26), and 52–56 false-alarm runs vs 130 for the MI cell rule, but no more closures caught than a counts-only model.</li>
+ <li><strong>Harvest-risk (toxic-state) product:</strong> PR-AUC 0.50 vs 0.29 for counts alone (2019–26), and 52–56 false-alarm runs vs 130 for the cell-count trigger rule, but no more closures caught than a counts-only model.</li>
  <li><strong>Species matter:</strong> when mussels are over the DSP limit, paired oysters in the same area are over it only 5 of 159 times (3%) in Ireland; in France the figure is 15.3%. A single “area” warning would over-warn oyster growers, so any product must be species-aware.</li>
  <li><strong>Lead time:</strong> nationally, DSP toxin onset follows a bloom by a median <strong>3 weeks</strong> (IQR 1–7; 244 area-seasons); in the South-West it is a median 2 weeks from bloom to closure. In France the median lead is 4 weeks. Cell counts and toxin trends give similar warning.</li>
  <li><strong>Not worth building:</strong> a time-to-reopen forecast (error 50.2 vs 50.4 days for a simple median) and an early-season severity outlook (a bay’s own history already gives Spearman 0.52).</li>
@@ -342,14 +343,14 @@ PAGES.push({id:'toxins', group:'Findings', icon:'🦪', title:'Other toxins & sp
 <h2>PSP and AZP</h2>
 <p>Paralytic (PSP, from <em>Alexandrium</em>) and azaspiracid (AZP, linked to <em>Azadinium</em>) toxins are rare in recent Irish records: 25 and 44 positives in 2016–26. Plain persistence is as good or better. In France, a PSP model with <em>Alexandrium</em> counts also failed against persistence.</p>
 
-<h2>The two Dinophysis species</h2>
+<h2>The two <em>Dinophysis</em> species</h2>
 <ul>
  <li><strong><em>D. acuta</em></strong>, the late-summer, long-closure species, has the largest relative skill: PR-AUC 0.101 vs 0.054 for the norm (2022–26), Brier skill +0.29; flagging the top 5% of station-weeks catches 58% of <em>acuta</em> events. But it is rare and declining (MI <em>acuta</em> records fell from 300 in 2019 to 17 in 2024).</li>
  <li><strong><em>D. acuminata</em></strong> is the most common species and essentially ties the seasonal norm: its timing is mostly seasonal and site-driven.</li>
  <li>The forecast’s gain is concentrated in <strong>mixed-species blooms</strong> (+0.074 [+0.010, +0.125] in 2022–26). The <em>acuta</em> decline does not explain the weaker years 2024 and 2026.</li>
 </ul>
 
-<h2>Karenia mikimotoi</h2>
+<h2><em>Karenia mikimotoi</em></h2>
 <p><em>Karenia mikimotoi</em> causes discoloured water and kills of fish and shellfish rather than a human-health toxin. The MI record holds 3,524 records and 451 station-weeks at ≥10,000 cells/L (May–September, peaking July–August), clustered in a few years and mostly in the South-West, West and North-West.</p>
 <ul>
  <li>The v2 recipe retrained for ≥10,000 cells/L in weeks +1/+2 (2016–26, 183 positives) scored <strong>0.048</strong> vs 0.022 for the norm (year-block CI for the gain −0.001 to +0.093, so it fails the rule) and lost to plain persistence (<strong>0.110</strong>).</li>
@@ -357,6 +358,15 @@ PAGES.push({id:'toxins', group:'Findings', icon:'🦪', title:'Other toxins & sp
  <li>Presence forecasting and per-region results showed no reliable lift; persistence was best in every region.</li>
 </ul>
 <div class="callout warn"><p><strong>Bottom line:</strong> don’t build a <em>Karenia</em> forecast on this recipe. Last week’s count is the better guide.</p></div>
+
+<h2><em>Mesodinium rubrum</em>: the prey</h2>
+<p><em>Dinophysis</em> feeds on the ciliate <em>Mesodinium rubrum</em>, so rising <em>Mesodinium</em> counts are a natural candidate for an early signal. Three pre-registered tests (#123–125, 9 Oct 2026) added MI’s <em>Mesodinium</em> counts from the previous two weeks, using only counts published by the Sunday issue, to the operational forecast:</p>
+<ul>
+ <li><strong>Presence only:</strong> 0.314 vs 0.312 (2022–26; gain +0.001, 95% CI −0.004 to +0.007). No lift.</li>
+ <li><strong>Presence plus abundance:</strong> 0.318 vs 0.312 (gain +0.0055). The 90% interval is just above zero (+0.0006 to +0.009), but the 95% interval is not (−0.0003 to +0.010), so it fails the pre-registered rule. On 2016–26 the gain is +0.003 (95% CI −0.002 to +0.009). A small, exploratory signal at most.</li>
+ <li><strong>Do <em>Mesodinium</em> rises come before blooms?</strong> In 28,503 non-blooming station-weeks, a bloom followed 4.7% of the time when <em>Mesodinium</em> had been recorded in the previous two weeks, against 4.1% without (odds ratio 1.16, 95% CI 0.87 to 1.57). Regional lead–lag correlations were all between −0.05 and 0.00. No clear association.</li>
+</ul>
+<div class="callout"><p><strong>Bottom line:</strong> with weekly counts as they are recorded now, <em>Mesodinium</em> adds very little to the forecast. Whether more frequent or more targeted <em>Mesodinium</em> data (for example eDNA) would help remains an open question.</p></div>
 `});
 PAGES.push({id:'france', group:'Findings', icon:'🌍', title:'France transfer',
  keywords:'rephy rephytox ifremer france replication transfer pooling',
@@ -457,7 +467,15 @@ PAGES.push({id:'data', group:'Reference', icon:'🗂️', title:'Data sources',
  <li><strong>Production-area status</strong> (<code>habs_status</code>): open/closed status and reasons, used for the closure backtests.</li>
  <li><strong>MI coastal temperature loggers and buoys:</strong> in-situ temperature (and buoy chemistry) for the heatwave audit.</li>
 </ul>
-<p>The Marine Institute publishes these openly on its ERDDAP server (<a href="https://erddap.marine.ie/" rel="noopener">erddap.marine.ie</a>). The biotoxin metadata states free use, not for legal use.</p>
+<p>These data come from the Marine Institute’s national monitoring programme for phytoplankton and marine biotoxins, whose results MI publishes to the competent authorities (the Food Safety Authority of Ireland and the Sea-Fisheries Protection Authority), to industry and openly. We are grateful to the MI teams who sample, count and publish them every week.</p>
+<div class="tbl"><table>
+<thead><tr><th>Dataset (Marine Institute)</th><th>Access</th><th>Licence / terms</th></tr></thead>
+<tbody>
+<tr><td>Phytoplankton counts (<code>habs_phyto</code>)</td><td><a href="https://erddap3.marine.ie/erddap/tabledap/habs_phyto.html" rel="noopener">MI ERDDAP</a>; <a href="https://data.gov.ie/dataset/national-monitoring-programme-for-phytoplankton-species-occurrence-in-aquaculture-production-areas" rel="noopener">data.gov.ie record</a></td><td><a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a> (data.gov.ie); ERDDAP terms: free to use and redistribute, not intended for legal use</td></tr>
+<tr><td>Shellfish biotoxins (<code>habs_biotoxin</code>)</td><td><a href="https://erddap3.marine.ie/erddap/tabledap/habs_biotoxin.html" rel="noopener">MI ERDDAP</a></td><td>ERDDAP terms: free to use and redistribute, not intended for legal use</td></tr>
+<tr><td>Production-area status (<code>habs_status</code>)</td><td><a href="https://erddap3.marine.ie/erddap/tabledap/habs_status.html" rel="noopener">MI ERDDAP</a></td><td>ERDDAP terms: free to use and redistribute, not intended for legal use</td></tr>
+</tbody></table></div>
+<p style="font-size:14px;color:var(--muted)">Source: Marine Institute. This site derives forecasts, scores and aggregates from these data; it shows no site-level data beyond what the live map displays. The Marine Institute does not endorse this site, and the data are not intended for legal use. For official HAB information and shellfish status, see the <a href="https://www.marine.ie/" rel="noopener">Marine Institute</a>, the <a href="https://www.sfpa.ie/" rel="noopener">SFPA</a> and the <a href="https://www.fsai.ie/" rel="noopener">FSAI</a>.</p>
 
 <h2>Tested environmental inputs</h2>
 <div class="tbl"><table>
@@ -500,7 +518,7 @@ PAGES.push({id:'limitations', group:'Reference', icon:'⚠️', title:'Limitatio
  <li><strong>The gain is mostly between years.</strong> Year-averaged, the operational score is 0.321 vs 0.269 and the CI includes zero. The model is best at telling busy years from quiet ones; within single years the edge is small, and in 2024 the norm wins.</li>
  <li><strong>The earlier check period is weaker.</strong> In 2019–21 the operational model only just beats the norm (0.548 vs 0.529, CI includes 0); in 2016–21 the conservative model ties.</li>
  <li><strong>A simple model does as well.</strong> A hierarchical ridge logistic is within 0.01 overall and beats v2 within 9 of 11 individual seasons.</li>
- <li><strong>It does not catch more closures</strong> than MI’s free ≥100 cells/L rule. The withdrawn “61 of 62 closures warned” figure is matched by random warnings at the same volume.</li>
+ <li><strong>It does not catch more closures</strong> than a simple ≥100 cells/L trigger-level rule. The withdrawn “61 of 62 closures warned” figure is matched by random warnings at the same volume.</li>
  <li><strong>Regional weakness.</strong> The model is worse than the seasonal norm in the South/South-East and North-West, and flat in Galway/Connemara.</li>
  <li><strong>Narrow margins under strict statistics.</strong> At 95% the region-year interval for the conservative gain touches zero; under the strictest multiple-testing correction the gain does not survive (q 0.60). Power to detect a +0.02 gain in the check pool is about 50%.</li>
  <li><strong>Hindcast, not track record.</strong> All skill numbers are out-of-sample hindcasts. The 2026 pseudo-prospective replay did <em>not</em> beat the norm (0.446 vs 0.473). Genuine scoring starts 25 Oct 2026; 2027 is the confirmatory season.</li>
@@ -523,7 +541,7 @@ PAGES.push({id:'limitations', group:'Reference', icon:'⚠️', title:'Limitatio
 </tbody></table></div>
 
 <h2>Use</h2>
-<div class="callout warn"><p>This is a research prototype. It is <strong>not</strong> an official Marine Institute product, not advice, and not a safety guarantee. Decisions on shellfish harvesting and safety are made by official monitoring and the competent authorities.</p></div>
+<div class="callout warn"><p>This is a research prototype. It is <strong>not</strong> an official product, not official advice, and not a safety guarantee. Decisions on shellfish harvesting and safety are made by official monitoring and the competent authorities.</p></div>
 `});
 PAGES.push({id:'roadmap', group:'Reference', icon:'🧭', title:'Roadmap & ideas',
  keywords:'roadmap future ideas 2027 preregistration scoreboard citizen science sensor network backlog',
@@ -548,12 +566,13 @@ PAGES.push({id:'roadmap', group:'Reference', icon:'🧭', title:'Roadmap & ideas
 <tr><td>Real-time MI coastal loggers</td><td>Fixes the satellite’s in-bay heatwave blind spot (about +80%); not forecast skill</td><td><span class="badge b-desc">Idea</span></td></tr>
 <tr><td>Automated plankton imaging at key bays</td><td>Hypothesis: more frequent counts improve the forecast</td><td><span class="badge b-desc">Idea</span></td></tr>
 <tr><td>Thermistor chains for stratification</td><td>Hypothesis: water-column layering adds skill</td><td><span class="badge b-desc">Idea</span></td></tr>
-<tr><td><em>Mesodinium</em> prey counts and eDNA</td><td>Hypothesis: an earlier signal than <em>Dinophysis</em> counts</td><td><span class="badge b-desc">Idea</span></td></tr>
+<tr><td><em>Mesodinium</em> prey counts</td><td>Weekly counts tested (#123–125): a small gain that fails the 95% rule; no lead association</td><td><span class="badge b-null">Tested: no lift</span></td></tr>
+<tr><td><em>Mesodinium</em> eDNA or higher-frequency counts</td><td>Hypothesis: a finer prey signal than weekly counts</td><td><span class="badge b-desc">Idea</span></td></tr>
 <tr><td>HF radar plus MI’s 1 km current model</td><td>Hypothesis: track blooms moving along the coast</td><td><span class="badge b-desc">Idea</span></td></tr>
 <tr><td>Species × toxin multi-state model</td><td>Closure warnings using toxin dynamics, not just a cell threshold</td><td><span class="badge b-desc">Idea</span></td></tr>
 <tr><td>Scottish and UK transfer or pooling</td><td>More data for the North-West, where the model is weakest</td><td><span class="badge b-desc">Idea</span></td></tr>
 <tr><td>Congener-level DSP data (OA vs DTX2)</td><td>Possible regime marker; not public yet</td><td><span class="badge b-desc">Idea</span></td></tr>
-<tr><td>MI weekly HAB bulletin as a benchmark</td><td>A like-for-like comparison with the expert forecast growers already read</td><td><span class="badge b-desc">Idea</span></td></tr>
+<tr><td>Complementing the weekly HAB bulletin</td><td>Only if useful to MI: a possible extra view alongside the expert bulletin that growers rely on, not a replacement</td><td><span class="badge b-desc">Idea</span></td></tr>
 <tr><td>Open near-real-time data feed</td><td>Reuse, transparency, schools</td><td><span class="badge b-desc">Idea</span></td></tr>
 <tr><td>Citizen science “what did you find?” app</td><td>Public engagement, biodiversity records, discolouration reports</td><td><span class="badge b-desc">Idea</span></td></tr>
 <tr><td>ATU final-year projects; schools version</td><td>Low-cost pilot builds; education</td><td><span class="badge b-desc">Idea</span></td></tr>
@@ -565,12 +584,14 @@ PAGES.push({id:'glossary', group:'Reference', icon:'📖', title:'Glossary',
  lede:'Short definitions of the terms used across this wiki.',
  html:`
 <div class="tbl"><table><tbody>
-<tr><td><strong>Dinophysis</strong></td><td>A genus of marine dinoflagellates (mainly <em>D. acuminata</em> and <em>D. acuta</em> in Ireland) that produce okadaic-acid-group toxins.</td></tr>
-<tr><td><strong>DSP</strong></td><td>Diarrhetic shellfish poisoning: illness from shellfish containing okadaic acid (OA), dinophysistoxins (DTX) and related toxins. Regulatory limit 160 µg OA equivalents per kg.</td></tr>
+<tr><td><strong><em>Dinophysis</em></strong></td><td>A genus of marine dinoflagellates (mainly <em>D. acuminata</em> and <em>D. acuta</em> in Ireland) that produce okadaic-acid-group toxins.</td></tr>
+<tr><td><strong>DSP</strong></td><td>Diarrhetic shellfish poisoning: illness from shellfish containing okadaic acid (OA), dinophysistoxins (DTX) and related toxins. Regulatory limit 160 µg OA equivalents per kg of shellfish flesh.</td></tr>
+<tr><td><strong>Trigger level</strong></td><td>A phytoplankton cell density at which the monitoring programme flags a possible toxin risk (for <em>Dinophysis</em>, 100 cells/L). It is not a closure criterion: harvesting closures follow shellfish toxin results above the regulatory limit.</td></tr>
 <tr><td><strong>ASP</strong></td><td>Amnesic shellfish poisoning, from domoic acid produced by the diatom <em>Pseudo-nitzschia</em>; in Ireland mainly affects king scallops (limit 20 mg/kg).</td></tr>
 <tr><td><strong>PSP</strong></td><td>Paralytic shellfish poisoning, from saxitoxins produced by <em>Alexandrium</em> (limit 800 µg/kg).</td></tr>
 <tr><td><strong>AZP</strong></td><td>Azaspiracid shellfish poisoning, linked to <em>Azadinium</em>.</td></tr>
-<tr><td><strong>Karenia mikimotoi</strong></td><td>A dinoflagellate that forms dense blooms causing discoloured water and kills of fish and shellfish.</td></tr>
+<tr><td><strong><em>Mesodinium rubrum</em></strong></td><td>A red-tide ciliate that <em>Dinophysis</em> feeds on (and takes chloroplasts from); a natural candidate for an early signal.</td></tr>
+<tr><td><strong><em>Karenia mikimotoi</em></strong></td><td>A dinoflagellate that forms dense blooms causing discoloured water and kills of fish and shellfish.</td></tr>
 <tr><td><strong>HAB</strong></td><td>Harmful algal bloom.</td></tr>
 <tr><td><strong>MI</strong></td><td>The Marine Institute, Ireland’s state agency for marine research, which runs national phytoplankton and biotoxin monitoring.</td></tr>
 <tr><td><strong>ERDDAP</strong></td><td>An open data server; MI publishes its HAB monitoring data through one.</td></tr>
@@ -607,12 +628,12 @@ PAGES.push({id:'about', group:'Reference', icon:'👤', title:'About & credits',
 <p><strong>Garry Lohan</strong> (ATU Galway) designed and leads PA-Marine-Model, built together with <strong>Felix Sproll</strong> (Marine Institute), a test-everything, report-everything approach to forecasting harmful algal blooms in Irish shellfish waters.</p>
 
 <h2>Status</h2>
-<p>This wiki and the <a href="../map/">interactive map</a> are demonstration material. They are a research prototype: <strong>not an official Marine Institute product or advice</strong>, and not a safety guarantee.</p>
+<p>This wiki and the <a href="../map/">interactive map</a> are demonstration material. They are a research prototype: <strong>not an official product or official advice</strong>, and not a safety guarantee.</p>
 
 <h2>Approach</h2>
 <ul>
  <li><strong>Pre-register, then test.</strong> Decision rules are committed before results are seen.</li>
- <li><strong>Report every test.</strong> All 122 logged tests are in the <a href="#/test-log">test log</a>, and half of them are nulls.</li>
+ <li><strong>Report every test.</strong> All 125 logged tests are in the <a href="#/test-log">test log</a>, and half of them are nulls.</li>
  <li><strong>Benchmark against standard baselines.</strong> Seasonal norms, persistence and simple logistic models.</li>
  <li><strong>Lock forecasts before outcomes.</strong> Every issued forecast goes into a tamper-evident log.</li>
 </ul>

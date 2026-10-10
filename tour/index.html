@@ -29,7 +29,7 @@
     <p class="who">Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</p>
     <p class="hint">Use <kbd>←</kbd> <kbd>→</kbd> or swipe · <kbd>N</kbd> speaker notes · <kbd>O</kbd> all steps · <kbd>F</kbd> full screen</p>
   </div>
-  <aside class="notes"><p><b>Garry:</b> Welcome. Who we are, and that this is a research prototype. Everything you’ll see is live on the web.</p><p><b>Felix:</b> The foundation is the Marine Institute’s weekly monitoring programme and its open data. Worth saying up front: this is a research demo, not an official Marine Institute product.</p></aside>
+  <aside class="notes"><p><b>Garry:</b> Welcome. Who we are, and that this is a research prototype. Everything you’ll see is live on the web.</p><p><b>Felix:</b> The foundation is the Marine Institute’s weekly monitoring programme and its open data. Worth saying up front: this is a research demo, not an official product.</p></aside>
 </section>
 
 <section class="step" data-title="The problem">
@@ -37,9 +37,9 @@
     <p class="kick"><i lang="ga">An fhadhb</i> · The problem</p>
     <h2>Toxic plankton can close shellfish farms at short notice</h2>
     <ul class="pts">
-      <li><em>Dinophysis</em> is a microscopic alga. Mussels and other shellfish filter it from the water and build up its toxins, which cause <b>diarrhetic shellfish poisoning (DSP)</b>.</li>
-      <li>To protect consumers, harvesting areas are <b>closed</b> when toxins exceed the legal limit. For growers, closures are costly and often come with little warning.</li>
-      <li>A count of <b>100 cells per litre</b> is the level the Marine Institute treats as a trigger.</li>
+      <li><em>Dinophysis</em> is a microscopic dinoflagellate (a plankton alga). Mussels and other shellfish filter it from the water and build up its toxins, which cause <b>diarrhetic shellfish poisoning (DSP)</b>.</li>
+      <li>To protect consumers, harvesting areas are <b>closed</b> when toxins in shellfish flesh exceed the regulatory limit. For growers, closures are costly and often come with little warning.</li>
+      <li>A count of <b>100 cells/L</b> of <em>Dinophysis</em> is the trigger level in the national monitoring programme: a flag for possible toxin risk, not a closure.</li>
     </ul>
     <p class="q">Can we say, a week or two ahead, where that level is likely to be reached?</p>
     <p class="more"><a href="../wiki/#/overview" target="_blank" rel="noopener">Overview in the wiki ↗</a></p>
@@ -98,7 +98,7 @@
       <div><b>~0.04</b><span>what random guessing would score</span></div>
     </div>
     <p class="plain"><b>In plain words:</b> the score (PR-AUC, 0 to 1) measures how well the forecast puts the real bloom weeks at the top of its list. The comparison is “what normally happens at this site in this week of the year”. Blooms are rare (about 4% of site-weeks), so both numbers are far above chance. The point is the gap.</p>
-    <p class="caveat"><b>Caveat:</b> for the same number of alarms it does <b>not</b> catch more closures than the Marine Institute’s own simple rule (41 vs 46 of 62 South-West closures), but it raises far fewer false-alarm runs (41 vs 124–130). It is a surveillance aid, not a safety system.</p>
+    <p class="caveat"><b>Caveat:</b> for the same number of alarms it does <b>not</b> catch more closures than a simple trigger-level rule, ≥100 cells/L at the site last week (41 vs 46 of 62 South-West closures), but it raises far fewer false-alarm runs (41 vs 124–130). It is a surveillance aid, not a safety system.</p>
     <p class="more"><a href="../wiki/#/results" target="_blank" rel="noopener">Full scorecard ↗</a></p>
   </div>
   <aside class="notes"><p><b>Garry:</b> Explain the score once, simply, then move on: “top of the list” and “compared with the normal pattern”. Say the caveat out loud; it builds trust.</p><p><b>Felix:</b> Optional: why fewer false alarms matters for a monitoring programme.</p></aside>
@@ -107,13 +107,13 @@
 <section class="step" data-title="The test log">
   <div class="inner">
     <p class="kick"><i lang="ga">Tástálacha</i> · The test log</p>
-    <h2>122 tests run, 62 null results reported</h2>
+    <h2>125 tests run, 65 null results reported</h2>
     <ul class="pts">
       <li>Every experiment is pre-registered where possible and logged with its verdict; all results are reported, including null results.</li>
       <li><b>Recent counts are the forecast.</b> What was in the water at and near a site in recent weeks carries almost all the skill; a simple logistic model gets within about 0.01.</li>
       <li><b>Environmental extras did not help:</b> sea temperature, heatwaves, wind, chlorophyll, currents and rivers added nothing once recent counts were known.</li>
     </ul>
-    <div class="btns"><a class="b" href="../wiki/#/test-log" target="_blank" rel="noopener">All 122 tests ↗</a><a class="b ghost" href="../wiki/#/test-log?cat=null" target="_blank" rel="noopener">The 62 null results ↗</a></div>
+    <div class="btns"><a class="b" href="../wiki/#/test-log" target="_blank" rel="noopener">All 125 tests ↗</a><a class="b ghost" href="../wiki/#/test-log?cat=null" target="_blank" rel="noopener">The 65 null results ↗</a></div>
   </div>
   <aside class="notes"><p><b>Garry:</b> Reporting null results is standard good practice: they show which claims the evidence does not support. Invite people to browse them on their phones.</p><p><b>Felix:</b> Optional: why negative results are useful for monitoring agencies too.</p></aside>
 </section>
@@ -163,6 +163,7 @@
       <li><b>Amnesic toxin (ASP) in king scallops:</b> a toxin-history forecast scored 0.748 vs 0.443 for “same as last time” in Ireland. Promising, but it did not replicate in France.</li>
       <li><b>“Hidden bloom” flag:</b> a toxin rise with no preceding high count. Flagged sites had a 23% chance of a ≥100 count within 21 days vs 5.1% otherwise, and it replicates in France.</li>
       <li><b>Paralytic (PSP), azaspiracid (AZP) toxins and <em>Karenia mikimotoi</em>:</b> no gain over simple baselines.</li>
+      <li><b><em>Mesodinium rubrum</em>, the ciliate <em>Dinophysis</em> feeds on:</b> adding its counts gave only a small gain (0.318 vs 0.312) that does not pass the pre-registered 95% rule, and its rises did not clearly come before blooms.</li>
     </ul>
     <p class="more"><a href="../wiki/#/toxins" target="_blank" rel="noopener">Other toxins page ↗</a></p>
   </div>
@@ -172,7 +173,7 @@
 <section class="step" data-title="Sampling & turnaround">
   <div class="inner">
     <p class="kick"><i lang="ga">Samplaí</i> · Sampling &amp; turnaround</p>
-    <h2>When you sample matters more than how fast the lab is</h2>
+    <h2>The day of sampling matters more than turnaround time</h2>
     <div class="cols">
       <div>
         <p class="small">Share of samples public before the Sunday forecast</p>
@@ -217,7 +218,8 @@
     <p class="who">Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute)</p>
     <p class="url">sliothar1.github.io/PA-Marine-Demo</p>
     <div class="btns center"><a class="b" href="../map/">Open the live map</a><a class="b ghost" href="../wiki/">Explore the wiki</a></div>
-    <p class="small dim">Built on the Marine Institute’s national phytoplankton and biotoxin monitoring and its open ERDDAP service, with E.U. Copernicus Marine Service information and Ifremer REPHY data. Research prototype; not an official Marine Institute product or advice. <i lang="ga">Déanta i nGaillimh</i> · Made in Galway.</p>
+    <p class="small dim">Built on the Marine Institute’s national phytoplankton and biotoxin monitoring and its open ERDDAP service, with E.U. Copernicus Marine Service information and Ifremer REPHY data. Research prototype; not an official product or official advice. <i lang="ga">Déanta i nGaillimh</i> · Made in Galway.</p>
+    <p class="small dim pa-credit">Designed and built by Garry Lohan (ATU Galway) · <a href="https://scholar.google.com/citations?user=9aBECzQAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a> · <a href="https://www.linkedin.com/in/garry-lohan-14923814" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://sliothar1.github.io/pa-realt/family.html"><i lang="ga">Teaghlach PA</i> · The PA family</a></p>
   </div>
   <aside class="notes"><p><b>Garry &amp; Felix:</b> Thank the Marine Institute monitoring teams. Invite questions and point people to the site on their phones.</p></aside>
 </section>
@@ -234,7 +236,7 @@
 </footer>
 <div id="notesPanel" class="notespanel" hidden><div class="np-in"></div><p class="np-t">Elapsed <b id="timer">0:00</b> · <button id="timerReset" type="button">reset</button> · <button id="presWin" type="button">open presenter window</button> <span class="np-tip">(keeps in step with this one, so the projector can show slides only)</span></p></div>
 <div id="overview" class="overview" hidden role="dialog" aria-label="All steps"><div class="ov-in"><p class="ov-h">All steps · press a number or click</p><ol id="ovList"></ol></div></div>
-<div class="disclaimer" role="note">Demo purposes only. Research prototype by Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute). Not an official Marine Institute product.</div>
+<div class="disclaimer" role="note">Demo purposes only. Research prototype by Garry Lohan (ATU Galway) and Felix Sproll (Marine Institute). Not an official product.</div>
 <script src="tour.js"></script>
 </body>
 </html>

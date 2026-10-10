@@ -110,3 +110,5 @@ h2.sm{font-size:clamp(24px,2.6vw,34px)}
 .ov-in a{color:var(--ink);text-decoration:none}.ov-in a:hover,.ov-in a.cur{color:var(--glass);text-decoration:underline}
 @media (max-width:600px){.ov-in ol{columns:1}}
 .np-tip{opacity:.7}
+.pa-credit{font-size:12.5px;margin-top:6px}.pa-credit a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.dim.pa-credit{margin-top:8px}

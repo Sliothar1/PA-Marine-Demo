@@ -238,3 +238,69 @@ html.js .cards.reveal.settled .card{transition:transform .18s ease,box-shadow .1
 html.js .reveal.settled{opacity:1;transform:none;transition:none}
 html.js .cards.reveal.settled .card{opacity:1}
 html.js .cards.reveal.settled .card:not(:hover){transform:none}
+
+/* ---- Features · Gnéithe menu (matches PA Réalt, marine palette) ---- */
+.feat{position:relative}
+.featbtn{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(180deg,rgba(15,124,128,.45),rgba(6,31,51,.55));border:1px solid rgba(143,224,214,.45);border-radius:999px;color:#eef6f8;cursor:pointer;font:inherit;font-weight:600;font-size:15px;padding:6px 13px;margin-right:4px;touch-action:manipulation}
+.featbtn .fb-ga{font-family:var(--serif);color:var(--glass);font-size:.92em;font-weight:400}
+.featbtn .spark{color:var(--glass);display:inline-block;transition:transform .5s}
+.featbtn:hover .spark,.featbtn[aria-expanded="true"] .spark{transform:rotate(72deg) scale(1.15)}
+.featbtn:focus-visible,.iconbtn:focus-visible,.toplink:focus-visible,.brandlink:focus-visible{outline:3px solid #ffd479;outline-offset:2px}
+.featmenu{position:fixed;z-index:1400;width:min(370px,92vw);max-height:min(78vh,660px);overflow:auto;-webkit-overflow-scrolling:touch;background:linear-gradient(180deg,#0a2c44,#061f33);border:1px solid rgba(143,224,214,.38);border-radius:16px;padding:8px;box-shadow:0 18px 50px rgba(0,0,0,.45);animation:fm-in .22s ease-out}
+.featmenu[hidden]{display:none}
+@keyframes fm-in{from{opacity:0;transform:translateY(-6px) scale(.97)}to{opacity:1;transform:none}}
+.featmenu a{display:flex;gap:12px;align-items:flex-start;padding:9px 10px;border-radius:12px;color:#eef6f8;text-decoration:none}
+.featmenu a:hover,.featmenu a:focus-visible{background:rgba(143,224,214,.12);outline:none}
+.featmenu a:hover svg{transform:rotate(-8deg) scale(1.08)}
+.featmenu svg{flex:0 0 30px;width:30px;height:30px;padding:5px;border-radius:10px;background:rgba(143,224,214,.1);border:1px solid rgba(143,224,214,.3);fill:none;stroke:var(--glass);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s;color:var(--glass)}
+.featmenu b{display:block;font-weight:600;font-size:14.5px}
+.featmenu i{display:block;font-family:var(--serif);color:var(--glass);font-size:13px}
+.featmenu small{display:block;color:#9fb9c6;font-size:12px;margin-top:1px}
+.featmenu a[data-act="egg"]{background:radial-gradient(120% 140% at 0% 50%,rgba(143,224,214,.16),transparent 60%)}
+.fm-foot{margin:6px 10px 4px;font-size:11.5px;color:#9fb9c6}
+.fm-foot kbd{font:11px var(--sans);border:1px solid rgba(143,224,214,.4);border-radius:4px;padding:0 4px}
+[data-theme="light"] .featmenu{background:#fbfefe;border-color:#9cd3cc}
+[data-theme="light"] .featmenu a{color:#0d2633}[data-theme="light"] .featmenu i,[data-theme="light"] .featmenu svg{color:#0f7c80;stroke:#0f7c80}
+[data-theme="light"] .featmenu small,[data-theme="light"] .fm-foot{color:#5d7785}
+[data-theme="light"] .featmenu svg{background:rgba(15,124,128,.07);border-color:rgba(15,124,128,.25)}
+[data-theme="light"] .featmenu a:hover,[data-theme="light"] .featmenu a:focus-visible{background:rgba(15,124,128,.08)}
+.brandlink{touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+.brandlink .mark{transition:transform .25s}
+.brandlink.tap1 .mark{transform:rotate(-8deg) scale(1.06)}.brandlink.tap2 .mark{transform:rotate(-16deg) scale(1.12)}
+@media (max-width:600px){
+ .toplink.opt{display:none}
+ .featbtn{padding:6px 11px;font-size:14px}
+ .featmenu{left:4vw;right:4vw;width:auto;max-height:calc(100vh - 120px)}
+ .brand{font-size:14.5px}
+}
+
+/* ---- PA family strip + credit (as on PA Réalt) ---- */
+.pa-family{display:flex;align-items:center;justify-content:center;gap:10px 14px;flex-wrap:wrap;margin:4px auto 0;font:13px var(--sans);color:var(--muted)}
+.pa-family .pa-mark{width:30px;height:30px;color:var(--accent)}
+.pa-family a{display:inline-flex;align-items:center;gap:6px;color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 12px 4px 8px;min-height:32px;transition:border-color .2s}
+.pa-family a:hover{border-color:var(--accent)}
+.pa-family a[aria-current]{border-color:var(--accent);color:var(--accent)}
+.pa-family a svg{width:18px;height:18px;color:var(--accent)}
+.pa-family .pa-hub{border-style:dashed}
+.foot .pa-family i{font-size:13.5px}
+.pa-credit{text-align:center;font:12px/1.5 var(--sans);color:var(--muted);margin:10px 0 14px;opacity:.9}
+.pa-credit a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:2px}
+.pa-credit a:hover{color:var(--accent)}
+.foot{padding-bottom:40px}
+
+/* ---- toast + dolphin's hello ---- */
+.toast{position:fixed;left:50%;bottom:44px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;transition:opacity .4s,transform .4s;background:#061f33;color:#eef6f8;border:1px solid var(--glass);border-radius:14px;padding:10px 16px;z-index:1300;font:14.5px/1.4 var(--sans);max-width:min(560px,92vw);text-align:center;box-shadow:0 12px 34px rgba(0,0,0,.35);cursor:pointer}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.toast i{font-family:var(--serif);color:var(--glass);font-size:15.5px}
+.toast small{display:block;color:#9fb9c6;font-size:12px;margin-top:2px}
+.mapframe{position:relative}
+.egg-layer{position:absolute;inset:0;pointer-events:none;z-index:5;overflow:hidden}
+.egg-layer.live{pointer-events:auto;cursor:pointer}
+.egg-layer svg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
+.egg-layer .dol{fill:#eaf8f6;stroke:#0b4f5c;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.egg-layer .dol .ln{fill:none}
+.egg-layer .rip{fill:none;stroke:#0f7c80;stroke-width:1.6}
+.egg-layer .fish{fill:#f6fbfb;stroke:#0b4f5c;stroke-width:1.2;stroke-linejoin:round}
+.egg-layer .drop{fill:#8fe0d6;stroke:#0b4f5c;stroke-width:.6}
+.egg-layer .pin{fill:none;stroke:#0f7c80;stroke-width:1.2;stroke-dasharray:2 3}
+.egg-layer .lbl{font:italic 600 13px var(--serif);fill:#0b4f5c;paint-order:stroke;stroke:#fff;stroke-width:3px}
