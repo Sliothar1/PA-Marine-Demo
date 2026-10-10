@@ -443,8 +443,8 @@ window.TESTS = [
 {
 "n": 50,
 "date": "2026-10-07",
-"test": "**Red team: baseline gauntlet** (MI rules, ranked MI, LR2/LR3/LOGIT5, L1/L2, hierarchical ridge, REV)",
-"result": "v2 0.290; hier. ridge 0.280 (Δ −0.010 [−0.030, +0.010]; 2016–21 **+0.024 [+0.006, +0.050]**); LR3 0.263 / 0.278 (≤Y−1); L1/L2 0.270; MI rules 0.08–0.12; ranked MI 0.182",
+"test": "**Red team: baseline gauntlet** (trigger-level rules, ranked MI, LR2/LR3/LOGIT5, L1/L2, hierarchical ridge, REV)",
+"result": "v2 0.290; hier. ridge 0.280 (Δ −0.010 [−0.030, +0.010]; 2016–21 **+0.024 [+0.006, +0.050]**); LR3 0.263 / 0.278 (≤Y−1); L1/L2 0.270; trigger-level rules 0.08–0.12; ranked MI 0.182",
 "verdict": "simple models within ~0.01",
 "cat": "chk",
 "theme": "Red team"
@@ -777,8 +777,8 @@ window.TESTS = [
 "n": 87,
 "date": "2026-10-07",
 "test": "Closure backtest with publish dates (rolling MI-budget thresholds)",
-"result": "MI rule 46/62 (130 FA runs); **MI on published-by-Sunday data 50/62** (124; +4, none lost). Frozen v2 42 (47 FA runs); PUB 41 (41 FA runs; seeds 39–43). Models near-silent in 2021, 2023–25",
-"verdict": "MI rule still wins catches; model = fewer false alarms",
+"result": "trigger-level rule 46/62 (130 FA runs); **MI on published-by-Sunday data 50/62** (124; +4, none lost). Frozen v2 42 (47 FA runs); PUB 41 (41 FA runs; seeds 39–43). Models near-silent in 2021, 2023–25",
+"verdict": "trigger-level rule still wins catches; model = fewer false alarms",
 "cat": "chk",
 "theme": "Operational rescore"
 },
