@@ -210,3 +210,7 @@ nav.side a .lbl i{font-size:11.5px;color:var(--muted);font-weight:400}
 .daybars i{font-style:normal;font-weight:650;color:var(--ink)}
 .foot .pa-credit{display:inline-block;margin-top:6px;font-size:12px;opacity:.9}
 .foot .pa-credit a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+
+/* bilingual labels: the " · " separator shows only without CSS */
+.sep{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.gacap{display:block;font-size:.8em;line-height:1.2}

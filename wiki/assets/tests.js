@@ -158,7 +158,7 @@ window.TESTS = [
 "test": "**Five-improvements review** (+ Mesodinium exploratory)",
 "result": "Station × week 0.284 vs STRONG 0.295 (skill 0.015, CI −0.019 to +0.037). OISST: 125/207 stations had no pixel. Mesodinium Δ −0.003 (−0.012 to +0.007)",
 "verdict": "history-only (review); Mesodinium no lift",
-"cat": "desc",
+"cat": "null",
 "theme": "Persistence model & v2"
 },
 {
@@ -257,7 +257,7 @@ window.TESTS = [
 "test": "Marine Heatwave Desk: toxin/closure stage (logistic on v2 p_cons + cells + DSP + status, SW, rolling Y−2/Y−1, 10% rolling budget)",
 "result": "Week-level PR-AUC 0.55 vs best free 0.47 (Δ CI +0.005 to +0.106); onsets 0.24 vs 0.13. Closure episodes 41/62 vs MI ≥100 last week 46/62 (false-alarm runs 23 vs 128). Rolling redo of 45 vs 46 = **42 vs 46** (CI −45 to +7 pp)",
 "verdict": "not adopted as an alarm; useful as a probability only",
-"cat": "null",
+"cat": "chk",
 "theme": "Persistence model & v2"
 },
 {
@@ -644,7 +644,7 @@ window.TESTS = [
 "test": "T5 neighbour toxin ablation (toxin target)",
 "result": "2016–21 +0.039 (+0.016, +0.052); 2022–26 +0.010 (−0.039, +0.065)",
 "verdict": "keep as feature; no claim",
-"cat": "null",
+"cat": "chk",
 "theme": "Toxins"
 },
 {

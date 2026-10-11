@@ -74,3 +74,8 @@ body.navopen nav{display:flex}.navtoggle{display:block}.baylist{columns:1}h1{fon
 
 /* mobile polish: compact outlook summary so the map appears sooner */
 @media (max-width:600px){.g4{gap:8px}.card{padding:10px 12px}.kpi{font-size:21px}.kpi small{font-size:12px}.lbl{font-size:11px}}
+
+/* legend: space between the band label and its range, and between items */
+.legend{gap:8px 16px}
+.legend .lg-b{font-weight:600;color:var(--ink)}
+.legend .lg-r{margin-left:4px;font-variant-numeric:tabular-nums}

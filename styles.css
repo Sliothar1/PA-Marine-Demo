@@ -296,3 +296,11 @@ html.js .cards.reveal.settled .card:not(:hover){transform:none}
 .egg-layer .drop{fill:#8fe0d6;stroke:#0b4f5c;stroke-width:.6}
 .egg-layer .pin{fill:none;stroke:#0f7c80;stroke-width:1.2;stroke-dasharray:2 3}
 .egg-layer .lbl{font:italic 600 13px var(--serif);fill:#0b4f5c;paint-order:stroke;stroke:#fff;stroke-width:3px}
+
+/* bilingual labels: Irish on its own line above the English; the " · " separator shows only without CSS */
+.sep{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.featmenu i{font-size:12.5px;margin-bottom:1px}
+.featbtn .fb-stack{display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1.1;text-align:left}
+.featbtn .fb-stack .fb-ga{font-size:11px}
+.mapbar .gacap{display:block;font-size:12px}
+.btn .ga{margin:0 0 2px}

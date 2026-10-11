@@ -67,7 +67,7 @@ function marker(m, lat, lon, p, o = {}) {
   return c.addTo(m);
 }
 function legend(extra = "") {
-  return `<div class="legend">${["Low", "Watch", "Elevated", "High"].map((b, i) => `<span><i class="dot" style="background:${BANDC[b]}"></i>${b} ${["<5%", "5–15%", "15–30%", "≥30%"][i]}</span>`).join("")}
+  return `<div class="legend">${["Low", "Watch", "Elevated", "High"].map((b, i) => `<span><i class="dot" style="background:${BANDC[b]}"></i><b class="lg-b">${b}</b><span class="lg-r">${["&lt;5%", "5–15%", "15–30%", "≥30%"][i]}</span></span>`).join("")}
   <span><i class="dot" style="background:#fff;border:2px dashed #555"></i>provisional (no sample this week)</span>
   <span><i class="dot" style="background:#fff;border:3px solid var(--acuta)"></i><i>D. acuta</i> flag</span>${extra}</div>`;
 }

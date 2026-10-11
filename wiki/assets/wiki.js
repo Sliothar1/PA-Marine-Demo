@@ -37,10 +37,10 @@ function buildSide(){
   groups.forEach(function(g){
     h+='<h4>'+esc(g)+(GA_GROUP[g]?' <i lang="ga">· '+GA_GROUP[g]+'</i>':'')+'</h4>';
     by[g].forEach(function(p){
-      h+='<a href="#/'+p.id+'" data-id="'+p.id+'"><span aria-hidden="true">'+(p.icon||'•')+'</span>'+'<span class="lbl">'+esc(p.title)+(GA[p.id]?'<i lang="ga">'+GA[p.id]+'</i>':'')+'</span>'+(p.id==='test-log'?'<span class="n">'+TESTS.length+'</span>':'')+'</a>';
+      h+='<a href="#/'+p.id+'" data-id="'+p.id+'"><span aria-hidden="true">'+(p.icon||'•')+'</span>'+'<span class="lbl">'+(GA[p.id]?'<i lang="ga">'+GA[p.id]+'</i><span class="sep" aria-hidden="true"> · </span>':'')+esc(p.title)+'</span>'+(p.id==='test-log'?'<span class="n">'+TESTS.length+'</span>':'')+'</a>';
     });
   });
-  h+='<div class="ext"><h4>Elsewhere on this site</h4><a href="../"><span>⌂</span><span class="lbl">Home page<i lang="ga">Baile</i></span></a><a href="../map/"><span>🗺</span><span class="lbl">Live map<i lang="ga">An léarscáil bheo</i></span></a><a href="../tour/"><span>🎞️</span><span class="lbl">Guided tour<i lang="ga">Turas</i></span></a></div>';
+  h+='<div class="ext"><h4>Elsewhere on this site</h4><a href="../"><span>⌂</span><span class="lbl"><i lang="ga">Baile</i><span class="sep" aria-hidden="true"> · </span>Home page</span></a><a href="../map/"><span>🗺</span><span class="lbl"><i lang="ga">An léarscáil bheo</i><span class="sep" aria-hidden="true"> · </span>Live map</span></a><a href="../tour/"><span>🎞️</span><span class="lbl"><i lang="ga">Turas</i><span class="sep" aria-hidden="true"> · </span>Guided tour</span></a></div>';
   h+='<div class="credit-card"><b>Garry Lohan and Felix Sproll</b><br>Research prototype. Not Marine Institute advice.<br><i lang="ga">Déanta i nGaillimh</i> · Made in Galway</div>';
   $('#side').innerHTML=h;
 }
