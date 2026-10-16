@@ -2,7 +2,7 @@ window.TESTS = [
 {
 "n": 1,
 "date": "2026-09-01",
-"test": "**Legacy STRONG_OISST baseline** (season + lat/lon + OISST lags; Irish HAB + MHW v1 pipeline)",
+"test": "**Legacy STRONG_OISST baseline** (season + lat/lon + OISST; Irish HAB + MHW v1 pipeline)",
 "result": "Test calibrated PR-AUC **0.295** (0.2953; n = 14,270, 5.2% prevalence) vs climatology 0.183",
 "verdict": "history-only (easier target, superseded)",
 "cat": "desc",
@@ -11,7 +11,7 @@ window.TESTS = [
 {
 "n": 2,
 "date": "2026-09-01",
-"test": "Dinophysis feature screen incl. SST lags and MHW features",
+"test": "Dinophysis feature screen incl. SST and MHW features",
 "result": "MHW features: near-zero gain",
 "verdict": "no lift",
 "cat": "null",
@@ -389,7 +389,7 @@ window.TESTS = [
 {
 "n": 44,
 "date": "2026-10-07",
-"test": "5-feature logistic vs LightGBM v2 (fit ≤Y−1)",
+"test": "logistic vs LightGBM v2 (fit ≤Y−1)",
 "result": "−0.007 [−0.029, +0.017] in 2022–26; +0.013 in 2016–21; Brier 0.0344 vs 0.0318",
 "verdict": "tie on ranking",
 "cat": "null",
@@ -741,7 +741,7 @@ window.TESTS = [
 "n": 83,
 "date": "2026-10-07",
 "test": "**Operational rescore: MI publish-date audit** (7 Oct snapshot)",
-"result": "All samples ≤ ~10 May 2018 carry one bulk stamp (2018-05-15 08:47–48; 29,002 samples) → backfilled, excluded. 2019–26 100% credible: median lag 3.6 d (2021 4.5), q90 6.6–9.6, max 38; none after snapshot or before sample date. Published before Sunday: Mon 90%, Tue 75%, Wed 40%, Thu 2%. 2.4% of samples not yet public when frozen v2 first uses them",
+"result": "All samples ≤ ~10 May 2018 carry one bulk stamp (2018-05-15 08:47–48; 29,002 samples) → backfilled, excluded. 2019–26 100% credible: median delay 3.6 d (2021 4.5), q90 6.6–9.6, max 38; none after snapshot or before sample date. Published before Sunday: Mon 90%, Tue 75%, Wed 40%, Thu 2%. 2.4% of samples not yet public when frozen v2 first uses them",
 "verdict": "credible from mid-May 2018",
 "cat": "desc",
 "theme": "Operational rescore"
@@ -767,8 +767,8 @@ window.TESTS = [
 {
 "n": 86,
 "date": "2026-10-07",
-"test": "Assumed-lag check + frozen v2 fed only published data",
-"result": "3-d 0.328 beats real publication by 0.016 [+0.004, +0.031] (too optimistic); 5-d 0.321 ≈ real (−0.009, CI incl. 0); zero lag 0.324. Frozen v2 with only-published inputs 0.291 (Δ +0.001)",
+"test": "Assumed-delay check + frozen v2 fed only published data",
+"result": "3-d 0.328 beats real publication by 0.016 [+0.004, +0.031] (too optimistic); 5-d 0.321 ≈ real (−0.009, CI incl. 0); zero delay 0.324. Frozen v2 with only-published inputs 0.291 (Δ +0.001)",
 "verdict": "0.290 confirmed; real ≈ 5-day",
 "cat": "chk",
 "theme": "Operational rescore"
@@ -785,7 +785,7 @@ window.TESTS = [
 {
 "n": 88,
 "date": "2026-10-07",
-"test": "**France A: Irish v2 recipe replicated on REPHY** (Dinophysis ≥100 wk +1/+2, conservative lag 1, rolling 2005–22)",
+"test": "**France A: Irish v2 recipe replicated on REPHY** (Dinophysis ≥100 wk +1/+2, rolling 2005–22)",
 "result": "2005–13: 0.662 vs norm 0.564 (+0.098, region-year 90% [+0.069, +0.131]); 2014–22: 0.674 vs 0.544 (+0.130 [+0.107, +0.152]). Also passes at ≥500, ≥1,000, onset; beats ridge (+0.028, +0.048)",
 "verdict": "**pass** (Holm ✓); generalises",
 "cat": "pos",
@@ -1073,8 +1073,8 @@ window.TESTS = [
 {
 "n": 120,
 "date": "2026-10-09",
-"test": "**Karenia ≥10,000 cells/L, weeks +1/+2: v2 recipe retrained** (14 feats, LightGBM + Platt, conservative lag 1, rolling origin 2016–26) vs station × week norm and persistence; year-block 95% CI",
-"result": "2016–26 (183 pos, 0.58%): model **0.048** [0.017–0.122] vs norm 0.022 [0.012–0.039] (Δ +0.026, **−0.001 to +0.093**) vs persistence **0.110** [0.060–0.158] (Δ −0.062, −0.106 to +0.003; station-block < 0). Lag 0 0.105 vs persistence 0.218. 2022–26 not testable (26 pos; model 0.005, norm 0.016, persistence 0.024)",
+"test": "**Karenia ≥10,000 cells/L, weeks +1/+2: v2 recipe retrained** (LightGBM + Platt, rolling origin 2016–26) vs station × week norm and persistence; year-block 95% CI",
+"result": "2016–26 (183 pos, 0.58%): model **0.048** [0.017–0.122] vs norm 0.022 [0.012–0.039] (Δ +0.026, **−0.001 to +0.093**) vs persistence **0.110** [0.060–0.158] (Δ −0.062, −0.106 to +0.003; station-block < 0). Same-week variant 0.105 vs persistence 0.218. 2022–26 not testable (26 pos; model 0.005, norm 0.016, persistence 0.024)",
 "verdict": "no lift (fails rule; persistence best)",
 "cat": "null",
 "theme": "Karenia"
@@ -1083,7 +1083,7 @@ window.TESTS = [
 "n": 121,
 "date": "2026-10-09",
 "test": "Karenia presence (any count > 0), weeks +1/+2, same recipe and baselines (secondary)",
-"result": "2016–26 (1,561 pos): 0.192 vs norm 0.151 (+0.040, −0.007 to +0.079) vs persistence 0.144 (+0.048, −0.004 to +0.105). 2022–26 (390): 0.097 vs 0.092 (−0.040 to +0.051). Lag 0 2016–26 beats both (CI > 0) but ties in 2022–26",
+"result": "2016–26 (1,561 pos): 0.192 vs norm 0.151 (+0.040, −0.007 to +0.079) vs persistence 0.144 (+0.048, −0.004 to +0.105). 2022–26 (390): 0.097 vs 0.092 (−0.040 to +0.051). The same-week variant in 2016–26 beats both (CI > 0) but ties in 2022–26",
 "verdict": "no lift (year-block CI ∋ 0)",
 "cat": "null",
 "theme": "Karenia"
@@ -1119,7 +1119,7 @@ window.TESTS = [
 "n": 125,
 "date": "2026-10-09",
 "test": "Do *Mesodinium* rises lead *Dinophysis* blooms? (descriptive, 2016–26)",
-"result": "Non-blooming station-weeks (28,503; 1,181 events): event rate 4.7% with Meso at t−1/t−2 vs 4.1% without; MH OR (station × month) **1.16, 95% region-year [0.87, 1.57]**. Regional anomaly lead-lag −6…+6 wk: all r between −0.05 and 0.00",
+"result": "Non-blooming station-weeks (28,503; 1,181 events): event rate 4.7% with Meso at t−1/t−2 vs 4.1% without; MH OR (station × month) **1.16, 95% region-year [0.87, 1.57]**. Regional anomaly timing −6…+6 wk: all r between −0.05 and 0.00",
 "verdict": "no association",
 "cat": "null",
 "theme": "Mesodinium"

@@ -84,13 +84,13 @@ PAGES.push({id:'overview', group:'Start here', icon:'🌊', title:'Overview',
 <p style="font-size:14px;color:var(--muted)">Research prototype by <strong>Garry Lohan and Felix Sproll</strong>. Not an official product or official advice; shellfish safety is decided by official monitoring.</p>
 `});
 PAGES.push({id:'how-it-works', group:'Start here', icon:'⚙️', title:'How the model works',
- keywords:'lightgbm platt features method pipeline erddap lag sunday target rolling origin',
+ keywords:'lightgbm platt features method pipeline erddap sunday target rolling origin',
  lede:'What the forecast predicts, what it looks at, how it is trained, and how it is evaluated. Method only — no code.',
  html:`
 <div class="flow">
  <div class="step"><b>1 · Data</b><span>MI publishes weekly phytoplankton counts on its open ERDDAP server</span></div>
  <div class="step"><b>2 · Sunday cut-off</b><span>Keep only counts actually published before the issue Sunday</span></div>
- <div class="step"><b>3 · 14 features</b><span>Season, location, the station’s own recent counts, neighbours within 30 km</span></div>
+ <div class="step"><b>3 · Features</b><span>Season, location, the station’s own recent counts, neighbours within 30 km</span></div>
  <div class="step"><b>4 · LightGBM</b><span>Gradient-boosted trees give a risk score</span></div>
  <div class="step"><b>5 · Platt scaling</b><span>Recalibrated on the most recent year to give well-calibrated probabilities</span></div>
  <div class="step"><b>6 · Issue & log</b><span>P(≥100 cells/L in week +1 or +2), locked before outcomes are known</span></div>
@@ -104,7 +104,7 @@ PAGES.push({id:'how-it-works', group:'Start here', icon:'⚙️', title:'How the
  <li><strong>Add-on:</strong> a separate <em>D. acuta</em> flag (the late-summer, long-closure species) was built for the prototype app.</li>
 </ul>
 
-<h2>The weekly cycle and the data lag</h2>
+<h2>The weekly cycle and the data delay</h2>
 <p>The forecast is issued every <strong>Sunday</strong>. The question that matters operationally is which counts are actually public by then. MI’s phytoplankton dataset carries a publication timestamp for every sample, so we measured it directly:</p>
 <div class="cards">
  <div class="stat"><div class="v">3.6 <small>days</small></div><div class="l">Median time from sampling to publication, 2019–26 (90th percentile 6.6–9.6 days)</div></div>
@@ -113,20 +113,20 @@ PAGES.push({id:'how-it-works', group:'Start here', icon:'⚙️', title:'How the
 </div>
 <p>Publication dates are genuine from mid-May 2018. Earlier samples all carry a single bulk “published” stamp from when the database went live, so they are not used for timing.</p>
 
-<h2>The 14 features</h2>
+<h2>The features</h2>
 <p>All features were fixed before any test score was seen.</p>
 <div class="tbl"><table>
 <thead><tr><th>Group</th><th>Features</th></tr></thead>
 <tbody>
-<tr><td><strong>Season & location (4)</strong></td><td>Week of year as sine and cosine; latitude; longitude</td></tr>
-<tr><td><strong>Station persistence (7)</strong></td><td>log(1 + last count); weeks since that count; maximum log count in the 4 weeks before the cut-off; weeks since the last ≥100 count (capped at 260); number of ≥100 weeks in the prior 52 weeks; same season last year (±3 weeks); last change</td></tr>
-<tr><td><strong>Neighbours (3)</strong></td><td>Other stations within 30 km in the week before the cut-off: maximum log count; fraction ≥100; number sampled</td></tr>
+<tr><td><strong>Season & location</strong></td><td>Week of year as sine and cosine; latitude; longitude</td></tr>
+<tr><td><strong>Station persistence</strong></td><td>log(1 + last count); weeks since that count; maximum log count in the 4 weeks before the cut-off; weeks since the last ≥100 count (capped at 260); number of ≥100 weeks in the prior 52 weeks; same season last year (±3 weeks); last change</td></tr>
+<tr><td><strong>Neighbours</strong></td><td>Other stations within 30 km in the week before the cut-off: maximum log count; fraction ≥100; number sampled</td></tr>
 </tbody></table></div>
 <p>Missing values are left missing (the tree model handles them natively) rather than filled with zeros.</p>
 
 <h2>The model</h2>
 <ul>
- <li><strong>LightGBM</strong> gradient-boosted trees with locked parameters (200 trees, learning rate 0.05, 31 leaves, class-weighted).</li>
+ <li>gradient-boosted trees, calibrated yearly; settings fixed before testing.</li>
  <li><strong>Platt scaling:</strong> the raw scores are recalibrated on the most recent year so that “20%” means roughly one in five. Isotonic and season-adjusted alternatives were tested and did worse (test #53).</li>
  <li>Calibration on 2022–26: mean forecast 4.3% vs 3.9% observed; calibration slope 0.97; Brier score 0.0318 vs 0.0355 for the seasonal norm (Brier skill +0.11).</li>
 </ul>
@@ -175,7 +175,7 @@ PAGES.push({id:'results', group:'Findings', icon:'📊', title:'Results & scorec
 <tr><td>“Same as last observed”</td><td class="num">0.144</td><td>Persistence of the last count</td></tr>
 <tr><td>Station × week seasonal norm</td><td class="num">0.231</td><td>The main comparator</td></tr>
 <tr><td>Active-year empirical-Bayes norm</td><td class="num">0.240</td><td>Norm scaled by this season’s station and regional activity; does not absorb the gain (v2 − EB +0.051)</td></tr>
-<tr><td>3-feature logistic</td><td class="num">0.263–0.278</td><td></td></tr>
+<tr><td>logistic</td><td class="num">0.263–0.278</td><td></td></tr>
 <tr><td>Hierarchical ridge logistic</td><td class="num">0.280</td><td>Within 0.010 of v2; beats v2 within 9 of 11 seasons; also scores 0.312 on published-by-Sunday features</td></tr>
 <tr class="hl"><td><strong>Model v2 (LightGBM + Platt)</strong></td><td class="num"><strong>0.290</strong></td><td>Frozen 7 Oct 2026</td></tr>
 </tbody></table></div>
@@ -364,7 +364,7 @@ PAGES.push({id:'toxins', group:'Findings', icon:'🦪', title:'Other toxins & sp
 <ul>
  <li><strong>Presence only:</strong> 0.314 vs 0.312 (2022–26; gain +0.001, 95% CI −0.004 to +0.007). No lift.</li>
  <li><strong>Presence plus abundance:</strong> 0.318 vs 0.312 (gain +0.0055). The 90% interval is just above zero (+0.0006 to +0.009), but the 95% interval is not (−0.0003 to +0.010), so it fails the pre-registered rule. On 2016–26 the gain is +0.003 (95% CI −0.002 to +0.009). A small, exploratory signal at most.</li>
- <li><strong>Do <em>Mesodinium</em> rises come before blooms?</strong> In 28,503 non-blooming station-weeks, a bloom followed 4.7% of the time when <em>Mesodinium</em> had been recorded in the previous two weeks, against 4.1% without (odds ratio 1.16, 95% CI 0.87 to 1.57). Regional lead–lag correlations were all between −0.05 and 0.00. No clear association.</li>
+ <li><strong>Do <em>Mesodinium</em> rises come before blooms?</strong> In 28,503 non-blooming station-weeks, a bloom followed 4.7% of the time when <em>Mesodinium</em> had been recorded in the previous two weeks, against 4.1% without (odds ratio 1.16, 95% CI 0.87 to 1.57). Regional timing correlations were all between −0.05 and 0.00. No clear association.</li>
 </ul>
 <div class="callout"><p><strong>Bottom line:</strong> with weekly counts as they are recorded now, <em>Mesodinium</em> adds very little to the forecast. Whether more frequent or more targeted <em>Mesodinium</em> data (for example eDNA) would help remains an open question.</p></div>
 `});
@@ -413,13 +413,13 @@ PAGES.push({id:'france', group:'Findings', icon:'🌍', title:'France transfer',
 <figure><img src="assets/img/france_phenology.png" alt="French and Irish Dinophysis season onset by year, French presence rate, OA-group positivity"><figcaption>National yearly aggregates: median <em>Dinophysis</em> season onset (France vs Ireland), the French presence rate, and French OA-group positivity (two lab methods that must not be joined). No clear long-term trend.</figcaption></figure>
 `});
 PAGES.push({id:'sampling', group:'Findings', icon:'⏱️', title:'Sampling & turnaround',
- keywords:'sampling turnaround lag publication lab courier week-0 monday thursday tuesday issue day triage queue microscopy flow cytometry qpcr twice-weekly sentinel',
+ keywords:'sampling turnaround delay publication lab courier week-0 monday thursday tuesday issue day triage queue microscopy flow cytometry qpcr twice-weekly sentinel',
  lede:'How quickly counts reach the forecast matters less than <em>when in the week</em> the water is sampled. Most of the information the forecast misses comes from samples taken late in the week, not from slow lab work.',
  html:`
 <div class="cards">
  <div class="stat"><div class="v">3.6 <small>days</small></div><div class="l">Median time from sampling to public count, since 2019 (90th percentile 6.6–9.6 days) · test #66</div></div>
  <div class="stat"><div class="v">78%</div><div class="l">Of the week’s samples are public before the Sunday forecast · #66</div></div>
- <div class="stat"><div class="v">0.324 <small>vs 0.312</small></div><div class="l">Skill with zero lab and posting delay vs real publication: cutting the lag adds little · #86</div></div>
+ <div class="stat"><div class="v">0.324 <small>vs 0.312</small></div><div class="l">Skill with zero lab and posting delay vs real publication: cutting the delay adds little · #86</div></div>
  <div class="stat"><div class="v">+0.063</div><div class="l">Gain from knowing the current week’s counts: the biggest information lever we found · #43</div></div>
 </div>
 
@@ -431,10 +431,10 @@ PAGES.push({id:'sampling', group:'Findings', icon:'⏱️', title:'Sampling & tu
  <div><span>Wed</span><b style="width:40%"></b><i>40%</i></div>
  <div><span>Thu</span><b style="width:2%"></b><i>2%</i></div>
 </div>
-<p>A Monday sample is almost always in time; a Thursday sample almost never is. The typical lag (a median of 3.6 days) is short, but a short lag still pushes a late-week sample past Sunday.</p>
+<p>A Monday sample is almost always in time; a Thursday sample almost never is. The typical delay (a median of 3.6 days) is short, but a short delay still pushes a late-week sample past Sunday.</p>
 
 <h2>Faster lab work buys surprisingly little</h2>
-<p>Test #86 re-ran the frozen forecast as if every count were public the moment the water was sampled. Skill rose only from <strong>0.312 to 0.324</strong> (PR-AUC, 2022–26). Real publication behaves roughly like a five-day lag. So shaving a day off transport or posting, on its own, would not change much.</p>
+<p>Test #86 re-ran the frozen forecast as if every count were public the moment the water was sampled. Skill rose only from <strong>0.312 to 0.324</strong> (PR-AUC, 2022–26). Real publication behaves roughly like a five-day delay. So shaving a day off transport or posting, on its own, would not change much.</p>
 
 <h2>But this week’s counts are the most valuable information</h2>
 <p>Test #43 asked how much the forecast gains when the current week’s (“week-0”) counts are known: <strong>+0.063</strong> nationally [95% CI +0.038 to +0.083] and +0.084 in the South-West. That was the largest information lever in the whole project. It was measured in a setting that also included samples taken on the issue Sunday itself (see test #45), so read it as an upper bound. The two results fit together: the missing information sits mainly in <strong>samples taken late in the week</strong>, which a faster lab alone cannot bring forward to Sunday.</p>

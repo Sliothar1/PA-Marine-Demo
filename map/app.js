@@ -335,7 +335,7 @@ V.honesty = function (el) {
   <li>Skill is mostly <b>persistence plus season</b>: the model is good at saying an ongoing bloom will continue and weak at predicting onset from a clean station.</li>
   <li>2026 so far (hindcast, conservative): PR-AUC ${f3(PA.scoreboard.pseudo_prospective.scored.pr_auc)} vs norm ${f3(PA.scoreboard.pseudo_prospective.scored.pr_auc_norm)}, i.e. no better than the norm this season unless this week's sample is known (${f3(PA.scoreboard.pseudo_prospective.scored_if_week0_known.pr_auc)}). Mean forecast ${pct1(PA.scoreboard.pseudo_prospective.scored.mean_forecast)} vs ${pct1(PA.scoreboard.pseudo_prospective.scored.obs_rate)} observed.</li>
   <li>Week-0 counts are public for only some stations by Sunday (${M.n_week0} of ${M.n_stations} this week); the rest are provisional (conservative model).</li>
-  <li>Independent check: this app re-ran the v2 model from scratch on fresh MI data and reproduced the stored pa/model-v2 predictions exactly (max |Δ| = ${Hn.reproduction ? f3(Hn.reproduction["T2_sum100/conservative_lag1"].max_abs_diff) : "–"}).</li>
+  <li>Independent check: this app re-ran the v2 model from scratch on fresh MI data and reproduced the stored pa/model-v2 predictions exactly (max |Δ| = ${Hn.reproduction ? f3(Hn.reproduction["T2_sum100/conservative"].max_abs_diff) : "–"}).</li>
   <li>No genuine prospective track record yet: logging started ${fmtDate(M.issue_date)}.</li></ul>`;
 };
 
